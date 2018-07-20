@@ -7,6 +7,8 @@ import { Component, OnInit } from '@angular/core';
 })
 export class JobDescriptionComponent implements OnInit {
 
+  showKeywordResults:boolean = false;
+
   constructor() { }
 
   ngOnInit() {
