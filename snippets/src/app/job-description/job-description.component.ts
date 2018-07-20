@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { FormsModule } from '@angular/forms';
 
 @Component({
   selector: 'app-job-description',
@@ -8,10 +9,16 @@ import { Component, OnInit } from '@angular/core';
 export class JobDescriptionComponent implements OnInit {
 
   showKeywordResults:boolean = false;
-
+  descriptionContent:string;
+  textValue = "hi";
   constructor() { }
 
   ngOnInit() {
+
+  }
+
+  submitDescription():void {
+
   }
 
 }
