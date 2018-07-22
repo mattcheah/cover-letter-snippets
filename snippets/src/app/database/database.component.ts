@@ -44,14 +44,16 @@ export class DatabaseComponent implements OnInit {
     },
   ];
 
-  constructor() { }
+  constructor(private connectToDatabaseService: ConnectToDatabaseService) { }
 
   ngOnInit() {
   }
 
   connect(connectString:string):void {
     // console.log(this.databaseString);
+    this.connectToDatabaseService.startConnection(connectString);
     console.log("connecting to mongoose db: response is:")
+
     // let connection = mongoose.connect(connectString);
     // console.log(connection);
 
