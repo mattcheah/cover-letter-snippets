@@ -3,4 +3,7 @@
   <p>
     Paste your MongoDB url here with credentials and we will connect to your database.
   </p>
+  <input [(ngModel)]="databaseString"/><br>
+  <button [ngClass]="{inactive: databaseString == ''}" (click)="connect(databaseString)">Connect to Database</button>
+  <p>{{responseMessage}}</p>
 </div>
