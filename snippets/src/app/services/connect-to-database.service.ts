@@ -21,7 +21,10 @@ export class ConnectToDatabaseService {
       body: JSON.stringify(data), // body data type must match "Content-Type" header
     }).then(function(res) {
       console.log("response: ");
-      console.log(res);
+      res.json().then((data)=> {
+        console.log("data:");
+        console.log(data);
+      });
     })
   }
 
