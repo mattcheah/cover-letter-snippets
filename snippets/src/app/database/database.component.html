@@ -1,4 +1,4 @@
-<div>
+<div ngShow="showConnectForm">
   <h4>Connect your Database:</h4>
   <p>
     Paste your MongoDB url here with credentials and we will connect to your database.
@@ -11,5 +11,5 @@
   </p>
   <input [(ngModel)]="databaseString"/><br>
   <button [ngClass]="{inactive: databaseString == ''}" (click)="connect(databaseString)">Connect to Database</button>
-  <p>{{responseMessage}}</p>
 </div>
+<p [ngClass]="responseMessageClass">{{responseMessage}}</p>

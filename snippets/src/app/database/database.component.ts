@@ -12,9 +12,11 @@ import { DatabaseService } from '../services/database.service';
 })
 export class DatabaseComponent implements OnInit {
 
+  showConnectForm: boolean = true;
   databaseString: string = "mongodb://test:testtest1@ds245901.mlab.com:45901/snippets-test";
   responseMessage:string = "";
-
+  responseMessageClass:string = "";
+  database:Array<Object>;
 
 
   constructor(private DatabaseService: DatabaseService) { }
@@ -30,30 +32,20 @@ export class DatabaseComponent implements OnInit {
     .then(function (res) {
       return res.json().then((data) => {
         console.log(data);
-        self.responseMessage = "error" in data ? data.error : data.responseMessage;
+        if ("error" in data) {
+          self.responseMessageClass = "fail";
+          self.responseMessage = data.error;
+        } else if(data.connected) {
+          self.responseMessage = data.responseMessage;
+          self.database = data.data;
+          self.showConnectForm = false;
+          self.responseMessageClass = "success";
+        }
       });
     }).catch((err) => {
       console.log("Error: " + err);
       self.responseMessage = err;
     });
-
-
-    // let connection = mongoose.connect(connectString);
-    // console.log(connection);
-
-    // let snippetSchema = new mongoose.Schema({
-    //   id: Number,
-    //   categories: Array,
-    //   snippet: String
-    // });
-    // let Snippet = mongoose.model('Snippet',snippetSchema);
-
-    // let snippet1 = Snippet({
-    //     id: 5,
-    //     categories: ["angular", "javascript"],
-    //     snippet: "I built the chewallah website in angular6."
-    // });
-      // this.responseMessage = connection ? "Connected successfully" : "Could not connect";
   }
 
 }
