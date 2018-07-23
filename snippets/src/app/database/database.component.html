@@ -3,6 +3,12 @@
   <p>
     Paste your MongoDB url here with credentials and we will connect to your database.
   </p>
+  <p>
+    Test URL:<br>
+    mongodb://test:testtest1@ds245901.mlab.com:45901/snippets-test<br>
+    un:test<br>
+    pw:testtest1<br>
+  </p>
   <input [(ngModel)]="databaseString"/><br>
   <button [ngClass]="{inactive: databaseString == ''}" (click)="connect(databaseString)">Connect to Database</button>
   <p>{{responseMessage}}</p>

@@ -3,8 +3,7 @@ import { FormsModule } from '@angular/forms';
 
 import { ConnectToDatabaseService } from '../services/connect-to-database.service';
 
-// import mongoose from 'mongoose';
-// const mongoose = require('mongoose');
+
 
 @Component({
   selector: 'app-database',
@@ -13,7 +12,7 @@ import { ConnectToDatabaseService } from '../services/connect-to-database.servic
 })
 export class DatabaseComponent implements OnInit {
 
-  databaseString:string = "";
+  databaseString: string = "mongodb://test:testtest1@ds245901.mlab.com:45901/snippets-test";
   responseMessage:string = "";
 
   databaseData:Array<Object> = [
@@ -61,7 +60,7 @@ export class DatabaseComponent implements OnInit {
     //   id: Number,
     //   categories: Array,
     //   snippet: String
-    // }); 
+    // });
     // let Snippet = mongoose.model('Snippet',snippetSchema);
 
     // let snippet1 = Snippet({
