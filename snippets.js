@@ -25,43 +25,52 @@ app.post('/connect-to-database', function(req, res) {
     const dburl = req.body.databaseUrl;
 
     if (dburl == "") {
-        res.send("Please enter the URI of a mlab mongodb database!");
-    } else {
+        res.status(400).send("Please enter the URI of a mlab mongodb database!");
+        return;
+    } 
 
-        let connection = mongoose.connect(dburl, function(err) {
-            if (err) {
-                console.log("Error! " + err);
-                res.send("Sorry, mongoose could not connect to the database! Make sure your URI is correct!");
-            }
-        });
-
-        console.log("connecting to mongoose db: response is:")
-        console.log(connection);
-
-        let Snippet;
-        try {
-            Snippet = mongoose.model('Snippet');
-        } catch(error) {
-            let Schema = mongoose.Schema;
-            let snippetSchema = new Schema({
-                id: {
-                    type: String,
-                    unique: true,
-                    index: true
-                },
-                categories: Array,
-                snippet: String
-            }); 
-            Snippet = mongoose.model('Snippet', snippetSchema);
+    let connection = mongoose.connect(dburl, function(err) {
+        if (err) {
+            
         }
+    });
 
-        //Get all the snippets in the database;
-        Snippet.find({}, function(err, data) {
-            if(err) throw err;
-            res.render('snippet', {snippets: data});
-        });
+    
 
+    mongoose.connection.on('error', function (err) {
+        console.log("Error! " + err);
+        res.status(400).json({ error: "Sorry, mongoose could not connect to the database! Make sure your URI is correct!" });
+        return;
+    });
+
+    mongoose.connection.on('connected', function () {
+        // logger.info("connection established successfully");
+        console.log("Successfully Connected!");
+    });
+
+    let Snippet;
+    try {
+        Snippet = mongoose.model('Snippet');
+    } catch(error) {
+        let Schema = mongoose.Schema;
+        let snippetSchema = new Schema({
+            id: {
+                type: String,
+                unique: true,
+                index: true
+            },
+            categories: Array,
+            snippet: String
+        }); 
+        Snippet = mongoose.model('Snippet', snippetSchema);
     }
+    //Get all the snippets in the database;
+    // Snippet.find({}, function(err, data) {
+    //     if(err) throw err;
+    //     res.render('snippet', {snippets: data});
+    // });
+
+    
 });
 
 // let browser;

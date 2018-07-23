@@ -7,7 +7,7 @@ import { JobDescriptionComponent } from './job-description/job-description.compo
 import { DatabaseComponent } from './database/database.component';
 import { ResultsComponent } from './results/results.component';
 
-import { ConnectToDatabaseService } from './services/connect-to-database.service';
+import { DatabaseService } from './services/database.service';
 
 
 @NgModule({
@@ -21,7 +21,7 @@ import { ConnectToDatabaseService } from './services/connect-to-database.service
     BrowserModule,
     FormsModule
   ],
-  providers: [ConnectToDatabaseService],
+  providers: [DatabaseService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
