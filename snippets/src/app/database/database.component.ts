@@ -16,10 +16,8 @@ export class DatabaseComponent implements OnInit {
   databaseString: string = "mongodb://test:testtest1@ds245901.mlab.com:45901/snippets-test";
   responseMessage:string = "";
   responseMessageClass:string = "";
-  database:Array<Object>;
 
-
-  constructor(private DatabaseService: DatabaseService) { }
+  constructor(private databaseService: DatabaseService) { }
 
   ngOnInit() {
   }
@@ -28,24 +26,20 @@ export class DatabaseComponent implements OnInit {
     console.log("connecting to mongoose db: response is:");
     let self = this;
 
-    this.DatabaseService.startConnection(connectString)
-    .then(function (res) {
-      return res.json().then((data) => {
-        console.log(data);
-        if ("error" in data) {
-          self.responseMessageClass = "fail";
-          self.responseMessage = data.error;
-        } else if(data.connected) {
-          self.responseMessage = data.responseMessage;
-          self.database = data.data;
-          self.showConnectForm = false;
-          self.responseMessageClass = "success";
-        }
-      });
-    }).catch((err) => {
-      console.log("Error: " + err);
-      self.responseMessage = err;
+    this.databaseService.startConnection(connectString).then((responseData) => {
+      console.log("responseData");
+      console.log(responseData);
+      if ("error" in responseData) {
+        self.responseMessage = responseData.error;
+        self.responseMessageClass = "fail";
+      } else if (responseData.connected) {
+        self.showConnectForm = false;
+        self.responseMessage = responseData.responseMessage;
+        self.responseMessageClass = "success";
+      }
     });
   }
+
+
 
 }

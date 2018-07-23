@@ -1,4 +1,4 @@
-<div ngShow="showConnectForm">
+<div *ngIf="showConnectForm">
   <h4>Connect your Database:</h4>
   <p>
     Paste your MongoDB url here with credentials and we will connect to your database.
@@ -13,3 +13,6 @@
   <button [ngClass]="{inactive: databaseString == ''}" (click)="connect(databaseString)">Connect to Database</button>
 </div>
 <p [ngClass]="responseMessageClass">{{responseMessage}}</p>
+<div *ngIf="!showConnectForm">
+  <p>Your Snippets Database has {{databaseService.database.length}} entries.</p>
+</div>

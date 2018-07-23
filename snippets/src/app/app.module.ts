@@ -8,6 +8,7 @@ import { DatabaseComponent } from './database/database.component';
 import { ResultsComponent } from './results/results.component';
 
 import { DatabaseService } from './services/database.service';
+import { ParseDescriptionService } from './services/parse-description.service';
 
 
 @NgModule({
@@ -21,7 +22,7 @@ import { DatabaseService } from './services/database.service';
     BrowserModule,
     FormsModule
   ],
-  providers: [DatabaseService],
+  providers: [DatabaseService,ParseDescriptionService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

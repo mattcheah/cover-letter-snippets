@@ -13,14 +13,14 @@ export class JobDescriptionComponent implements OnInit {
   showKeywordResults:boolean = false;
   descriptionContent:string;
   textValue = "hi";
-  constructor() { }
+  constructor(private parseDescriptionService:ParseDescriptionService) { }
 
   ngOnInit() {
 
   }
 
-  submitDescription():void {
-
+  submitDescription(description):void {
+    this.parseDescriptionService.parseDescription(description);
   }
 
 }
