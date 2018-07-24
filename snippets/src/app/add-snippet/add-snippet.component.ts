@@ -22,9 +22,4 @@ export class AddSnippetComponent implements OnInit {
     let categoriesArray = this.categories.split(",");
     this.databaseService.addSnippet(this.snippet, categoriesArray);
   }
-
-  // parseCategories():Array<String> {
-  //   return this.categories.split(",");
-  // }
-
 }

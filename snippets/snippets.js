@@ -29,43 +29,26 @@ app.post('/connect-to-database', function(req, res) {
         res.status(400).send("Please enter the URI of a mlab mongodb database!");
         return;
     }
+    setUpConnetion(dburl);
+    let Snippet = setUpSchema();
+    res.json(getAllSnippets(Snippet, "Successfully Connected to the Database and retrieved records!"));
+});
 
-    let connection = mongoose.connect(dburl);
-
-    mongoose.connection.on('error', function (err) {
-        console.log("Error! " + err);
-        res.status(400).json({ error: "Sorry, mongoose could not connect to the database! Make sure your URI is correct!" });
-        return;
+app.post('/add-snippet', function(req, res) {
+    const snippet = req.body.snippet;
+    const categories = req.body.categories;
+    let Snippet = setUpSchema();
+    new Snippet({
+        snippet: snippet,
+        categories: categories
+    }).save(function(err) {
+        if (err) {
+            console.log("Error saving new snippet: "+ err);
+        } else {
+            console.log("New Snippet Saved!");
+            res.json(getAllSnippets(Snippet, "New Snippet Saved!"));
+        }
     });
-
-    mongoose.connection.on('connected', function () {
-        console.log("Successfully Connected!");
-    });
-
-    let Snippet;
-    try {
-        Snippet = mongoose.model('Snippet');
-    } catch(error) {
-        let Schema = mongoose.Schema;
-        let snippetSchema = new Schema({
-            categories: Array,
-            snippet: String
-        });
-        Snippet = mongoose.model('Snippet', snippetSchema);
-    }
-
-    // Get all the snippets in the database;
-    Snippet.find({}, function(err, data) {
-        if(err) throw err;
-        let returnObj = {
-            responseMessage: "Successfully Connected to the Database!",
-            connected: true,
-            data: data
-        };
-        res.json(returnObj);
-    });
-
-
 });
 
 // let browser;
@@ -100,3 +83,43 @@ console.log("app starting, listening on: localhost:"+port);
 
 // //catches uncaught exceptions
 // process.on('uncaughtException', exitHandler.bind(null, { exit: true }));
+function setUpConnection(dburl) {
+    let connection = mongoose.connect(dburl);
+
+    mongoose.connection.on('error', function (err) {
+        console.log("Error! " + err);
+        res.status(400).json({ error: "Sorry, mongoose could not connect to the database! Make sure your URI is correct!" });
+        return;
+    });
+
+    mongoose.connection.on('connected', function () {
+        console.log("Successfully Connected!");
+    });
+}
+
+function setUpSchema() {
+    let Snippet;
+    try {
+        Snippet = mongoose.model('Snippet');
+    } catch(error) {
+        let Schema = mongoose.Schema;
+        let snippetSchema = new Schema({
+            categories: Array,
+            snippet: String
+        });
+        Snippet = mongoose.model('Snippet', snippetSchema);
+    }
+    return Snippet;
+}
+
+function getAllSnippets(Snippet, successMessage) {
+    // Get all the snippets in the database;
+    Snippet.find({}, function(err, data) {
+        if(err) throw err;
+        return returnObj = {
+            responseMessage: successMessage,
+            connected: true,
+            data: data
+        };
+    });
+}
