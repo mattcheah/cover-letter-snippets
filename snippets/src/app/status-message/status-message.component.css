@@ -1,0 +1,9 @@
+#status {
+    width:100%;
+    padding:5px;
+    border:1px solid #666;
+    text-align:left;
+    color:#666;
+    border-radius:3px;
+    margin:20px 0;
+}

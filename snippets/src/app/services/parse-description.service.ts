@@ -6,8 +6,6 @@ import { DatabaseService } from "./database.service";
 @Injectable()
 export class ParseDescriptionService {
 
-
-
   constructor(private databaseService:DatabaseService) { }
 
   parseDescription(description):any {
@@ -21,8 +19,6 @@ export class ParseDescriptionService {
         this.databaseService.categories[word].jobKeywords++;
       }
     }
-    console.log("databaseService categories list is now:");
-    console.log(this.databaseService.categories);
 
     this.createOrderedArray();
 
@@ -42,9 +38,6 @@ export class ParseDescriptionService {
       this.databaseService.categories[keywords[i]].keyword = keywords[i];
       keywordsArray.push(this.databaseService.categories[keywords[i]]);
     }
-    console.log("KeywordsArray before:");
-    console.log(keywordsArray);
-
 
     function quicksortByJobKeywords(arr, left, right) {
       if (left < right) {
@@ -76,8 +69,6 @@ export class ParseDescriptionService {
     }
 
     quicksortByJobKeywords(keywordsArray, 0, keywordsArray.length-1);
-    console.log("KeywordsArray after:");
-    console.log(keywordsArray);
     return keywordsArray;
   }
 

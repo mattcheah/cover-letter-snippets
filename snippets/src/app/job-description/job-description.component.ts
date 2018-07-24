@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 
 import { ParseDescriptionService } from '../services/parse-description.service';
+import { DatabaseService } from '../services/database.service';
 
 @Component({
   selector: 'app-job-description',
@@ -13,7 +14,8 @@ export class JobDescriptionComponent implements OnInit {
   showKeywordResults:boolean = false;
   descriptionContent:string;
   textValue = "hi";
-  constructor(private parseDescriptionService:ParseDescriptionService) { }
+  
+  constructor(private parseDescriptionService:ParseDescriptionService, private databaseService:DatabaseService) { }
 
   ngOnInit() {
 

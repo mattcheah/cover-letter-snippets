@@ -29,9 +29,11 @@ app.post('/connect-to-database', function(req, res) {
         res.status(400).send("Please enter the URI of a mlab mongodb database!");
         return;
     }
-    setUpConnetion(dburl);
+    setUpConnection(dburl);
     let Snippet = setUpSchema();
-    res.json(getAllSnippets(Snippet, "Successfully Connected to the Database and retrieved records!"));
+    getAllSnippets(Snippet, "Successfully Connected to the Database and retrieved records!").then(data => {
+        res.json(data);
+    });
 });
 
 app.post('/add-snippet', function(req, res) {
@@ -46,7 +48,9 @@ app.post('/add-snippet', function(req, res) {
             console.log("Error saving new snippet: "+ err);
         } else {
             console.log("New Snippet Saved!");
-            res.json(getAllSnippets(Snippet, "New Snippet Saved!"));
+            getAllSnippets(Snippet, "New Snippet Saved!").then(data => {
+                res.json(data);
+            });
         }
     });
 });
@@ -114,12 +118,15 @@ function setUpSchema() {
 
 function getAllSnippets(Snippet, successMessage) {
     // Get all the snippets in the database;
-    Snippet.find({}, function(err, data) {
-        if(err) throw err;
-        return returnObj = {
-            responseMessage: successMessage,
-            connected: true,
-            data: data
-        };
+    return new Promise((res,rej) => {
+        Snippet.find({}, function(err, data) {
+            if(err) throw err;
+            returnObj = {
+                responseMessage: successMessage,
+                connected: true,
+                data: data
+            };
+            res(returnObj);
+        });
     });
 }
