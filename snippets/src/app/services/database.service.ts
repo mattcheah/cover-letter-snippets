@@ -5,6 +5,7 @@ import { Observable, BehaviorSubject } from 'rxjs';
 export class DatabaseService {
 
   database: Array<any>;
+  connected:boolean = false;
   databaseStream:BehaviorSubject<any> = new BehaviorSubject(undefined);
   categories:any = {};
 
@@ -30,6 +31,7 @@ export class DatabaseService {
       if("data" in data) self.database = data.data;
       self.extractCategories();
       this.databaseStream.next(data);
+      this.connected = true;
     }).catch((err) => {
       console.log("Error: " + err);
       this.databaseStream.error(err);

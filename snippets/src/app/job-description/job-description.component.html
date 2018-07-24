@@ -1,8 +1,11 @@
-<h4>Job Description</h4>
-<p>Enter the job description here, and Snippets will parse it in order to find the keywords (skills, experience, languages) that match previous cover letter information that you have written.</p>
-<textarea ref-textarea [(ngModel)]="descriptionContent" placeholder="Copy/Paste a job description here" ></textarea>
-<button (click)="submitDescription(descriptionContent)">Parse Job Description</button>
-<div class="results" *ngIf="showKeywordsResults">
-  <p>Results:</p>
+<div *ngIf="databaseService.connected">
+
+  <h4>Job Description</h4>
+  <p>Enter the job description here, and Snippets will parse it in order to find the keywords (skills, experience, languages) that match previous cover letter information that you have written.</p>
+  <textarea ref-textarea [(ngModel)]="descriptionContent" placeholder="Copy/Paste a job description here" ></textarea>
+  <button (click)="submitDescription(descriptionContent)">Parse Job Description</button>
+  <div class="results" *ngIf="showKeywordsResults">
+    <p>Results:</p>
+  </div>
 </div>
 

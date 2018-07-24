@@ -9,6 +9,7 @@ import { ResultsComponent } from './results/results.component';
 
 import { DatabaseService } from './services/database.service';
 import { ParseDescriptionService } from './services/parse-description.service';
+import { AddSnippetComponent } from './add-snippet/add-snippet.component';
 
 
 @NgModule({
@@ -16,7 +17,8 @@ import { ParseDescriptionService } from './services/parse-description.service';
     AppComponent,
     JobDescriptionComponent,
     DatabaseComponent,
-    ResultsComponent
+    ResultsComponent,
+    AddSnippetComponent
   ],
   imports: [
     BrowserModule,
