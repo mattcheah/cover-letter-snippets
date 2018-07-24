@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { StatusMessageService } from '../services/status-message.service';
 
 @Component({
   selector: 'app-status-message',
@@ -8,17 +9,16 @@ import { Component, OnInit } from '@angular/core';
 export class StatusMessageComponent implements OnInit {
   statusMessage:String = "";
   statusClass:String = "primary";
-  constructor() { }
+  constructor(private statusMessageService:StatusMessageService) { }
 
   ngOnInit() {
-  }
-
-  setStatusMessage(message):void {
-    this.statusMessage = message;
-  }
-
-  setStatusClass(cssClass):void {
-    this.statusClass = cssClass;
+    let statusObservable = this.statusMessageService.getStatusMessageStream();
+    statusObservable.subscribe(d => {
+      if (d !== undefined) {
+        this.statusMessage = d.status;
+        this.statusClass = d.cssClass;
+      }
+    });
   }
 
 }

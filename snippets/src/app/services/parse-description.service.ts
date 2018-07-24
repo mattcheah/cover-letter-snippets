@@ -2,11 +2,12 @@ import { Injectable } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
 
 import { DatabaseService } from "./database.service";
+import { StatusMessageService} from './status-message.service';
 
 @Injectable()
 export class ParseDescriptionService {
 
-  constructor(private databaseService:DatabaseService) { }
+  constructor(private databaseService:DatabaseService, private statusMessageService:StatusMessageService) { }
 
   parseDescription(description):any {
     this.resetJobKeywords();
@@ -69,6 +70,8 @@ export class ParseDescriptionService {
     }
 
     quicksortByJobKeywords(keywordsArray, 0, keywordsArray.length-1);
+    let statusMessage = "Finished parsing the description. The category with the most keywords in this job description is: "+keywordsArray[0].keyword + " with "+keywordsArray[0].jobKeywords + " keywords.";
+    this.statusMessageService.newStatusMessage(statusMessage, "success");
     return keywordsArray;
   }
 

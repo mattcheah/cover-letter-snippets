@@ -11,7 +11,7 @@ import { DatabaseService } from './services/database.service';
 import { ParseDescriptionService } from './services/parse-description.service';
 import { AddSnippetComponent } from './add-snippet/add-snippet.component';
 import { StatusMessageComponent } from './status-message/status-message.component';
-
+import { StatusMessageService } from './services/status-message.service';
 
 @NgModule({
   declarations: [
@@ -26,7 +26,7 @@ import { StatusMessageComponent } from './status-message/status-message.componen
     BrowserModule,
     FormsModule
   ],
-  providers: [DatabaseService,ParseDescriptionService],
+  providers: [DatabaseService,ParseDescriptionService, StatusMessageService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

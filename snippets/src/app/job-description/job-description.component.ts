@@ -13,8 +13,7 @@ export class JobDescriptionComponent implements OnInit {
 
   showKeywordResults:boolean = false;
   descriptionContent:string;
-  textValue = "hi";
-  
+
   constructor(private parseDescriptionService:ParseDescriptionService, private databaseService:DatabaseService) { }
 
   ngOnInit() {

@@ -29,7 +29,18 @@ app.post('/connect-to-database', function(req, res) {
         res.status(400).send("Please enter the URI of a mlab mongodb database!");
         return;
     }
-    setUpConnection(dburl);
+    
+    let connection = mongoose.connect(dburl);
+    mongoose.connection.on('error', function (err) {
+        console.log("Error! " + err);
+        res.status(400).json({ error: "Sorry, mongoose could not connect to the database! Make sure your URI is correct!" });
+        return;
+    });
+    mongoose.connection.on('connected', function () {
+        console.log("Successfully Connected!");
+    });
+
+
     let Snippet = setUpSchema();
     getAllSnippets(Snippet, "Successfully Connected to the Database and retrieved records!").then(data => {
         res.json(data);
@@ -87,19 +98,6 @@ console.log("app starting, listening on: localhost:"+port);
 
 // //catches uncaught exceptions
 // process.on('uncaughtException', exitHandler.bind(null, { exit: true }));
-function setUpConnection(dburl) {
-    let connection = mongoose.connect(dburl);
-
-    mongoose.connection.on('error', function (err) {
-        console.log("Error! " + err);
-        res.status(400).json({ error: "Sorry, mongoose could not connect to the database! Make sure your URI is correct!" });
-        return;
-    });
-
-    mongoose.connection.on('connected', function () {
-        console.log("Successfully Connected!");
-    });
-}
 
 function setUpSchema() {
     let Snippet;
@@ -120,7 +118,12 @@ function getAllSnippets(Snippet, successMessage) {
     // Get all the snippets in the database;
     return new Promise((res,rej) => {
         Snippet.find({}, function(err, data) {
-            if(err) throw err;
+            if(err) {
+                rej({
+                    error:err,
+                    connected: false
+                });
+            }
             returnObj = {
                 responseMessage: successMessage,
                 connected: true,

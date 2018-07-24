@@ -1,9 +1,34 @@
 #status {
     width:100%;
-    padding:5px;
-    border:1px solid #666;
+    padding: 0px 15px;
+    border:1px solid #c9c9c9;
     text-align:left;
-    color:#666;
+    color:#c9c9c9;
     border-radius:3px;
     margin:20px 0;
+    background-color: rgba(200,200,200,.3);
+}
+
+#status.success {
+    color:green;
+    border-color:green;
+    background-color:#9bca9b;
+}
+
+#status.error {
+    color: #c14242;
+    border-color: #b54242;
+    background-color: #5a2c2c;
+}
+
+#status.primary {
+    color: #8fcef3;
+    border-color: #596c77;
+    background-color: #596c77;
+}
+
+#status.warning {
+    color:yellow;
+    border-color:yellow;
+    background-color:#a29152;
 }

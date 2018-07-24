@@ -12,7 +12,7 @@
   <input [(ngModel)]="databaseString"/><br>
   <button [ngClass]="{inactive: databaseString == ''}" (click)="connect(databaseString)">Connect to Database</button>
 </div>
-<p [ngClass]="responseMessageClass">{{responseMessage}}</p>
+
 <div *ngIf="!showConnectForm">
   <p>Your Snippets Database has {{databaseService.database.length}} entries.</p>
 </div>

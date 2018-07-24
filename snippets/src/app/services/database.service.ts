@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Observable, BehaviorSubject } from 'rxjs';
+import { StatusMessageService } from './status-message.service';
 
 @Injectable()
 export class DatabaseService {
@@ -10,11 +11,11 @@ export class DatabaseService {
   categories:any = {};
 
 
-  constructor() { }
+  constructor(private statusMessageService:StatusMessageService) { }
 
-  getDatabaseStream():Observable<{}> {
-    return this.databaseStream.asObservable();
-  }
+  // getDatabaseStream():Observable<{}> {
+  //   return this.databaseStream.asObservable();
+  // }
 
   startConnection(urlString):void {
     let self = this;
@@ -28,17 +29,22 @@ export class DatabaseService {
     }).then(function (res) {
       return res.json();
     }).then((data) => {
-      if("data" in data) self.database = data.data;
-      self.extractCategories();
-      this.databaseStream.next(data);
-      this.connected = true;
+      if ("error" in data) {
+        self.statusMessageService.newStatusMessage("There was an error connecting to the database: "+data.error, "error");
+      } else if (data.connected) {
+        self.database = data.data;
+        self.statusMessageService.newStatusMessage(data.responseMessage, "success");
+        self.extractCategories();
+        self.connected = true;
+      }
     }).catch((err) => {
       console.log("Error: " + err);
-      this.databaseStream.error(err);
+      self.statusMessageService.newStatusMessage("There was an error connecting to the database: "+err, "error");
     });
   }
 
   addSnippet(snippet, categories):void {
+    let self = this;
     let data = {snippet:snippet, categories:categories};
     fetch('add-snippet', {
         method: "POST", // *GET, POST, PUT, DELETE, etc.
@@ -49,8 +55,10 @@ export class DatabaseService {
     }).then(res => res.json())
     .then(data => {
       console.log(data);
+      self.statusMessageService.newStatusMessage(data.responseMessage, "success");
     }).catch(error => {
       console.log("Error: "+error);
+      self.statusMessageService.newStatusMessage("There was an error submitting your snippet: "+error, "error");
     });
   }
 
