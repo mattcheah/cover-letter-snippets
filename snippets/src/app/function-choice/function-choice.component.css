@@ -1,0 +1,8 @@
+.flex {
+    display: flex;
+    justify-content: space-around;
+}
+.active {
+    background-color: #bdd3e6;
+    border: 1px solid #757575;
+}

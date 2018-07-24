@@ -12,6 +12,7 @@ import { ParseDescriptionService } from './services/parse-description.service';
 import { AddSnippetComponent } from './add-snippet/add-snippet.component';
 import { StatusMessageComponent } from './status-message/status-message.component';
 import { StatusMessageService } from './services/status-message.service';
+import { FunctionChoiceComponent } from './function-choice/function-choice.component';
 
 @NgModule({
   declarations: [
@@ -20,7 +21,8 @@ import { StatusMessageService } from './services/status-message.service';
     DatabaseComponent,
     ResultsComponent,
     AddSnippetComponent,
-    StatusMessageComponent
+    StatusMessageComponent,
+    FunctionChoiceComponent
   ],
   imports: [
     BrowserModule,

@@ -1,4 +1,4 @@
-<div *ngIf="showConnectForm">
+<div *ngIf="!databaseService.connected">
   <h4>Connect your Database:</h4>
   <p>
     Paste your MongoDB url here with credentials and we will connect to your database.
