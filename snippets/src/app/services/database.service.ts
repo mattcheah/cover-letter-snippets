@@ -38,6 +38,22 @@ export class DatabaseService {
     });
   }
 
+  addSnippet(snippet, categories):void {
+    let data = {snippet:snippet, categories:categories};
+    fetch('add-snippet', {
+        method: "POST", // *GET, POST, PUT, DELETE, etc.
+        headers: {
+          "Content-Type": "application/json; charset=utf-8",
+        },
+        body: JSON.stringify(data)
+    }).then(res => res.json())
+    .then(data => {
+      console.log(data);
+    }).catch(error => {
+      console.log("Error: "+error);
+    });
+  }
+
   extractCategories(): void {
     for (let i = 0; i < this.database.length; i++) {
       let record = this.database[i];
