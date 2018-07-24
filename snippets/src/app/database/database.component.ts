@@ -20,24 +20,28 @@ export class DatabaseComponent implements OnInit {
   constructor(private databaseService: DatabaseService) { }
 
   ngOnInit() {
+    let self = this;
+    let databaseObservable:any = this.databaseService.getDatabaseStream();
+    databaseObservable.subscribe(d => {
+      if (d !== undefined) {
+        let responseData = d;
+        console.log("subscribed to dataobservable responseData");
+        console.log(responseData);
+        if ("error" in responseData) {
+          self.responseMessage = responseData.error;
+          self.responseMessageClass = "fail";
+        } else if (responseData.connected) {
+          self.showConnectForm = false;
+          self.responseMessage = responseData.responseMessage;
+          self.responseMessageClass = "success";
+        }
+      }
+    });
   }
 
   connect(connectString:string):void {
-    console.log("connecting to mongoose db: response is:");
-    let self = this;
-
-    this.databaseService.startConnection(connectString).then((responseData) => {
-      console.log("responseData");
-      console.log(responseData);
-      if ("error" in responseData) {
-        self.responseMessage = responseData.error;
-        self.responseMessageClass = "fail";
-      } else if (responseData.connected) {
-        self.showConnectForm = false;
-        self.responseMessage = responseData.responseMessage;
-        self.responseMessageClass = "success";
-      }
-    });
+    // console.log("connecting to mongoose db: response is:");
+    this.databaseService.startConnection(connectString);
   }
 
 
