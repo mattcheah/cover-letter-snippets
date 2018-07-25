@@ -26,8 +26,8 @@ export class DatabaseComponent implements OnInit {
     this.databaseService.startConnection(connectString);
   }
 
-  deleteSnippet(id) {
-    console.log("delete id: "+id);
+  deleteRecord(id) {
+    // console.log("delete id: "+id);
     this.databaseService.deleteSnippet(id);
   }
 

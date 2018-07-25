@@ -57,6 +57,7 @@ app.post('/add-snippet', function(req, res) {
     }).save(function(err) {
         if (err) {
             console.log("Error saving new snippet: "+ err);
+            res.error("Error adding snippet: "+err);
         } else {
             console.log("New Snippet Saved!");
             getAllSnippets(Snippet, "New Snippet Saved!").then(data => {
@@ -64,6 +65,22 @@ app.post('/add-snippet', function(req, res) {
             });
         }
     });
+});
+
+app.delete('/delete-snippet', function(req,res) {
+    const Snippet = setUpSchema();
+    const id = req.body.id;
+    let snippet;
+    Snippet.findById(id, function(err, response) {
+        let snippet = response;
+        Snippet.findByIdAndRemove(id, function(err) {
+            if (err) res.error("Error deleting snippet: " + err);
+            getAllSnippets(Snippet, "Removed Snippet: "+snippet.snippet.substring(0, 30)+"...").then(data => {
+                res.json(data);
+            });
+        });
+    });
+    
 });
 
 // let browser;

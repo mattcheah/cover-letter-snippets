@@ -52,10 +52,11 @@ export class DatabaseService {
           "Content-Type": "application/json; charset=utf-8",
         },
         body: JSON.stringify(data)
-    }).then(res => res.json())
-    .then(data => {
-      console.log(data);
+    }).then(res => res.json()
+    ).then(data => {
       self.statusMessageService.newStatusMessage(data.responseMessage, "success");
+      self.database = data.data;
+      self.extractCategories();
     }).catch(error => {
       console.log("Error: "+error);
       self.statusMessageService.newStatusMessage("There was an error submitting your snippet: "+error, "error");
@@ -71,10 +72,13 @@ export class DatabaseService {
         "Content-Type": "application/json; charset=utf-8",
       },
       body: JSON.stringify(data)
-    }).then(res => {
-
+    }).then(res => res.json()
+    ).then(data => {
+      self.statusMessageService.newStatusMessage(data.responseMessage, "success");
+      self.database = data.data;
+      self.extractCategories();
     }).catch(err => {
-      
+      self.statusMessageService.newStatusMessage(err, "error");
     });
   }
 

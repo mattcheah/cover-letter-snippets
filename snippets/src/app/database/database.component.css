@@ -2,7 +2,7 @@
     color: #aaa;
 }
 
-#database-container {
+#table-container {
   max-height:400px;
   overflow-y:scroll;
   margin-bottom:30px;
@@ -21,6 +21,11 @@
 
 #database-table tbody tr {
   max-height:100px;
+}
+
+
+#database-table tbody tr .delete a {
+  cursor:pointer;
 }
 
 #database-table tbody tr:nth-child(2n) {
