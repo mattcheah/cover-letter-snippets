@@ -5,20 +5,23 @@
   margin-bottom:30px;
 }
 
-#database-table, #keyword-results-table {
-  font-size:10px;
+table {
+  font-size:11px;
   font-family:sans-serif;
 }
 
-#database-table thead td, #keyword-results-table thead, td {
-  font-weight:700;
+table thead td{
   font-size:12px;
 }
 
-#database-table tbody tr, #keyword-results-table tbody tr {
+table tbody tr {
   max-height:100px;
 }
 
+table td {
+    word-wrap: break-word;
+    word-break: break-all;
+}
 
 table td a {
   cursor:pointer;
@@ -26,4 +29,7 @@ table td a {
 
 table tbody tr:nth-child(2n) {
   background-color:#333;
+}
+table tbody tr:nth-child(2n+1) {
+  background-color:#2A2A2A;
 }

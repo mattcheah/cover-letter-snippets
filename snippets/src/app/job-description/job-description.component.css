@@ -1,0 +1,30 @@
+#keyword-results-table-container {
+    max-height:160px;
+}
+
+#keyword-results-table thead td, #filtered-snippets-table thead td {
+    font-size:14px;
+    color:white;
+}
+
+#keyword-results-table tbody td {
+    font-size:10px;
+}
+
+#filtered-snippets-table thead td:first-child {
+    width:60%;
+}
+
+#filtered-snippets-table thead td:nth-child(2) {
+    max-width:25%;
+}
+
+#filtered-snippets-table thead td:nth-child(3) {
+    max-width:15%;
+}
+
+.line-break {
+    margin:10px auto;
+    width: 80%;
+    border-bottom:1px solid  #c9c9c9;
+}

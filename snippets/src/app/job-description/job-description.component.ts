@@ -12,6 +12,8 @@ import { DatabaseService } from '../services/database.service';
 export class JobDescriptionComponent implements OnInit {
 
   descriptionContent:string;
+  filteredSnippets:Array<any>;
+  showFilteredSnippetsTable:boolean = false;
 
   constructor(private parseDescriptionService:ParseDescriptionService, private databaseService:DatabaseService) { }
 
@@ -21,6 +23,21 @@ export class JobDescriptionComponent implements OnInit {
 
   submitDescription(description):void {
     this.parseDescriptionService.parseDescription(description);
+  }
+
+  enterNewDescription():void {
+    this.descriptionContent = "";
+    this.parseDescriptionService.showParsingResults = false;
+    this.showFilteredSnippetsTable = false;
+  }
+
+  displaySnippets(keyword):void {
+    this.filteredSnippets = [];
+    let snippets = this.databaseService.database;
+    for(let i = 0; i < snippets.length; i++) {
+      if (snippets[i].categories.includes(keyword)) this.filteredSnippets.push(snippets[i]);
+    }
+    this.showFilteredSnippetsTable = true;
   }
 
 }

@@ -2,6 +2,11 @@
     display: flex;
     justify-content: space-around;
 }
+
+button {
+    margin:20px;
+}
+
 .active {
     background-color: #bdd3e6;
     border: 1px solid #757575;
