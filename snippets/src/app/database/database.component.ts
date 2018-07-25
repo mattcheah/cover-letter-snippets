@@ -18,26 +18,17 @@ export class DatabaseComponent implements OnInit {
   constructor(private databaseService: DatabaseService) { }
 
   ngOnInit() {
-    // let self = this;
-    // let databaseObservable:any = this.databaseService.getDatabaseStream();
-    // databaseObservable.subscribe(d => {
-    //   if (d !== undefined) {
-    //     let responseData = d;
-    //     console.log("subscribed to dataobservable responseData");
-    //     console.log(responseData);
-    //     if ("error" in responseData) {
-          
-    //     } else if (responseData.connected) {
-    //       self.showConnectForm = false;
-
-    //     }
-    //   }
-    // });
+    
   }
 
   connect(connectString:string):void {
     // console.log("connecting to mongoose db: response is:");
     this.databaseService.startConnection(connectString);
+  }
+
+  deleteSnippet(id) {
+    console.log("delete id: "+id);
+    this.databaseService.deleteSnippet(id);
   }
 
 

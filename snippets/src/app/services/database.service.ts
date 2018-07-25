@@ -62,6 +62,22 @@ export class DatabaseService {
     });
   }
 
+  deleteSnippet(id):void {
+    let self = this;
+    let data = {id: id};
+    fetch('delete-snippet', {
+      method: "DELETE",
+      headers: {
+        "Content-Type": "application/json; charset=utf-8",
+      },
+      body: JSON.stringify(data)
+    }).then(res => {
+
+    }).catch(err => {
+      
+    });
+  }
+
   extractCategories(): void {
     for (let i = 0; i < this.database.length; i++) {
       let record = this.database[i];

@@ -2,11 +2,27 @@
     color: #aaa;
 }
 
-.fail {
-  color:red;
+#database-container {
+  max-height:400px;
+  overflow-y:scroll;
+  margin-bottom:30px;
 }
 
-.success {
-  color:green;
-  font-size:18px;
+#database-table {
+  font-size:10px;
+  font-family:sans-serif;
+
+}
+
+#database-table thead td {
+  font-weight:700;
+  font-size:12px;
+}
+
+#database-table tbody tr {
+  max-height:100px;
+}
+
+#database-table tbody tr:nth-child(2n) {
+  background-color:#333;
 }
