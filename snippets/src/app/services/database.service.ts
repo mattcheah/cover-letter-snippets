@@ -7,6 +7,7 @@ export class DatabaseService {
 
   database: Array<any>;
   connected:boolean = false;
+  showDatabase:boolean = false;
   databaseStream:BehaviorSubject<any> = new BehaviorSubject(undefined);
   categories:any = {};
 
@@ -36,6 +37,7 @@ export class DatabaseService {
         self.statusMessageService.newStatusMessage(data.responseMessage, "success");
         self.extractCategories();
         self.connected = true;
+        self.showDatabase = true;
       }
     }).catch((err) => {
       console.log("Error: " + err);

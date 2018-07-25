@@ -13,6 +13,7 @@ import { AddSnippetComponent } from './add-snippet/add-snippet.component';
 import { StatusMessageComponent } from './status-message/status-message.component';
 import { StatusMessageService } from './services/status-message.service';
 import { FunctionChoiceComponent } from './function-choice/function-choice.component';
+import { HasKeywordsPipe } from './has-keywords.pipe';
 
 @NgModule({
   declarations: [
@@ -22,7 +23,8 @@ import { FunctionChoiceComponent } from './function-choice/function-choice.compo
     ResultsComponent,
     AddSnippetComponent,
     StatusMessageComponent,
-    FunctionChoiceComponent
+    FunctionChoiceComponent,
+    HasKeywordsPipe
   ],
   imports: [
     BrowserModule,

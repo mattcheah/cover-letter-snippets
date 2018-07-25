@@ -13,9 +13,9 @@
   <button [ngClass]="{inactive: databaseString == ''}" (click)="connect(databaseString)">Connect to Database</button>
 </div>
 
-<div *ngIf="databaseService.connected">
+<div *ngIf="databaseService.showDatabase">
   <p>Your Snippets Database has {{databaseService.database.length}} entries.</p>
-  <div id="table-container">
+  <div class="table-container">
 
     <table id="database-table">
       <thead>

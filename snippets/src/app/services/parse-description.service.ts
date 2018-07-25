@@ -7,6 +7,9 @@ import { StatusMessageService} from './status-message.service';
 @Injectable()
 export class ParseDescriptionService {
 
+  showParsingResults:boolean = false;
+  keywordArray:Array<{}>;
+
   constructor(private databaseService:DatabaseService, private statusMessageService:StatusMessageService) { }
 
   parseDescription(description):any {
@@ -21,8 +24,9 @@ export class ParseDescriptionService {
       }
     }
 
-    this.createOrderedArray();
-
+    this.keywordArray = this.createOrderedArray();
+    this.showParsingResults = true;
+    this.databaseService.showDatabase = false;
   }
 
   resetJobKeywords():void {

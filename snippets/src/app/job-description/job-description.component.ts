@@ -11,7 +11,6 @@ import { DatabaseService } from '../services/database.service';
 })
 export class JobDescriptionComponent implements OnInit {
 
-  showKeywordResults:boolean = false;
   descriptionContent:string;
 
   constructor(private parseDescriptionService:ParseDescriptionService, private databaseService:DatabaseService) { }
