@@ -5,9 +5,16 @@
     <textarea ref-textarea [(ngModel)]="descriptionContent" placeholder="Copy/Paste a job description here" ></textarea>
     <button (click)="submitDescription(descriptionContent)">Parse Job Description</button>
   </div>
+
   <div class="results" *ngIf="parseDescriptionService.showParsingResults">
+
+    <div class="line-break"></div>
     <small><a (click)="enterNewDescription()"><< Enter new job description</a></small>
-    <p>Results for the job description: <small>{{descriptionContent.substring(0,60)}}...</small></p>
+    <div class="line-break"></div>
+
+    <h4>Results for the job description:</h4>
+    <p><small>{{descriptionContent.substring(0,100)}}...</small></p>
+
     <div id="keyword-results-table-container" class="table-container">
       <table id="keyword-results-table">
         <thead>
@@ -25,25 +32,31 @@
         </tbody>
       </table>  
     </div>
+
     <div class="line-break"></div>
+
+    <h4>Snippets from Category: {{ displayedCategory }}</h4>
     <div id="filtered-snippets-table-container" class="table-container" *ngIf="showFilteredSnippetsTable">
         <table id="filtered-snippets-table">
           <thead>
             <tr>
               <td>Snippet</td>
-              <td>Categories</td>
+              <!-- <td>Categories</td> -->
               <td>Add to Letter</td>
             </tr>
           </thead>
           <tbody>
             <tr *ngFor="let snippet of filteredSnippets">
               <td class="snippet">{{snippet.snippet}}</td>
-              <td class="categories">{{snippet.categories}}</td>
-              <td class="add"><a>Add</a></td>
+              <!-- <td class="categories">{{snippet.categories}}</td> -->
+              <td class="add" (click)="coverLetterService.addSnippet(snippet)"><a>Add</a></td>
             </tr>
           </tbody>
         </table>
     </div>
+
+    <div class="line-break"></div>
+
   </div>
 </div>
 

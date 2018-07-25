@@ -1,0 +1,11 @@
+#cover-letter-table thead td:first-child {
+    width:70%;
+}
+
+#cover-letter-table thead td:nth-child(2) {
+    max-width:15%;
+}
+
+#cover-letter-table thead td:nth-child(3) {
+    max-width:15%;
+}

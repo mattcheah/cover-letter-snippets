@@ -11,16 +11,17 @@ table {
 }
 
 table thead td{
-  font-size:12px;
+  font-size:14px;
+  color:white;
 }
 
-table tbody tr {
+table thead tr {
   max-height:100px;
 }
 
 table td {
-    word-wrap: break-word;
-    word-break: break-all;
+  word-wrap: break-word;
+  word-break: break-all;
 }
 
 table td a {

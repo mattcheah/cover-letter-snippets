@@ -2,25 +2,21 @@
     max-height:160px;
 }
 
-#keyword-results-table thead td, #filtered-snippets-table thead td {
+/* #keyword-results-table thead td, #filtered-snippets-table thead td {
     font-size:14px;
     color:white;
-}
+} */
 
 #keyword-results-table tbody td {
     font-size:10px;
 }
 
 #filtered-snippets-table thead td:first-child {
-    width:60%;
+    width:75%;
 }
 
 #filtered-snippets-table thead td:nth-child(2) {
     max-width:25%;
-}
-
-#filtered-snippets-table thead td:nth-child(3) {
-    max-width:15%;
 }
 
 .line-break {

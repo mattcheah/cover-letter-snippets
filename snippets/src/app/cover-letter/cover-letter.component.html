@@ -1,0 +1,23 @@
+<!-- <div class="table-container" *ngIf="coverLetterService.addedSnippets.length > 0"> -->
+<h4>Organize Snippets and Export:</h4>
+<div class="table-container" *ngIf="coverLetterService.addedSnippets.length > 0">
+  <table id="cover-letter-table">
+    <thead>
+      <tr>
+        <td>Snippet</td>
+        <td>Remove</td>
+        <td>Reorganize</td>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let snippet of coverLetterService.addedSnippets; let i = index">
+        <td>{{snippet.snippet}}</td>
+        <td><a (click)="coverLetterService.removeSnippet(i)">Remove</a></td>
+        <td>
+          <p><a (click)="coverLetterService.moveSnippet(i,true)" *ngIf="i !== 0">Move Up</a></p>
+          <p><a (click)="coverLetterService.moveSnippet(i,false)" *ngIf="i !== coverLetterService.addedSnippets.length - 1">Move Down</a></p>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>
