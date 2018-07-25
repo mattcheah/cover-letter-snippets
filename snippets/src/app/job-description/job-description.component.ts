@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 
 import { ParseDescriptionService } from '../services/parse-description.service';
+import { StatusMessageService } from '../services/status-message.service';
 import { DatabaseService } from '../services/database.service';
 import { CoverLetterService } from '../services/cover-letter.service';
 
@@ -18,9 +19,10 @@ export class JobDescriptionComponent implements OnInit {
   showFilteredSnippetsTable:boolean = false;
 
   constructor(
-    private parseDescriptionService:ParseDescriptionService, 
+    private parseDescriptionService:ParseDescriptionService,
     private databaseService:DatabaseService,
-    private coverLetterService:CoverLetterService
+    private coverLetterService:CoverLetterService,
+    private statusMessageService:StatusMessageService
   ) { }
 
   ngOnInit() {
@@ -35,6 +37,7 @@ export class JobDescriptionComponent implements OnInit {
     this.descriptionContent = "";
     this.parseDescriptionService.showParsingResults = false;
     this.showFilteredSnippetsTable = false;
+    this.statusMessageService.newStatusMessage("Resetting Job Description", "warning");
   }
 
   displaySnippets(keyword):void {
@@ -45,6 +48,7 @@ export class JobDescriptionComponent implements OnInit {
     }
     this.displayedCategory = keyword;
     this.showFilteredSnippetsTable = true;
+    this.statusMessageService.newStatusMessage("Displaying Snippets from category: "+keyword, "primary");
   }
 
 }

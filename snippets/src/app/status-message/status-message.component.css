@@ -28,7 +28,7 @@
 }
 
 #status.warning {
-    color:yellow;
-    border-color:yellow;
-    background-color:#a29152;
+    color: #856404;
+    background-color: #fff3cd;
+    border-color: #ffeeba;
 }

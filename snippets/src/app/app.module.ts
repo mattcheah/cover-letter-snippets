@@ -17,6 +17,7 @@ import { StatusMessageComponent } from './status-message/status-message.componen
 import { FunctionChoiceComponent } from './function-choice/function-choice.component';
 import { HasKeywordsPipe } from './has-keywords.pipe';
 import { CoverLetterComponent } from './cover-letter/cover-letter.component';
+import { ExportComponent } from './export/export.component';
 
 
 @NgModule({
@@ -29,7 +30,8 @@ import { CoverLetterComponent } from './cover-letter/cover-letter.component';
     StatusMessageComponent,
     FunctionChoiceComponent,
     HasKeywordsPipe,
-    CoverLetterComponent
+    CoverLetterComponent,
+    ExportComponent
   ],
   imports: [
     BrowserModule,

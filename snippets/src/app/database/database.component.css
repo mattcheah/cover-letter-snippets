@@ -1,0 +1,15 @@
+.table-container {
+    max-height: 300px;
+}
+
+#database-table thead td:first-child {
+    width:60%;
+}
+
+#database-table thead td:nth-child(2) {
+    width:25%;
+}
+
+#database-table thead td:nth-child(3) {
+    width:15%;
+}
