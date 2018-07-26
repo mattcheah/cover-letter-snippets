@@ -1,13 +1,27 @@
 /* You can add global styles to this file, and also import other style files */
+
+.flex {
+  display:flex;
+  justify-content: space-around;
+}
+
+.flex ul {
+  list-style: none;
+}
+
 .table-container {
   max-height:400px;
   overflow-y:scroll;
   margin-bottom:30px;
+  border-radius: 5px;
 }
 
 table {
   font-size:11px;
   font-family:sans-serif;
+}
+table thead tr {
+  background-color:#171717;
 }
 
 table thead td{

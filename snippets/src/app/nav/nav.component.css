@@ -1,0 +1,21 @@
+ul {
+  list-style-type: none;
+}
+
+li a {
+  color:#b0ccea;
+}
+
+li .is-active {
+  color:white;
+  font-weight:700;
+}
+
+li .disabled {
+  cursor:not-allowed !important;
+  color:#555 !important;
+  text-decoration:none;
+}
+/* .is-active {
+  color:#7ca0c5;
+} */

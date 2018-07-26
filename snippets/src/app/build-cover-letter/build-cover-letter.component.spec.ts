@@ -1,20 +1,20 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { FunctionChoiceComponent } from './function-choice.component';
+import { BuildCoverLetterComponent } from './build-cover-letter.component';
 
-describe('FunctionChoiceComponent', () => {
-  let component: FunctionChoiceComponent;
-  let fixture: ComponentFixture<FunctionChoiceComponent>;
+describe('BuildCoverLetterComponent', () => {
+  let component: BuildCoverLetterComponent;
+  let fixture: ComponentFixture<BuildCoverLetterComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ FunctionChoiceComponent ]
+      declarations: [ BuildCoverLetterComponent ]
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(FunctionChoiceComponent);
+    fixture = TestBed.createComponent(BuildCoverLetterComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

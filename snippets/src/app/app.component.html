@@ -4,9 +4,11 @@
     Welcome to {{ title }}!
   </h1>
 </div>
+<app-nav></app-nav>
 <div class="container">
-  <app-status-message></app-status-message>
-  <app-database></app-database>
-  <app-function-choice></app-function-choice>
+  <router-outlet></router-outlet>
+  <!-- <app-database></app-database>
+  <app-function-choice></app-function-choice> -->
 </div>
+<app-status-message></app-status-message>
 

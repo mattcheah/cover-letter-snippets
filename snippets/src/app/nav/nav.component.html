@@ -1,0 +1,12 @@
+<ul class="flex">
+  <li><a [routerLink]="['']" [routerLinkActive]="['is-active']" [routerLinkActiveOptions]="{ exact: true }">Connect Database</a></li>
+
+  <li *ngIf="databaseService.connected"><a [routerLink]="['add-snippet']" [routerLinkActive]="['is-active']" [routerLinkActiveOptions]="{ exact: true }" [ngClass]="{disabled: !databaseService.connected}">Add Snippets</a></li>
+  <li *ngIf="!databaseService.connected"><a class="disabled">Add Snippets</a></li>
+
+  <li *ngIf="databaseService.connected"><a [routerLink]="['build-cover-letter']" [routerLinkActive]="['is-active']" [routerLinkActiveOptions]="{ exact: true }">Build Cover Letter</a></li>
+  <li *ngIf="!databaseService.connected"><a class="disabled">Build Cover Letter</a></li>
+
+  <li *ngIf="!coverLetterLinkDisabled"><a [routerLink]="['export-cover-letter']" [routerLinkActive]="['is-active']">Export Cover Letter</a></li>
+  <li *ngIf="coverLetterLinkDisabled"><a  class="disabled">Export Cover Letter</a></li>
+</ul>
