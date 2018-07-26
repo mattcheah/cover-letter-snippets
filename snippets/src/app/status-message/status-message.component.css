@@ -6,10 +6,11 @@
     text-align:left;
     color:#c9c9c9;
     border-radius:3px;
-    margin:20px 0 0;
+    margin:20px 0 0 -13px;
     background-color: rgba(200,200,200,.3);
     position: fixed;
     bottom: 0px;
+    box-sizing: border-box;
 }
 
 #status.success {

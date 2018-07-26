@@ -1,12 +1,13 @@
 /* You can add global styles to this file, and also import other style files */
 
+.body {
+  padding: 13px 13px 80px 13px;
+}
+
 .flex {
   display:flex;
   justify-content: space-around;
-}
-
-.flex ul {
-  list-style: none;
+  flex-wrap: wrap;
 }
 
 .table-container {
