@@ -1,3 +1,8 @@
 <div id="export-container">
-  <textarea ([ngModel])="coverLetterService.exported"></textarea>
+  <h4>Exported Cover Letter:</h4>
+  <p>You may edit your cover letter, and copy/paste it from here to whatever medium you are using to apply for jobs.</p>
+  <textarea [(ngModel)]="coverLetterService.exported"></textarea>
+  <p>Need to edit something? Click the button below to go back.</p>
+  <p>WARNING: Any changes you made in this text form will not be saved!</p>
+  <button [routerLink]="['/build-cover-letter']">Go Back to Building Cover Letter</button>
 </div>

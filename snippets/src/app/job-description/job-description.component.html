@@ -1,62 +1,8 @@
-<div *ngIf="databaseService.connected">
-  <div *ngIf="!parseDescriptionService.showParsingResults">
-    <h4>Job Description</h4>
-    <p>Enter the job description here, and Snippets will parse it in order to find the keywords (skills, experience, languages) that match previous cover letter information that you have written.</p>
-    <textarea ref-textarea [(ngModel)]="descriptionContent" placeholder="Copy/Paste a job description here" ></textarea>
-    <button (click)="submitDescription(descriptionContent)">Parse Job Description</button>
-  </div>
 
-  <div class="results" *ngIf="parseDescriptionService.showParsingResults">
+<h4>Job Description</h4>
+<p>Enter the job description here, and Snippets will parse it in order to find the keywords (skills, experience, languages) that match previous cover letter information that you have written.</p>
+<textarea ref-textarea [(ngModel)]="descriptionContent" placeholder="Copy/Paste a job description here" ></textarea>
+<button (click)="submitDescription(descriptionContent)">Parse Job Description</button>
 
-    <div class="line-break"></div>
-    <small><a (click)="enterNewDescription()"><< Enter new job description</a></small>
-    <div class="line-break"></div>
 
-    <h4>Results for the job description:</h4>
-    <small>{{descriptionContent.substring(0,300)}}...</small>
-
-    <div id="keyword-results-table-container" class="table-container">
-      <table id="keyword-results-table">
-        <thead>
-          <tr>
-            <td>Category/Keyword:</td>
-            <td>Times Mentioned:</td>
-            <td>Show snippets for Category</td>
-        </thead>
-        <tbody>
-          <tr *ngFor="let keyword of parseDescriptionService.keywordArray | hasKeywords">
-            <td>{{ keyword.keyword }}</td>
-            <td>{{ keyword.jobKeywords }}</td>
-            <td><a (click)="displaySnippets(keyword.keyword)">Show Snippets</a></td>
-          </tr>
-        </tbody>
-      </table>
-    </div>
-
-    <div class="line-break"></div>
-
-    <h4>Snippets from Category: {{ displayedCategory }}</h4>
-    <div id="filtered-snippets-table-container" class="table-container" *ngIf="showFilteredSnippetsTable">
-        <table id="filtered-snippets-table">
-          <thead>
-            <tr>
-              <td>Snippet</td>
-              <!-- <td>Categories</td> -->
-              <td>Add to Letter</td>
-            </tr>
-          </thead>
-          <tbody>
-            <tr *ngFor="let snippet of filteredSnippets">
-              <td class="snippet">{{snippet.snippet}}</td>
-              <!-- <td class="categories">{{snippet.categories}}</td> -->
-              <td class="add" (click)="coverLetterService.addSnippet(snippet)"><a>Add</a></td>
-            </tr>
-          </tbody>
-        </table>
-    </div>
-
-    <div class="line-break"></div>
-
-  </div>
-</div>
 

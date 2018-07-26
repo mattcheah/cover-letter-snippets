@@ -8,7 +8,7 @@
   <div class="line-break"></div>
 
   <h4>Results for the job description:</h4>
-  <small>{{descriptionContent.substring(0,300)}}...</small>
+  <small>{{parseDescriptionService.jobDescription.substring(0,200)}}...</small>
 
   <div id="keyword-results-table-container" class="table-container">
     <table id="keyword-results-table">
@@ -32,8 +32,8 @@
 
   <div class="line-break"></div>
 
-  <h4>Snippets from Category: {{ displayedCategory }}</h4>
   <div id="filtered-snippets-table-container" class="table-container" *ngIf="showFilteredSnippetsTable">
+    <h4>Snippets from Category: {{ displayedCategory }}</h4>
     <table id="filtered-snippets-table">
       <thead>
         <tr>
@@ -53,7 +53,5 @@
       </tbody>
     </table>
   </div>
-
-  <div class="line-break"></div>
 
 </div>

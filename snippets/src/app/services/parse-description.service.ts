@@ -7,6 +7,7 @@ import { StatusMessageService} from './status-message.service';
 @Injectable()
 export class ParseDescriptionService {
 
+  jobDescription:string = "";
   showParsingResults:boolean = false;
   keywordArray:Array<{}>;
 
@@ -14,6 +15,7 @@ export class ParseDescriptionService {
 
   parseDescription(description):any {
     this.resetJobKeywords();
+    this.jobDescription = description;
 
     let descriptionWords = description.split(/\W/);
 

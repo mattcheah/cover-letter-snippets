@@ -14,9 +14,6 @@ import { CoverLetterService } from '../services/cover-letter.service';
 export class JobDescriptionComponent implements OnInit {
 
   descriptionContent:string;
-  filteredSnippets:Array<any>;
-  displayedCategory:string = "";
-  showFilteredSnippetsTable:boolean = false;
 
   constructor(
     private parseDescriptionService:ParseDescriptionService,
@@ -36,19 +33,7 @@ export class JobDescriptionComponent implements OnInit {
   enterNewDescription():void {
     this.descriptionContent = "";
     this.parseDescriptionService.showParsingResults = false;
-    this.showFilteredSnippetsTable = false;
     this.statusMessageService.newStatusMessage("Resetting Job Description", "warning");
-  }
-
-  displaySnippets(keyword):void {
-    this.filteredSnippets = [];
-    let snippets = this.databaseService.database;
-    for(let i = 0; i < snippets.length; i++) {
-      if (snippets[i].categories.includes(keyword)) this.filteredSnippets.push(snippets[i]);
-    }
-    this.displayedCategory = keyword;
-    this.showFilteredSnippetsTable = true;
-    this.statusMessageService.newStatusMessage("Displaying Snippets from category: "+keyword, "primary");
   }
 
 }

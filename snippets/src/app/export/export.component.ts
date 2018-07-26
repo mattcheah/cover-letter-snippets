@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { FormsModule } from '@angular/forms';
+import { CoverLetterService } from '../services/cover-letter.service';
 
 @Component({
   selector: 'app-export',
@@ -7,7 +9,7 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ExportComponent implements OnInit {
 
-  constructor() { }
+  constructor(private coverLetterService:CoverLetterService) { }
 
   ngOnInit() {
   }

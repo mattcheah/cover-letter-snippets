@@ -11,16 +11,5 @@
     font-size:10px;
 }
 
-#filtered-snippets-table thead td:first-child {
-    width:75%;
-}
 
-#filtered-snippets-table thead td:nth-child(2) {
-    max-width:25%;
-}
 
-.line-break {
-    margin:10px auto;
-    width: 80%;
-    border-bottom:1px solid  #c9c9c9;
-}

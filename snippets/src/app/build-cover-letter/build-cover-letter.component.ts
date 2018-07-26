@@ -1,5 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 
+import { ParseDescriptionService } from '../services/parse-description.service';
+import { StatusMessageService } from '../services/status-message.service';
+import { DatabaseService } from '../services/database.service';
+import { CoverLetterService } from '../services/cover-letter.service';
+
 @Component({
   selector: 'app-build-cover-letter',
   templateUrl: './build-cover-letter.component.html',
@@ -7,7 +12,12 @@ import { Component, OnInit } from '@angular/core';
 })
 export class BuildCoverLetterComponent implements OnInit {
 
-  constructor() { }
+  constructor(
+    private parseDescriptionService: ParseDescriptionService,
+    private databaseService: DatabaseService,
+    private coverLetterService: CoverLetterService,
+    private statusMessageService: StatusMessageService
+  ) { }
 
   ngOnInit() {
   }

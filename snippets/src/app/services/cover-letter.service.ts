@@ -6,6 +6,7 @@ import { StatusMessageService } from '../services/status-message.service';
 export class CoverLetterService {
 
   addedSnippets:Array<any> = [];
+  exported:string = "";
 
   constructor(private statusMessageService:StatusMessageService) { }
 

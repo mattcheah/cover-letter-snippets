@@ -1,3 +1,11 @@
-<app-job-description></app-job-description>
-<app-results></app-results>
-<app-cover-letter></app-cover-letter>
+<app-job-description *ngIf="!parseDescriptionService.showParsingResults"></app-job-description>
+
+<div *ngIf="parseDescriptionService.showParsingResults">
+  <app-results ></app-results>
+  <div class="line-break"></div>
+</div>
+
+<div *ngIf="coverLetterService.addedSnippets.length > 0">
+  <app-cover-letter></app-cover-letter>
+  <div class="line-break"></div>
+</div>

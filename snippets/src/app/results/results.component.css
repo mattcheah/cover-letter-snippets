@@ -1,0 +1,7 @@
+#filtered-snippets-table thead td:first-child {
+    width:75%;
+}
+
+#filtered-snippets-table thead td:nth-child(2) {
+    max-width:25%;
+}

@@ -7,6 +7,6 @@
   <li *ngIf="databaseService.connected"><a [routerLink]="['build-cover-letter']" [routerLinkActive]="['is-active']" [routerLinkActiveOptions]="{ exact: true }">Build Cover Letter</a></li>
   <li *ngIf="!databaseService.connected"><a class="disabled">Build Cover Letter</a></li>
 
-  <li *ngIf="!coverLetterLinkDisabled"><a [routerLink]="['export-cover-letter']" [routerLinkActive]="['is-active']">Export Cover Letter</a></li>
-  <li *ngIf="coverLetterLinkDisabled"><a  class="disabled">Export Cover Letter</a></li>
+  <li *ngIf="coverLetterService.addedSnippets.length != 0"><a [routerLink]="['export-cover-letter']" [routerLinkActive]="['is-active']">Export Cover Letter</a></li>
+  <li *ngIf="coverLetterService.addedSnippets.length == 0"><a  class="disabled">Export Cover Letter</a></li>
 </ul>

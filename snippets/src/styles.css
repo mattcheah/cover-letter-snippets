@@ -1,7 +1,7 @@
 /* You can add global styles to this file, and also import other style files */
 
-.body {
-  padding: 13px 13px 80px 13px;
+body {
+  padding: 13px 13px 80px 13px !important;
 }
 
 .flex {
@@ -48,4 +48,10 @@ table tbody tr:nth-child(2n) {
 }
 table tbody tr:nth-child(2n+1) {
   background-color:#2A2A2A;
+}
+
+.line-break {
+    margin:10px auto;
+    width: 80%;
+    border-bottom:1px solid  #c9c9c9;
 }

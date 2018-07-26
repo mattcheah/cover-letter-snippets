@@ -1,6 +1,6 @@
 <!-- <div class="table-container" *ngIf="coverLetterService.addedSnippets.length > 0"> -->
 <h4>Organize Snippets and Export:</h4>
-<div class="table-container" *ngIf="coverLetterService.addedSnippets.length > 0">
+<div class="table-container">
   <table id="cover-letter-table">
     <thead>
       <tr>
@@ -21,3 +21,4 @@
     </tbody>
   </table>
 </div>
+<button [routerLink]="['/export-cover-letter']" (click)="compile()">Export and Tweak Cover Letter</button>

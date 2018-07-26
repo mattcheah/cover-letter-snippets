@@ -10,7 +10,7 @@ import { CoverLetterService } from '../services/cover-letter.service';
 })
 export class NavComponent implements OnInit {
 
-  coverLetterLinkDisabled:boolean = this.coverLetterService.addedSnippets.length == 0;
+  coverLetterLinkDisabled:boolean = (this.coverLetterService.addedSnippets.length == 0);
 
   constructor(
     private databaseService:DatabaseService,
