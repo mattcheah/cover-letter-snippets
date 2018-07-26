@@ -5,3 +5,7 @@
 #filtered-snippets-table thead td:nth-child(2) {
     max-width:25%;
 }
+button {
+  margin: 0 auto;
+  display: block;
+}

@@ -22,6 +22,7 @@ export class CoverLetterComponent implements OnInit {
       exportedCoverLetter += "\n\n";
     }
     this.coverLetterService.exported = exportedCoverLetter;
+    this.statusMessasageService.newStatusMessage('Exporting Cover Letter to final edit!','success');
   }
 
 }

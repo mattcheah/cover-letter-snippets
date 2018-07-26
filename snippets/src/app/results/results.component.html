@@ -1,10 +1,9 @@
-<div class="results" *ngIf="parseDescriptionService.showParsingResults">
+<div class="results">
 
   <div class="line-break"></div>
-  <small>
-    <a (click)="enterNewDescription()">
-      << Enter new job description</a>
-  </small>
+
+  <button class="centered" (click)="enterNewDescription()">Enter new job description</button>
+
   <div class="line-break"></div>
 
   <h4>Results for the job description:</h4>
@@ -28,30 +27,36 @@
         </tr>
       </tbody>
     </table>
+
   </div>
 
-  <div class="line-break"></div>
 
-  <div id="filtered-snippets-table-container" class="table-container" *ngIf="showFilteredSnippetsTable">
+  <div *ngIf="showFilteredSnippetsTable">
+    <div class="line-break"></div>
+
     <h4>Snippets from Category: {{ displayedCategory }}</h4>
-    <table id="filtered-snippets-table">
-      <thead>
-        <tr>
-          <td>Snippet</td>
-          <!-- <td>Categories</td> -->
-          <td>Add to Letter</td>
-        </tr>
-      </thead>
-      <tbody>
-        <tr *ngFor="let snippet of filteredSnippets">
-          <td class="snippet">{{snippet.snippet}}</td>
-          <!-- <td class="categories">{{snippet.categories}}</td> -->
-          <td class="add" (click)="coverLetterService.addSnippet(snippet)">
-            <a>Add</a>
-          </td>
-        </tr>
-      </tbody>
-    </table>
+    <div id="filtered-snippets-table-container" class="table-container" >
+      <table id="filtered-snippets-table">
+        <thead>
+          <tr>
+            <td>Snippet</td>
+            <!-- <td>Categories</td> -->
+            <td>Add to Letter</td>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let snippet of filteredSnippets">
+            <td class="snippet">{{snippet.snippet}}</td>
+            <!-- <td class="categories">{{snippet.categories}}</td> -->
+            <td class="add" (click)="coverLetterService.addSnippet(snippet)">
+              <a>Add</a>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+
+    </div>
+
   </div>
 
 </div>
