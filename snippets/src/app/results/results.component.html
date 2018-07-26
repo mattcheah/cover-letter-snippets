@@ -2,7 +2,9 @@
 
   <div class="line-break"></div>
 
-  <button class="centered" (click)="enterNewDescription()">Enter new job description</button>
+  <div class="flex">
+    <button (click)="enterNewDescription()">Enter new job description</button>
+  </div>
 
   <div class="line-break"></div>
 
@@ -54,7 +56,11 @@
           </tr>
         </tbody>
       </table>
+    </div>
 
+    <div class="flex">
+      <button (click)="displaySnippets('intro')">Show Intros</button>
+      <button (click)="displaySnippets('outro')">Show Outros</button>
     </div>
 
   </div>

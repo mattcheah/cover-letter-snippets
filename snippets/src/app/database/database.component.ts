@@ -18,7 +18,6 @@ export class DatabaseComponent implements OnInit {
   constructor(private databaseService: DatabaseService) { }
 
   ngOnInit() {
-    
   }
 
   connect(connectString:string):void {

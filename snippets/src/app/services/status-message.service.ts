@@ -7,7 +7,7 @@ export class StatusMessageService {
   statusMessageStream:BehaviorSubject<any> = new BehaviorSubject(undefined);
 
   constructor() { }
-  
+
   getStatusMessageStream() {
     return this.statusMessageStream.asObservable();
   }
@@ -16,6 +16,13 @@ export class StatusMessageService {
     this.statusMessageStream.next({
       status:status,
       cssClass:cssClass
+    });
+  }
+
+  clearStatus() {
+    this.statusMessageStream.next({
+      status: "",
+      cssClass: ""
     });
   }
 

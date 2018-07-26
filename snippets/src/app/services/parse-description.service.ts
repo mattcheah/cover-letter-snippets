@@ -28,7 +28,6 @@ export class ParseDescriptionService {
 
     this.keywordArray = this.createOrderedArray();
     this.showParsingResults = true;
-    this.databaseService.showDatabase = false;
   }
 
   resetJobKeywords():void {
