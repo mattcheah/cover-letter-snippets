@@ -40,7 +40,7 @@ It's also important for you to add an 'intro' and 'outro' category, so that you 
 First, copy/paste a job description into the textarea field and click "Parse Job Description". The application will check if any of the words in the job description match any of your snippet categories.
 
 A table of results will be returned where you can see how many times a category has been mentioned. Click on the "Show Snippets" link to see the snippets that match those categories. ie. If you're applying for a Java Developer position, you should probably see a lot of matches for the category "java", and those are the important snippets that you want to add to your cover letter first.  
-<img src="https://ibb.co/bPOpto"/>
+
 ![View Parsed Job Description and Category Matches](/readme-images/snippets-results.png)
 
 Once you see snippets from a category, you can add those snippets to your cover letter, and also see the intro and outro snippets you added earlier. 
