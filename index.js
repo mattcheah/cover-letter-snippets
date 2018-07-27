@@ -3,20 +3,21 @@
 const express = require('express');
 const opn = require('opn');
 const mongoose = require('mongoose');
+const path = require('path');
 
 const app = express();
 
 // Decide what port to listen on.
-const port = 3141;
+const port = 3142;
 
 
-app.use(express.static('dist/'));
+app.use(express.static('dist'));
 app.use(express.json());
 app.use(express.urlencoded());
 
 app.get('/', function (req, res) {
     res.sendFile("index.html", {
-        root: __dirname + "/dist/"
+        root: path.join(__dirname,"dist")
     });
 });
 
