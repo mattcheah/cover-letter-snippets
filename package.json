@@ -1,6 +1,6 @@
 {
   "name": "cover-letter-snippets",
-  "version": "1.0.4",
+  "version": "1.0.5",
   "description": "A Angular/Node/MongoDB app that helps compose cover letters based on keywords in a job description.",
   "browser": "index.js",
   "scripts": {
