@@ -13,9 +13,9 @@ import { DatabaseService } from '../services/database.service';
 export class DatabaseComponent implements OnInit {
 
   showConnectForm: boolean = true;
-  databaseString: string = "mongodb://test:testtest1@ds245901.mlab.com:45901/snippets-test";
+  databaseString: string = "mongodb://user:testtest1@ds119660.mlab.com:19660/snippets-sandbox";
 
-  constructor(private databaseService: DatabaseService) { }
+  constructor(public databaseService: DatabaseService) { }
 
   ngOnInit() {
   }

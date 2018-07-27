@@ -3,13 +3,11 @@
 const express = require('express');
 const opn = require('opn');
 const mongoose = require('mongoose');
-const treekill = require('tree-kill');
-// const process = require('process');
 
 const app = express();
 
 // Decide what port to listen on.
-const port = 3300;
+const port = 3141;
 
 
 app.use(express.static('dist/'));
@@ -85,36 +83,9 @@ app.delete('/delete-snippet', function(req,res) {
 
 // let browser;
 app.listen(port);
-let browser = opn('http://localhost:' + port).then(cp => {
-    // PID
-    console.log(cp.pid);
-    // Close the app
-    // console.log(cp.kill());
-    cp.kill('SIGINT');
-});
+opn('http://localhost:' + port);
 
-console.log("app starting, listening on: localhost:"+port);
-
-// function exitHandler(options, err) {
-//     if (options.cleanup) console.log('clean');
-//     if (err) console.log(err.stack);
-//     // console.log("closing snippets app: pid:"+browser.pid);
-//     // treekill(browser.pid);
-//     if (options.exit) process.exit();
-// }
-
-// //do something when app is closing
-// // process.on('exit', exitHandler.bind(null, { cleanup: true }));
-
-// //catches ctrl+c event
-// process.on('SIGINT', exitHandler.bind(null, { exit: true }));
-
-// // catches "kill pid" (for example: nodemon restart)
-// process.on('SIGUSR1', exitHandler.bind(null, { exit: true }));
-// process.on('SIGUSR2', exitHandler.bind(null, { exit: true }));
-
-// //catches uncaught exceptions
-// process.on('uncaughtException', exitHandler.bind(null, { exit: true }));
+console.log("snippets starting, listening on: localhost:"+port);
 
 function setUpSchema() {
     let Snippet;

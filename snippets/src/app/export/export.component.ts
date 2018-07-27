@@ -11,8 +11,8 @@ import { StatusMessageService } from '../services/status-message.service';
 export class ExportComponent implements OnInit {
 
   constructor(
-    private coverLetterService:CoverLetterService,
-    private statusMessageService:StatusMessageService
+    public coverLetterService:CoverLetterService,
+    public statusMessageService:StatusMessageService
   ) { }
 
   ngOnInit() {

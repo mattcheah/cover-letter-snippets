@@ -9,7 +9,7 @@ import { StatusMessageService } from '../services/status-message.service';
 })
 export class CoverLetterComponent implements OnInit {
 
-  constructor(private coverLetterService:CoverLetterService,
+  constructor(public coverLetterService:CoverLetterService,
   private statusMessasageService:StatusMessageService) { }
 
   ngOnInit() {

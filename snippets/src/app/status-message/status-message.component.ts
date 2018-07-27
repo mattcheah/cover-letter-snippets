@@ -6,6 +6,7 @@ import { StatusMessageService } from '../services/status-message.service';
   templateUrl: './status-message.component.html',
   styleUrls: ['./status-message.component.css']
 })
+
 export class StatusMessageComponent implements OnInit {
   statusMessage:String = "";
   statusClass:String = "primary";

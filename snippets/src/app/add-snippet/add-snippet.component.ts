@@ -13,7 +13,7 @@ export class AddSnippetComponent implements OnInit {
   snippet:String = "";
   categories:String = "";
 
-  constructor(private databaseService:DatabaseService) { }
+  constructor(public databaseService:DatabaseService) { }
 
   ngOnInit() {
   }

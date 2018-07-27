@@ -13,10 +13,8 @@ import { CoverLetterService } from '../services/cover-letter.service';
 export class BuildCoverLetterComponent implements OnInit {
 
   constructor(
-    private parseDescriptionService: ParseDescriptionService,
-    private databaseService: DatabaseService,
-    private coverLetterService: CoverLetterService,
-    private statusMessageService: StatusMessageService
+    public parseDescriptionService: ParseDescriptionService,
+    public coverLetterService: CoverLetterService,
   ) { }
 
   ngOnInit() {

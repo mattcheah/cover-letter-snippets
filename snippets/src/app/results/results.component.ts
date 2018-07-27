@@ -16,9 +16,9 @@ export class ResultsComponent implements OnInit {
   showFilteredSnippetsTable: boolean = false;
 
   constructor(
-    private parseDescriptionService: ParseDescriptionService,
+    public parseDescriptionService: ParseDescriptionService,
+    public coverLetterService: CoverLetterService,
     private databaseService: DatabaseService,
-    private coverLetterService: CoverLetterService,
     private statusMessageService: StatusMessageService) { }
 
   ngOnInit() {
@@ -33,6 +33,15 @@ export class ResultsComponent implements OnInit {
     this.displayedCategory = keyword;
     this.showFilteredSnippetsTable = true;
     this.statusMessageService.newStatusMessage("Displaying Snippets from category: " + keyword, "primary");
+  }
+
+  enterNewDescription() {
+    this.filteredSnippets = [];
+    this.showFilteredSnippetsTable = false;
+    this.parseDescriptionService.showParsingResults = false;
+    this.parseDescriptionService.jobDescription = "";
+    this.parseDescriptionService.keywordArray = [];
+    this.statusMessageService.newStatusMessage("Resetting Job Description", "warning");
   }
 
 }

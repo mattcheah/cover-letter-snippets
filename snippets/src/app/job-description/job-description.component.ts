@@ -3,8 +3,6 @@ import { FormsModule } from '@angular/forms';
 
 import { ParseDescriptionService } from '../services/parse-description.service';
 import { StatusMessageService } from '../services/status-message.service';
-import { DatabaseService } from '../services/database.service';
-import { CoverLetterService } from '../services/cover-letter.service';
 
 @Component({
   selector: 'app-job-description',
@@ -17,8 +15,6 @@ export class JobDescriptionComponent implements OnInit {
 
   constructor(
     private parseDescriptionService:ParseDescriptionService,
-    private databaseService:DatabaseService,
-    private coverLetterService:CoverLetterService,
     private statusMessageService:StatusMessageService
   ) { }
 
