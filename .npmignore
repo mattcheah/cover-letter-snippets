@@ -1,0 +1,5 @@
+# Ignore the Angular Development App
+/snippets/
+
+# vscode workspace
+*.code-workspace
