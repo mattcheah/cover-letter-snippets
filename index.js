@@ -1,4 +1,3 @@
-// When I'm done, move snippets.js out of "/snippets"
 
 const express = require('express');
 const opn = require('opn');

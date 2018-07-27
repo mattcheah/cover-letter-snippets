@@ -11,7 +11,8 @@
     "url": "git+https://github.com/mattcheah/cover-letter-snippets.git"
   },
   "bin": {
-    "snippets": "./index.js"
+    "snippets": "./cl-snippets.sh",
+    "cover-letter-snippets": "./cl-snippets.sh"
   },
   "files": [
     "dist"
