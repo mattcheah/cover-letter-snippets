@@ -29,11 +29,11 @@ From here you can Add snippets to your database or Build your cover letter.
 
 Copy/Paste a small snippet of a previous cover letter covering one or more related skills, and fill out the categories field with the keywords that you want to match to the job description. (Comma Separated, no spaces.)
 
-![Add a new snippet to your database](https://ibb.co/j8OxDo)
+![Add a new snippet to your database](/readme-images/snippets-snippet.png)
 
 It's also important for you to add an 'intro' and 'outro' category, so that you can add intro and outro snippets easily. 
 
-![Add an intro snippet to your database](https://ibb.co/dj7Pto)
+![Add an intro snippet to your database](/readme-images/snippets-intro.png)
 
 ## Build Cover Letter
 
@@ -41,18 +41,18 @@ First, copy/paste a job description into the textarea field and click "Parse Job
 
 A table of results will be returned where you can see how many times a category has been mentioned. Click on the "Show Snippets" link to see the snippets that match those categories. ie. If you're applying for a Java Developer position, you should probably see a lot of matches for the category "java", and those are the important snippets that you want to add to your cover letter first.  
 <img src="https://ibb.co/bPOpto"/>
-![View Parsed Job Description and Category Matches](https://ibb.co/bPOpto)
+![View Parsed Job Description and Category Matches](/readme-images/snippets-results.png)
 
 Once you see snippets from a category, you can add those snippets to your cover letter, and also see the intro and outro snippets you added earlier. 
 
-![Add snippets to your cover letter.](https://ibb.co/dabneT)
-
+![Add snippets to your cover letter.](/readme-images/snippets-outro.png)
+ 
 Once you're done arranging your snippets in the cover letter table, you can press the export button.  
 
 ## Export Cover Letter
 
 You're basically done! You can edit the text in the textarea, and you can copy/paste your cover letter into your word doc or PDF that you're submitting with an application. 
 
-![Exported Cover Letter.](https://ibb.co/eYy5Yo)
+![Exported Cover Letter.](/readme-images/snippets-export.png) 
 
 
