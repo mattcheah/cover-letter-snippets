@@ -17,6 +17,8 @@ Snippets uses a MongoDB database on Mlab.com to store your cover letter snippets
 ## Using Snippets
 
 Install Cover-Letter-Snippets with `npm i cover-letter-snippets`
+(Note: Some users may have to install globally `npm i -g cover-letter-snippets`)
+
 Enter the command `snippets` to start a localhost server that will serve the application on `localhost:3141`. A browser will open automatically.
 
 First, paste the URI (including UN and Password) from your Mlab database and click "Connect to Database". 
