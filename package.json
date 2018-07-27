@@ -15,13 +15,15 @@
     "cover-letter-snippets": "./cl-snippets.sh"
   },
   "files": [
-    "dist"
+    "dist",
+    "cl-snippets.sh"
   ],
   "keywords": [
     "cover letter",
     "coverletter",
     "snippets",
     "resume",
+    "builder",
     "database"
   ],
   "author": "matt cheah <matt.cheah@gmail.com> (http://mattcheah.com)",
