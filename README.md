@@ -58,3 +58,14 @@ You're basically done! You can edit the text in the textarea, and you can copy/p
 ![Exported Cover Letter.](/readme-images/snippets-export.png) 
 
 
+# Contributing
+
+If you'd like to help, there's a ton of work that can be done to improve the product. Clone the repo and make a pull request! Off the top of my head, here are some things that can be done:
+
+ - Create an array of aliases for category names (ie. a job description listing 'RoR' or 'Ruby/Rails' would match your category of 'rails'. Each category and aliases would have to be set up by the user individually.)
+ - Create an option to use a JSON file locally instead of mlab db. 
+ - Sort addable snippets by which ones have the most relevant categories in the job description. 
+
+# Other
+
+If you're looking to build a quick and easy resume, check out [Best Resume Ever](https://github.com/salomonelli/best-resume-ever) - I created the purple theme, which was based on how I styled my own resume. Check it out!
