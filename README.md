@@ -62,6 +62,9 @@ You're basically done! You can edit the text in the textarea, and you can copy/p
 
 If you'd like to help, there's a ton of work that can be done to improve the product. Clone the repo and make a pull request! Off the top of my head, here are some things that can be done:
 
+ - Show Intro Snippets automatically after parsing job description
+ - Add button to show more snippets even if they haven't been mentioned in job desc.
+ - Create a fixed div as a sidebar that shows the parsed job description when you're adding snippets. 
  - Create an array of aliases for category names (ie. a job description listing 'RoR' or 'Ruby/Rails' would match your category of 'rails'. Each category and aliases would have to be set up by the user individually.)
  - Create an option to use a JSON file locally instead of mlab db. 
  - Sort addable snippets by which ones have the most relevant categories in the job description. 
