@@ -4,6 +4,10 @@ body {
   padding: 13px 13px 80px 13px !important;
 }
 
+a {
+  color: #b0ccea;
+}
+
 .flex {
   display:flex;
   justify-content: space-around;

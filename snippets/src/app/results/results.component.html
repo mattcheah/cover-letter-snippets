@@ -18,6 +18,7 @@
           <td>Category/Keyword:</td>
           <td>Times Mentioned:</td>
           <td>Show snippets for Category</td>
+    <button (click)="displaySnippets('intro')">Show Intros<
       </thead>
       <tbody>
         <tr *ngFor="let keyword of parseDescriptionService.keywordArray | hasKeywords">
@@ -29,9 +30,11 @@
         </tr>
       </tbody>
     </table>
-
   </div>
 
+  <div id="intro-outro" class="flex">/button>
+    <button (click)="displaySnippets('outro')">Show Outros</button>
+  </div>
 
   <div *ngIf="showFilteredSnippetsTable">
     <div class="line-break"></div>
@@ -57,12 +60,6 @@
         </tbody>
       </table>
     </div>
-
-    <div class="flex">
-      <button (click)="displaySnippets('intro')">Show Intros</button>
-      <button (click)="displaySnippets('outro')">Show Outros</button>
-    </div>
-
   </div>
 
 </div>
