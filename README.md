@@ -1,6 +1,8 @@
 # cover-letter-snippets
 Angular/MongoDB/Node.js Express local application for quickly composing a cover letter that discusses each keyword and technology on a job listing.
 
+![Put together your Cover Letter Gif](/readme-images/snippets-part-2.gif)
+
 ## Setting up a database
 Snippets uses a MongoDB database on Mlab.com to store your cover letter snippets data. 
 
@@ -27,6 +29,7 @@ If you want to play around with the app, there is an existing database URI strin
 
 From here you can Add snippets to your database or Build your cover letter. 
 
+
 ## Adding Snippets
 
 Copy/Paste a small snippet of a previous cover letter covering one or more related skills, and fill out the categories field with the keywords that you want to match to the job description. (Comma Separated, no spaces.)
@@ -35,7 +38,7 @@ Copy/Paste a small snippet of a previous cover letter covering one or more relat
 
 It's also important for you to add an 'intro' and 'outro' category, so that you can add intro and outro snippets easily. 
 
-![Add an intro snippet to your database](/readme-images/snippets-intro.png)
+![Connect to Database Gif](/readme-images/snippets-part-1.gif)
 
 ## Build Cover Letter
 
@@ -55,19 +58,19 @@ Once you're done arranging your snippets in the cover letter table, you can pres
 
 You're basically done! You can edit the text in the textarea, and you can copy/paste your cover letter into your word doc or PDF that you're submitting with an application. 
 
-![Exported Cover Letter.](/readme-images/snippets-export.png) 
+![Connect to Database Gif](/readme-images/snippets-part-3.gif)
 
 
 # Contributing
 
 If you'd like to help, there's a ton of work that can be done to improve the product. Clone the repo and make a pull request! Off the top of my head, here are some things that can be done:
 
- - (Show Intro Snippets automatically after parsing job description)[https://github.com/mattcheah/cover-letter-snippets/issues/1]
- - (Add button to show more snippets even if they haven't been mentioned in job desc.)[https://github.com/mattcheah/cover-letter-snippets/issues/2]
- - Create a fixed div as a sidebar that shows the parsed job description when you're adding snippets. 
- - Create an array of aliases for category names (ie. a job description listing 'RoR' or 'Ruby/Rails' would match your category of 'rails'. Each category and aliases would have to be set up by the user individually.)
+ - [Show Intro Snippets automatically after parsing job description](https://github.com/mattcheah/cover-letter-snippets/issues/1)
+ - [Add button to show more snippets even if they haven't been mentioned in job desc.](https://github.com/mattcheah/cover-letter-snippets/issues/2)
+ - [Create a fixed div as a sidebar that shows the parsed job description when you're adding snippets.](https://github.com/mattcheah/cover-letter-snippets/issues/4)
+ - [Create an array of aliases for category names](https://github.com/mattcheah/cover-letter-snippets/issues/5) (ie. a job description listing 'RoR' or 'Ruby/Rails' would match your category of 'rails'. Each category and aliases would have to be set up by the user individually.)
  - [Create an option to use a JSON file locally instead of mlab db.](https://github.com/mattcheah/cover-letter-snippets/issues/3)
- - Sort addable snippets by which ones have the most relevant categories in the job description. 
+ - [Sort addable snippets by which ones have the most relevant categories in the job description.](https://github.com/mattcheah/cover-letter-snippets/issues/6)
 
 # Other
 
