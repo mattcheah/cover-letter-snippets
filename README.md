@@ -3,7 +3,27 @@ Angular/MongoDB/Node.js Express local application for quickly composing a cover 
 
 ![Put together your Cover Letter Gif](/readme-images/snippets-part-2.gif)
 
-## Setting up a database
+
+## Using Snippets
+
+#### To Install Snippets:
+
+Install Cover-Letter-Snippets with `npm i cover-letter-snippets`
+(Note: Some users may have to install globally `npm i -g cover-letter-snippets`)
+
+#### To Run Snippets:
+
+Enter the command `snippets` to run the program. 
+This will start a localhost server that will serve the application on `localhost:3141`. A browser will open automatically.
+
+First, paste the URI (including UN and Password) from your Mlab database and click "Connect to Database". ([Setting up a database](https://github.com/mattcheah/cover-letter-snippets#setting-up-a-database))
+
+If you want to play around with the app, there is an existing database URI string in the form field. Please be a good person or I will have to take it out. 
+
+From here you can Add Snippets to your database or Build your cover letter. 
+
+#### Setting up a database
+
 Snippets uses a MongoDB database on Mlab.com to store your cover letter snippets data. 
 
 - Go to mlab.com and sign up or log in.
@@ -15,19 +35,6 @@ Snippets uses a MongoDB database on Mlab.com to store your cover letter snippets
 - Navigate to the users tab and click the button to create a new user.
 - Fill out the username and password.
 - copy/paste the MongoDB URI for your database and enter your username/password in the appropriate place in the URI. 
-
-## Using Snippets
-
-Install Cover-Letter-Snippets with `npm i cover-letter-snippets`
-(Note: Some users may have to install globally `npm i -g cover-letter-snippets`)
-
-Enter the command `snippets` to start a localhost server that will serve the application on `localhost:3141`. A browser will open automatically.
-
-First, paste the URI (including UN and Password) from your Mlab database and click "Connect to Database". 
-
-If you want to play around with the app, there is an existing database URI string in the form field. Please be a good person or I will have to take it out. 
-
-From here you can Add snippets to your database or Build your cover letter. 
 
 
 ## Adding Snippets
