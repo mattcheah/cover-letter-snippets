@@ -47,7 +47,7 @@ export class DatabaseService {
 
   startConnectionJson():void {
     let self = this;
-    fetch("connect-to-json", {
+    fetch("get-json-data", {
       method: "POST", // *GET, POST, PUT, DELETE, etc.
       headers: {
         "Content-Type": "application/json; charset=utf-8",
