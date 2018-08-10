@@ -12,15 +12,19 @@ import { DatabaseService } from '../services/database.service';
 })
 export class DatabaseComponent implements OnInit {
 
-  showConnectForm: boolean = true;
-  databaseString: string = "mongodb://user:testtest1@ds119660.mlab.com:19660/snippets-sandbox";
+  showConnectForm = true;
+  databaseString = "mongodb://user:testtest1@ds119660.mlab.com:19660/snippets-sandbox";
 
   constructor(public databaseService: DatabaseService) { }
 
   ngOnInit() {
   }
 
-  connect(connectString:string):void {
+  connectJson(): void {
+    this.databaseService.startConnectionJson();
+  }
+
+  connect(connectString: string): void {
     // console.log("connecting to mongoose db: response is:");
     this.databaseService.startConnection(connectString);
   }

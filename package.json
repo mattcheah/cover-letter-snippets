@@ -33,6 +33,7 @@
   "homepage": "https://github.com/mattcheah/cover-letter-snippets#readme",
   "dependencies": {
     "express": "^4.16.3",
+    "fs": "0.0.1-security",
     "mongoose": "^5.2.4",
     "opn": "^5.3.0"
   }
