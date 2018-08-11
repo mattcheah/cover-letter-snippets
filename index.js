@@ -23,7 +23,19 @@ app.get('/', function (req, res) {
 });
 
 app.post('/get-json-data', function(req, res) {
-    returnJsonData(req, res);
+    returnJsonData().then(data => {
+        let returnObj = {
+            responseMessage: "Connected to JSON file and Returned Results!",
+            connected: true,
+            data: data
+        };
+        res.json(returnObj);
+    }).catch(err => {
+        res.status(400).json({
+            error: "Sorry, could not connect to JSON file",
+            connected: false
+        });
+    });;
 });
 
 app.post('/connect-to-database', function(req, res) {
@@ -69,6 +81,29 @@ app.post('/add-snippet', function(req, res) {
             });
         }
     });
+});
+
+app.post('/add-json-snippet', function(req,res) {
+    const snippet = req.body.snippet;
+    const categories = req.body.categories;
+    const snippetObject = {
+        snippet: snippet,
+        categories: categories
+    };
+    let db;
+    returnJsonData().then(data => {
+        db = data;
+        db.push(snippetObject);
+        // Here: rewrite the json file with the new json.
+
+    }).catch(err => {
+        console.log("Error getting data from JSON file!");
+        let returnObj = {
+            error: "Error getting data from JSON file!"
+        }
+        res.send(returnObj);
+    });
+
 });
 
 app.delete('/delete-snippet', function(req,res) {
@@ -128,26 +163,14 @@ function getAllSnippets(Snippet, successMessage) {
     });
 }
 
-function returnJsonData(req,res) {
-    new Promise((response, reject) => {
+function returnJsonData() {
+    return new Promise((response, reject) => {
         try {
             const database = require('./snippets-db.json');
-            console.log("connected to JSON DB");
+            console.log("Got JSON DB");
             response(database);
         } catch (err) {
             reject(err);
         }
-    }).then(data => {
-        let returnObj = {
-            responseMessage: "Connected to JSON file and Returned Results!",
-            connected: true,
-            data: data
-        };
-        res.json(returnObj);
-    }).catch(err => {
-        res.status(400).json({
-            error: "Sorry, could not connect to JSON file",
-            connected: false
-        });
     });
 }
