@@ -1,0 +1,18 @@
+[
+    {
+        "snippet": "I wrote my own search engine called google.com (a play on the number googol), in Java and Python. You can see it in action here: https://www.google.com. After numerous bugs, my team and I rewrote it in C and C++.",
+        "categories": "java,python,c,c++"
+    },
+    {
+        "snippet": "Hi, my name is Larry Page. I'm interested in your Jr. Developer Position at Yahoo.com, and I have some experience creating large-scale search applications, so i feel like I will be a good fit for the job.",
+        "categories": "intro"
+    },
+    {
+        "snippet": "I do not have Microsoft Word or Excel experience, but I did create something similar called Google Docs, which has a word processor and spreadsheet app. It appears to run on some form of electricity and coding nonsense.",
+        "categories": "word,excel,microsoft"
+    },
+    {
+        "snippet": "Since I have so much money, I bought this video streaming service called Youtube. It's written in Python but has some other services written in C and Java, and probably PHP.",
+        "categories": "python,java,c,php"
+    }
+]

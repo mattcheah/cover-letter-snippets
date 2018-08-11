@@ -4,12 +4,13 @@ const express = require('express');
 const opn = require('opn');
 const mongoose = require('mongoose');
 const path = require('path');
+// const fs = require('fs');
+
 
 const app = express();
 
 // Decide what port to listen on.
 const port = 3141;
-
 
 app.use(express.static(path.join(__dirname, "dist")));
 app.use(express.json());
@@ -19,6 +20,10 @@ app.get('/', function (req, res) {
     res.sendFile("index.html", {
         root: path.join(__dirname,"dist")
     });
+});
+
+app.post('/get-json-data', function(req, res) {
+    returnJsonData(req, res);
 });
 
 app.post('/connect-to-database', function(req, res) {
@@ -119,6 +124,30 @@ function getAllSnippets(Snippet, successMessage) {
                 data: data
             };
             res(returnObj);
+        });
+    });
+}
+
+function returnJsonData(req,res) {
+    new Promise((response, reject) => {
+        try {
+            const database = require('./snippets-db.json');
+            console.log("connected to JSON DB");
+            response(database);
+        } catch (err) {
+            reject(err);
+        }
+    }).then(data => {
+        let returnObj = {
+            responseMessage: "Connected to JSON file and Returned Results!",
+            connected: true,
+            data: data
+        };
+        res.json(returnObj);
+    }).catch(err => {
+        res.status(400).json({
+            error: "Sorry, could not connect to JSON file",
+            connected: false
         });
     });
 }

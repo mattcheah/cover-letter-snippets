@@ -45,6 +45,31 @@ export class DatabaseService {
     });
   }
 
+  startConnectionJson():void {
+    let self = this;
+    fetch("get-json-data", {
+      method: "POST", // *GET, POST, PUT, DELETE, etc.
+      headers: {
+        "Content-Type": "application/json; charset=utf-8",
+      }
+    }).then(function (res) {
+      return res.json();
+    }).then((data) => {
+      if ("error" in data) {
+        self.statusMessageService.newStatusMessage("There was an error connecting to the JSON File: " + data.error, "error");
+      } else if (data.connected) {
+        self.database = data.data;
+        self.statusMessageService.newStatusMessage(data.responseMessage, "success");
+        self.extractCategories();
+        self.connected = true;
+        self.showDatabase = true;
+      }
+    }).catch((err) => {
+      console.log("Error: " + err);
+      self.statusMessageService.newStatusMessage("There was an error connecting to the JSON File: " + err, "error");
+    });
+  }
+
   addSnippet(snippet, categories):void {
     let self = this;
     let data = {snippet:snippet, categories:categories};
