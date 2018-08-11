@@ -4,8 +4,7 @@ const express = require('express');
 const opn = require('opn');
 const mongoose = require('mongoose');
 const path = require('path');
-// const fs = require('fs');
-
+const fs = require('fs');
 
 const app = express();
 
@@ -23,6 +22,21 @@ app.get('/', function (req, res) {
 });
 
 app.post('/get-json-data', function(req, res) {
+    const path = "./snippets-dn.json";
+    if (!fs.existsSync(path)) {
+        fs.open(path, "wx", function (err, fd) {
+            // create file if it doesn't exist.
+            if (err) {
+                console.log("error creating new json file: "+err);
+            } 
+            fs.close(fd, function (err) {
+                if (err) {
+                    console.log("error closing created json file: "+err);
+                }
+            });
+        });
+    }
+
     returnJsonData().then(data => {
         let returnObj = {
             responseMessage: "Connected to JSON file and Returned Results!",
