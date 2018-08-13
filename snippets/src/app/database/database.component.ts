@@ -13,7 +13,7 @@ import { DatabaseService } from '../services/database.service';
 export class DatabaseComponent implements OnInit {
 
   showConnectForm = true;
-  databaseString = "mongodb://user:testtest1@ds119660.mlab.com:19660/snippets-sandbox";
+  databaseString = 'mongodb://user:testtest1@ds119660.mlab.com:19660/snippets-sandbox';
 
   constructor(public databaseService: DatabaseService) { }
 

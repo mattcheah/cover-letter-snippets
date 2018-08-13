@@ -1,6 +1,13 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { RouterTestingModule } from '@angular/router/testing';
 
 import { ExportComponent } from './export.component';
+
+import { ParseDescriptionService } from '../services/parse-description.service';
+import { DatabaseService } from '../services/database.service';
+import { StatusMessageService } from '../services/status-message.service';
+import { CoverLetterService } from '../services/cover-letter.service';
 
 describe('ExportComponent', () => {
   let component: ExportComponent;
@@ -8,7 +15,18 @@ describe('ExportComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ ExportComponent ]
+      declarations: [ ExportComponent ],
+      imports: [
+        FormsModule,
+        ReactiveFormsModule,
+        RouterTestingModule.withRoutes([])
+      ],
+      providers: [
+        ParseDescriptionService,
+        StatusMessageService,
+        CoverLetterService,
+        DatabaseService
+      ]
     })
     .compileComponents();
   }));

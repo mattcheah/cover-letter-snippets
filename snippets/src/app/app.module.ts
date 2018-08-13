@@ -21,7 +21,9 @@ import { ParseDescriptionService } from './services/parse-description.service';
 import { StatusMessageService } from './services/status-message.service';
 import { CoverLetterService } from './services/cover-letter.service';
 
-const appRoutes:Routes = [
+import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
+
+const appRoutes: Routes = [
   { path: '', component: DatabaseComponent },
   { path: 'add-snippet', component: AddSnippetComponent },
   { path: 'build-cover-letter', component: BuildCoverLetterComponent },
@@ -55,6 +57,9 @@ const appRoutes:Routes = [
     StatusMessageService,
     CoverLetterService
   ],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
+  schemas: [
+    CUSTOM_ELEMENTS_SCHEMA
+  ]
 })
 export class AppModule { }
