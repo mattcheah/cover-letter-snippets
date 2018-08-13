@@ -793,88 +793,88 @@ var DatabaseService = /** @class */ (function () {
     DatabaseService.prototype.startConnection = function (urlString) {
         var self = this;
         var data = { databaseUrl: urlString };
-        fetch("connect-to-database", {
-            method: "POST",
+        fetch('api/connect-to-database', {
+            method: 'POST',
             headers: {
-                "Content-Type": "application/json; charset=utf-8",
+                'Content-Type': 'application/json; charset=utf-8',
             },
             body: JSON.stringify(data)
         }).then(function (res) {
             return res.json();
         }).then(function (data) {
-            if ("error" in data) {
-                self.statusMessageService.newStatusMessage("There was an error connecting to the database: " + data.error, "error");
+            if ('error' in data) {
+                self.statusMessageService.newStatusMessage('There was an error connecting to the database: ' + data.error, 'error');
             }
             else if (data.connected) {
                 self.database = data.data;
-                self.statusMessageService.newStatusMessage(data.responseMessage, "success");
+                self.statusMessageService.newStatusMessage(data.responseMessage, 'success');
                 self.extractCategories();
                 self.connected = true;
                 self.showDatabase = true;
             }
         }).catch(function (err) {
-            console.log("Error: " + err);
-            self.statusMessageService.newStatusMessage("There was an error connecting to the database: " + err, "error");
+            console.log('Error: ' + err);
+            self.statusMessageService.newStatusMessage('There was an error connecting to the database: ' + err, 'error');
         });
     };
     DatabaseService.prototype.startConnectionJson = function () {
         var self = this;
-        fetch("connect-to-json", {
-            method: "POST",
+        fetch('api/get-json-data', {
+            method: 'POST',
             headers: {
-                "Content-Type": "application/json; charset=utf-8",
+                'Content-Type': 'application/json; charset=utf-8',
             }
         }).then(function (res) {
             return res.json();
         }).then(function (data) {
-            if ("error" in data) {
-                self.statusMessageService.newStatusMessage("There was an error connecting to the JSON File: " + data.error, "error");
+            if ('error' in data) {
+                self.statusMessageService.newStatusMessage('There was an error connecting to the JSON File: ' + data.error, 'error');
             }
             else if (data.connected) {
                 self.database = data.data;
-                self.statusMessageService.newStatusMessage(data.responseMessage, "success");
+                self.statusMessageService.newStatusMessage(data.responseMessage, 'success');
                 self.extractCategories();
                 self.connected = true;
                 self.showDatabase = true;
             }
         }).catch(function (err) {
-            console.log("Error: " + err);
-            self.statusMessageService.newStatusMessage("There was an error connecting to the JSON File: " + err, "error");
+            console.log('Error: ' + err);
+            self.statusMessageService.newStatusMessage('There was an error connecting to the JSON File: ' + err, 'error');
         });
     };
     DatabaseService.prototype.addSnippet = function (snippet, categories) {
         var self = this;
         var data = { snippet: snippet, categories: categories };
-        fetch('add-snippet', {
-            method: "POST",
+        fetch('api/add-snippet', {
+            method: 'POST',
             headers: {
-                "Content-Type": "application/json; charset=utf-8",
+                'Content-Type': 'application/json; charset=utf-8',
             },
             body: JSON.stringify(data)
         }).then(function (res) { return res.json(); }).then(function (data) {
-            self.statusMessageService.newStatusMessage(data.responseMessage, "success");
+            self.statusMessageService.newStatusMessage(data.responseMessage, 'success');
             self.database = data.data;
             self.extractCategories();
         }).catch(function (error) {
-            console.log("Error: " + error);
-            self.statusMessageService.newStatusMessage("There was an error submitting your snippet: " + error, "error");
+            console.log('Error: ' + error);
+            self.statusMessageService.newStatusMessage('There was an error submitting your snippet: ' + error, 'error');
         });
     };
     DatabaseService.prototype.deleteSnippet = function (id) {
         var self = this;
         var data = { id: id };
-        fetch('delete-snippet', {
-            method: "DELETE",
+        fetch('api/delete-snippet', {
+            method: 'DELETE',
             headers: {
-                "Content-Type": "application/json; charset=utf-8",
+                'Content-Type': 'application/json; charset=utf-8',
             },
             body: JSON.stringify(data)
         }).then(function (res) { return res.json(); }).then(function (data) {
-            self.statusMessageService.newStatusMessage(data.responseMessage, "success");
+            self.statusMessageService.newStatusMessage(data.responseMessage, 'success');
             self.database = data.data;
             self.extractCategories();
         }).catch(function (err) {
-            self.statusMessageService.newStatusMessage(err, "error");
+            self.statusMessageService.newStatusMessage(err, 'error');
         });
     };
     DatabaseService.prototype.extractCategories = function () {
@@ -891,7 +891,7 @@ var DatabaseService = /** @class */ (function () {
                 this.categories[category].ids.push(record);
             }
         }
-        console.log("categories:");
+        console.log('categories:');
         console.log(this.categories);
     };
     DatabaseService = __decorate([
