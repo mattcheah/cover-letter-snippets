@@ -3,6 +3,7 @@ const mongoose = require('mongoose');
 // CRUD routes for Mongoose db snippets entries. 
 module.exports = {
     connectToDatabase: (req, res) => {
+
         const dburl = req.body.databaseUrl;
 
         if (dburl == "") {

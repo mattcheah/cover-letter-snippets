@@ -20,13 +20,13 @@ export class DatabaseService {
 
   startConnection(urlString): void {
     const self = this;
-    const data = { databaseUrl: urlString };
+    const dataObj = { databaseUrl: urlString };
     fetch('api/connect-to-database', {
       method: 'POST', // *GET, POST, PUT, DELETE, etc.
       headers: {
         'Content-Type': 'application/json; charset=utf-8',
       },
-      body: JSON.stringify(data)
+      body: JSON.stringify(dataObj)
     }).then(function (res) {
       return res.json();
     }).then((data) => {
@@ -48,7 +48,7 @@ export class DatabaseService {
   startConnectionJson(): void {
     const self = this;
     fetch('api/get-json-data', {
-      method: 'POST', // *GET, POST, PUT, DELETE, etc.
+      method: 'GET', // *GET, POST, PUT, DELETE, etc.
       headers: {
         'Content-Type': 'application/json; charset=utf-8',
       }

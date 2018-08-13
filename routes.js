@@ -1,14 +1,11 @@
 const express = require('express');
 const router = express.Router();
 
-const mongoose = require('mongoose');
-
-
 const dbRoutes = require("./controllers/db-routes");
 const jsonRoutes = require("./controllers/json-routes");
 
 
-router.get('/connect-to-database', dbRoutes.connectToDatabase);
+router.post('/connect-to-database', dbRoutes.connectToDatabase);
 router.get('/get-json-data', jsonRoutes.getSnippets);
 
 router.post('/add-snippet', dbRoutes.addSnippet);

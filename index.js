@@ -6,7 +6,7 @@ const routes = require('./routes');
 const path = require('path');
 const app = express();
 
-app.use("/api", routes);
+
 
 // Decide what port to listen on.
 const port = 3141;
@@ -14,6 +14,8 @@ const port = 3141;
 app.use(express.static(path.join(__dirname, "dist")));
 app.use(express.json());
 app.use(express.urlencoded());
+
+app.use("/api", routes);
 
 app.get('/', function (req, res) {
     res.sendFile("index.html", {

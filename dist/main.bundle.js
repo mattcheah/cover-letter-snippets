@@ -792,13 +792,13 @@ var DatabaseService = /** @class */ (function () {
     // }
     DatabaseService.prototype.startConnection = function (urlString) {
         var self = this;
-        var data = { databaseUrl: urlString };
+        var dataObj = { databaseUrl: urlString };
         fetch('api/connect-to-database', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json; charset=utf-8',
             },
-            body: JSON.stringify(data)
+            body: JSON.stringify(dataObj)
         }).then(function (res) {
             return res.json();
         }).then(function (data) {
@@ -820,7 +820,7 @@ var DatabaseService = /** @class */ (function () {
     DatabaseService.prototype.startConnectionJson = function () {
         var self = this;
         fetch('api/get-json-data', {
-            method: 'POST',
+            method: 'GET',
             headers: {
                 'Content-Type': 'application/json; charset=utf-8',
             }
