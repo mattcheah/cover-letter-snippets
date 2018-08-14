@@ -110,6 +110,8 @@ export class DatabaseService {
   }
 
   extractCategories(): void {
+    this.categories = {};
+
     for (let i = 0; i < this.database.length; i++) {
       const record = this.database[i];
       for (let j = 0; j < record.categories.length; j++) {
