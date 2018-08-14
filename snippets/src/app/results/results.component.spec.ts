@@ -53,4 +53,20 @@ describe('ResultsComponent', () => {
   it('should create', () => {
     expect(component).toBeTruthy();
   });
+
+  it('should render "Results for the job description:" in an h4', async(() => {
+    const compiled = fixture.debugElement.nativeElement;
+    expect(compiled.querySelector('#results-title').textContent).toContain('Results for the job description:');
+  }));
+
+  it('should render "Snippets from Category" when showFilteredSnippets is true', async(() => {
+    const compiled = fixture.debugElement.nativeElement;
+    expect(compiled.querySelector('#snippets-from-category')).toBe(null);
+
+    component.showFilteredSnippetsTable = true;
+
+    fixture.detectChanges();
+    expect(compiled.querySelector('#snippets-from-category').textContent).toContain('Snippets from Category:');
+  }));
+
 });

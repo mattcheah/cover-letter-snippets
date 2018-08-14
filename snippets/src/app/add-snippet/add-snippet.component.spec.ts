@@ -33,4 +33,14 @@ describe('AddSnippetComponent', () => {
   it('should create', () => {
     expect(component).toBeTruthy();
   });
+
+  it('should render "Add Snippet" in an h4', async(() => {
+    const databaseService = TestBed.get(DatabaseService);
+    databaseService.connected = true;
+
+    fixture = TestBed.createComponent(AddSnippetComponent);
+    fixture.detectChanges();
+    const compiled = fixture.debugElement.nativeElement;
+    expect(compiled.querySelector('h4').textContent).toContain('Add Snippet');
+  }));
 });

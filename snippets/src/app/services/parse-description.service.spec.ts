@@ -134,7 +134,7 @@ describe('ParseDescriptionService', () => {
 
     parseDescriptionService.parseDescription(description);
 
-    const result = parseDescriptionService.keywordArray;
+    const result: Array<any> = parseDescriptionService.keywordArray;
     expect(result[0].keyword).toEqual('php');
     expect(result[0].jobKeywords).toEqual(4);
     expect(result[1].keyword).toEqual('java');
@@ -156,7 +156,7 @@ describe('ParseDescriptionService', () => {
       parseDescriptionService.resetJobKeywords();
       parseDescriptionService.createOrderedArray();
 
-      const result = parseDescriptionService.keywordArray;
+      const result: Array<any> = parseDescriptionService.keywordArray;
       expect(result[0].jobKeywords).toEqual(0);
       expect(result[result.length - 1].jobKeywords).toEqual(0);
     });

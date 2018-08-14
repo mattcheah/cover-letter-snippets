@@ -41,4 +41,11 @@ describe('JobDescriptionComponent', () => {
   it('should create', () => {
     expect(component).toBeTruthy();
   });
+
+  it('should render "Job Description" in an h4', async(() => {
+    fixture = TestBed.createComponent(JobDescriptionComponent);
+    fixture.detectChanges();
+    const compiled = fixture.debugElement.nativeElement;
+    expect(compiled.querySelector('h4').textContent).toContain('Job Description');
+  }));
 });
