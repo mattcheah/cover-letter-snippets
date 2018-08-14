@@ -40,4 +40,9 @@ describe('ExportComponent', () => {
   it('should create', () => {
     expect(component).toBeTruthy();
   });
+
+  it('should render "Exported Cover Letter:" in an h4', async(() => {
+    const compiled = fixture.debugElement.nativeElement;
+    expect(compiled.querySelector('#export-title').textContent).toContain('Exported Cover Letter');
+  }));
 });

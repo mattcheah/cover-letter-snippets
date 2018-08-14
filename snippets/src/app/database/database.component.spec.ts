@@ -38,4 +38,14 @@ describe('DatabaseComponent', () => {
   it('should create', () => {
     expect(component).toBeTruthy();
   });
+
+  it('should render "Use JSON File:" in an h4', async(() => {
+    const compiled = fixture.debugElement.nativeElement;
+    expect(compiled.querySelector('#json-title').textContent).toContain('Use JSON File:');
+  }));
+
+  it('should render "Connect your Database:" in an h4', async(() => {
+    const compiled = fixture.debugElement.nativeElement;
+    expect(compiled.querySelector('#db-title').textContent).toContain('Connect your Database:');
+  }));
 });
