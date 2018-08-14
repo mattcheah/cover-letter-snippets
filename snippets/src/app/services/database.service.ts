@@ -35,6 +35,8 @@ export class DatabaseService {
       } else if (data.connected) {
         self.database = data.data;
         self.statusMessageService.newStatusMessage(data.responseMessage, 'success');
+        console.log('data from database');
+        console.log(self.database);
         self.extractCategories();
         self.connected = true;
         self.showDatabase = true;
@@ -60,6 +62,8 @@ export class DatabaseService {
       } else if (data.connected) {
         self.database = data.data;
         self.statusMessageService.newStatusMessage(data.responseMessage, 'success');
+        console.log('data from json');
+        console.log(self.database);
         self.extractCategories();
         self.connected = true;
         self.showDatabase = true;
@@ -125,8 +129,6 @@ export class DatabaseService {
         this.categories[category].ids.push(record);
       }
     }
-    console.log('categories:');
-    console.log(this.categories);
   }
 
 }

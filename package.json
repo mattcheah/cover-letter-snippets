@@ -4,7 +4,10 @@
   "description": "An Angular/Node/MongoDB app that helps compose cover letters based on keywords in a job description.",
   "browser": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "cd snippets && ng build && cd ../ && node index",
+    "back": "",
+    "front": "cd ~"
   },
   "repository": {
     "type": "git",

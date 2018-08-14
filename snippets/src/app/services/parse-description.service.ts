@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
 
 import { DatabaseService } from './database.service';
-import { StatusMessageService} from './status-message.service';
+import { StatusMessageService } from './status-message.service';
 
 @Injectable()
 export class ParseDescriptionService {
@@ -28,6 +28,7 @@ export class ParseDescriptionService {
 
     this.keywordArray = this.createOrderedArray();
     this.showParsingResults = true;
+
   }
 
   resetJobKeywords(): void {

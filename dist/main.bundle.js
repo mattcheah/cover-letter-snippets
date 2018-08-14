@@ -64,7 +64,7 @@ var AddSnippetComponent = /** @class */ (function () {
         this.categories = "";
     };
     AddSnippetComponent = __decorate([
-        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["n" /* Component */])({
+        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["o" /* Component */])({
             selector: 'app-add-snippet',
             template: __webpack_require__("./src/app/add-snippet/add-snippet.component.html"),
             styles: [__webpack_require__("./src/app/add-snippet/add-snippet.component.css")]
@@ -110,7 +110,7 @@ var AppComponent = /** @class */ (function () {
         this.title = 'Cover Letter Snippets';
     }
     AppComponent = __decorate([
-        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["n" /* Component */])({
+        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["o" /* Component */])({
             selector: 'app-root',
             template: __webpack_require__("./src/app/app.component.html"),
             styles: [__webpack_require__("./src/app/app.component.css")]
@@ -172,6 +172,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 
 
 
+
 var appRoutes = [
     { path: '', component: __WEBPACK_IMPORTED_MODULE_6__database_database_component__["a" /* DatabaseComponent */] },
     { path: 'add-snippet', component: __WEBPACK_IMPORTED_MODULE_8__add_snippet_add_snippet_component__["a" /* AddSnippetComponent */] },
@@ -182,7 +183,7 @@ var AppModule = /** @class */ (function () {
     function AppModule() {
     }
     AppModule = __decorate([
-        Object(__WEBPACK_IMPORTED_MODULE_1__angular_core__["I" /* NgModule */])({
+        Object(__WEBPACK_IMPORTED_MODULE_1__angular_core__["J" /* NgModule */])({
             declarations: [
                 __WEBPACK_IMPORTED_MODULE_3__app_component__["a" /* AppComponent */],
                 __WEBPACK_IMPORTED_MODULE_5__job_description_job_description_component__["a" /* JobDescriptionComponent */],
@@ -207,7 +208,10 @@ var AppModule = /** @class */ (function () {
                 __WEBPACK_IMPORTED_MODULE_17__services_status_message_service__["a" /* StatusMessageService */],
                 __WEBPACK_IMPORTED_MODULE_18__services_cover_letter_service__["a" /* CoverLetterService */]
             ],
-            bootstrap: [__WEBPACK_IMPORTED_MODULE_3__app_component__["a" /* AppComponent */]]
+            bootstrap: [__WEBPACK_IMPORTED_MODULE_3__app_component__["a" /* AppComponent */]],
+            schemas: [
+                __WEBPACK_IMPORTED_MODULE_1__angular_core__["j" /* CUSTOM_ELEMENTS_SCHEMA */]
+            ]
         })
     ], AppModule);
     return AppModule;
@@ -259,7 +263,7 @@ var BuildCoverLetterComponent = /** @class */ (function () {
     BuildCoverLetterComponent.prototype.ngOnInit = function () {
     };
     BuildCoverLetterComponent = __decorate([
-        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["n" /* Component */])({
+        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["o" /* Component */])({
             selector: 'app-build-cover-letter',
             template: __webpack_require__("./src/app/build-cover-letter/build-cover-letter.component.html"),
             styles: [__webpack_require__("./src/app/build-cover-letter/build-cover-letter.component.css")]
@@ -325,7 +329,7 @@ var CoverLetterComponent = /** @class */ (function () {
         this.statusMessasageService.newStatusMessage('Exporting Cover Letter to final edit!', 'success');
     };
     CoverLetterComponent = __decorate([
-        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["n" /* Component */])({
+        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["o" /* Component */])({
             selector: 'app-cover-letter',
             template: __webpack_require__("./src/app/cover-letter/cover-letter.component.html"),
             styles: [__webpack_require__("./src/app/cover-letter/cover-letter.component.css")]
@@ -376,7 +380,7 @@ var DatabaseComponent = /** @class */ (function () {
     function DatabaseComponent(databaseService) {
         this.databaseService = databaseService;
         this.showConnectForm = true;
-        this.databaseString = "mongodb://user:testtest1@ds119660.mlab.com:19660/snippets-sandbox";
+        this.databaseString = 'mongodb://user:testtest1@ds119660.mlab.com:19660/snippets-sandbox';
     }
     DatabaseComponent.prototype.ngOnInit = function () {
     };
@@ -392,7 +396,7 @@ var DatabaseComponent = /** @class */ (function () {
         this.databaseService.deleteSnippet(id);
     };
     DatabaseComponent = __decorate([
-        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["n" /* Component */])({
+        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["o" /* Component */])({
             selector: 'app-database',
             template: __webpack_require__("./src/app/database/database.component.html"),
             styles: [__webpack_require__("./src/app/database/database.component.css")]
@@ -448,7 +452,7 @@ var ExportComponent = /** @class */ (function () {
     ExportComponent.prototype.ngOnInit = function () {
     };
     ExportComponent = __decorate([
-        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["n" /* Component */])({
+        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["o" /* Component */])({
             selector: 'app-export',
             template: __webpack_require__("./src/app/export/export.component.html"),
             styles: [__webpack_require__("./src/app/export/export.component.css")]
@@ -484,7 +488,7 @@ var HasKeywordsPipe = /** @class */ (function () {
         return value.filter(function (cat) { return cat.jobKeywords > 0; });
     };
     HasKeywordsPipe = __decorate([
-        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["T" /* Pipe */])({
+        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["U" /* Pipe */])({
             name: 'hasKeywords'
         })
     ], HasKeywordsPipe);
@@ -545,7 +549,7 @@ var JobDescriptionComponent = /** @class */ (function () {
         this.statusMessageService.newStatusMessage("Resetting Job Description", "warning");
     };
     JobDescriptionComponent = __decorate([
-        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["n" /* Component */])({
+        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["o" /* Component */])({
             selector: 'app-job-description',
             template: __webpack_require__("./src/app/job-description/job-description.component.html"),
             styles: [__webpack_require__("./src/app/job-description/job-description.component.css")]
@@ -603,7 +607,7 @@ var NavComponent = /** @class */ (function () {
     NavComponent.prototype.ngOnInit = function () {
     };
     NavComponent = __decorate([
-        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["n" /* Component */])({
+        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["o" /* Component */])({
             selector: 'app-nav',
             template: __webpack_require__("./src/app/nav/nav.component.html"),
             styles: [__webpack_require__("./src/app/nav/nav.component.css")]
@@ -662,7 +666,7 @@ var ResultsComponent = /** @class */ (function () {
         this.coverLetterService = coverLetterService;
         this.databaseService = databaseService;
         this.statusMessageService = statusMessageService;
-        this.displayedCategory = "";
+        this.displayedCategory = '';
         this.showFilteredSnippetsTable = false;
     }
     ResultsComponent.prototype.ngOnInit = function () {
@@ -671,23 +675,24 @@ var ResultsComponent = /** @class */ (function () {
         this.filteredSnippets = [];
         var snippets = this.databaseService.database;
         for (var i = 0; i < snippets.length; i++) {
-            if (snippets[i].categories.includes(keyword))
+            if (snippets[i].categories.includes(keyword)) {
                 this.filteredSnippets.push(snippets[i]);
+            }
         }
         this.displayedCategory = keyword;
         this.showFilteredSnippetsTable = true;
-        this.statusMessageService.newStatusMessage("Displaying Snippets from category: " + keyword, "primary");
+        this.statusMessageService.newStatusMessage('Displaying Snippets from category: ' + keyword, 'primary');
     };
     ResultsComponent.prototype.enterNewDescription = function () {
         this.filteredSnippets = [];
         this.showFilteredSnippetsTable = false;
         this.parseDescriptionService.showParsingResults = false;
-        this.parseDescriptionService.jobDescription = "";
+        this.parseDescriptionService.jobDescription = '';
         this.parseDescriptionService.keywordArray = [];
-        this.statusMessageService.newStatusMessage("Resetting Job Description", "warning");
+        this.statusMessageService.newStatusMessage('Resetting Job Description', 'warning');
     };
     ResultsComponent = __decorate([
-        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["n" /* Component */])({
+        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["o" /* Component */])({
             selector: 'app-results',
             template: __webpack_require__("./src/app/results/results.component.html"),
             styles: [__webpack_require__("./src/app/results/results.component.css")]
@@ -726,16 +731,16 @@ var CoverLetterService = /** @class */ (function () {
     function CoverLetterService(statusMessageService) {
         this.statusMessageService = statusMessageService;
         this.addedSnippets = [];
-        this.exported = "";
+        this.exported = '';
     }
     CoverLetterService.prototype.addSnippet = function (snippet) {
         for (var i = 0; i < this.addedSnippets.length; i++) {
-            if (this.addedSnippets[i]._id == snippet._id) {
+            if (this.addedSnippets[i]._id === snippet._id) {
                 return;
             }
         }
         this.addedSnippets.push(snippet);
-        this.statusMessageService.newStatusMessage("Added Snippet to the Cover Letter", "primary");
+        this.statusMessageService.newStatusMessage('Added Snippet to the Cover Letter', 'primary');
     };
     CoverLetterService.prototype.moveSnippet = function (index, up) {
         var temp = this.addedSnippets[index];
@@ -745,10 +750,10 @@ var CoverLetterService = /** @class */ (function () {
     };
     CoverLetterService.prototype.removeSnippet = function (index) {
         this.addedSnippets.splice(index, 1);
-        this.statusMessageService.newStatusMessage("Removed Snippet from Cover Letter", "primary");
+        this.statusMessageService.newStatusMessage('Removed Snippet from Cover Letter', 'primary');
     };
     CoverLetterService = __decorate([
-        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["A" /* Injectable */])(),
+        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["B" /* Injectable */])(),
         __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1__services_status_message_service__["a" /* StatusMessageService */]])
     ], CoverLetterService);
     return CoverLetterService;
@@ -808,6 +813,8 @@ var DatabaseService = /** @class */ (function () {
             else if (data.connected) {
                 self.database = data.data;
                 self.statusMessageService.newStatusMessage(data.responseMessage, 'success');
+                console.log('data from database');
+                console.log(self.database);
                 self.extractCategories();
                 self.connected = true;
                 self.showDatabase = true;
@@ -833,6 +840,8 @@ var DatabaseService = /** @class */ (function () {
             else if (data.connected) {
                 self.database = data.data;
                 self.statusMessageService.newStatusMessage(data.responseMessage, 'success');
+                console.log('data from json');
+                console.log(self.database);
                 self.extractCategories();
                 self.connected = true;
                 self.showDatabase = true;
@@ -878,6 +887,7 @@ var DatabaseService = /** @class */ (function () {
         });
     };
     DatabaseService.prototype.extractCategories = function () {
+        this.categories = {};
         for (var i = 0; i < this.database.length; i++) {
             var record = this.database[i];
             for (var j = 0; j < record.categories.length; j++) {
@@ -895,7 +905,7 @@ var DatabaseService = /** @class */ (function () {
         console.log(this.categories);
     };
     DatabaseService = __decorate([
-        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["A" /* Injectable */])(),
+        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["B" /* Injectable */])(),
         __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_2__status_message_service__["a" /* StatusMessageService */]])
     ], DatabaseService);
     return DatabaseService;
@@ -929,13 +939,14 @@ var ParseDescriptionService = /** @class */ (function () {
     function ParseDescriptionService(databaseService, statusMessageService) {
         this.databaseService = databaseService;
         this.statusMessageService = statusMessageService;
-        this.jobDescription = "";
+        this.jobDescription = '';
         this.showParsingResults = false;
     }
     ParseDescriptionService.prototype.parseDescription = function (description) {
         this.resetJobKeywords();
         this.jobDescription = description;
         var descriptionWords = description.split(/\W/);
+        console.log(descriptionWords);
         for (var i = 0; i < descriptionWords.length; i++) {
             var word = descriptionWords[i].toLowerCase();
             if (word in this.databaseService.categories) {
@@ -944,6 +955,8 @@ var ParseDescriptionService = /** @class */ (function () {
         }
         this.keywordArray = this.createOrderedArray();
         this.showParsingResults = true;
+        console.log('keywordArray');
+        console.log(this.keywordArray);
     };
     ParseDescriptionService.prototype.resetJobKeywords = function () {
         var keywords = Object.keys(this.databaseService.categories);
@@ -984,12 +997,12 @@ var ParseDescriptionService = /** @class */ (function () {
             arr[b] = temp;
         }
         quicksortByJobKeywords(keywordsArray, 0, keywordsArray.length - 1);
-        var statusMessage = "Finished parsing the description. The category with the most keywords in this job description is: " + keywordsArray[0].keyword + " with " + keywordsArray[0].jobKeywords + " keywords.";
-        this.statusMessageService.newStatusMessage(statusMessage, "success");
+        var statusMessage = 'Finished parsing the description. The category with the most keywords in this job description is: ' + keywordsArray[0].keyword + ' with ' + keywordsArray[0].jobKeywords + ' keywords.';
+        this.statusMessageService.newStatusMessage(statusMessage, 'success');
         return keywordsArray;
     };
     ParseDescriptionService = __decorate([
-        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["A" /* Injectable */])(),
+        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["B" /* Injectable */])(),
         __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1__database_service__["a" /* DatabaseService */], __WEBPACK_IMPORTED_MODULE_2__status_message_service__["a" /* StatusMessageService */]])
     ], ParseDescriptionService);
     return ParseDescriptionService;
@@ -1033,12 +1046,12 @@ var StatusMessageService = /** @class */ (function () {
     };
     StatusMessageService.prototype.clearStatus = function () {
         this.statusMessageStream.next({
-            status: "",
-            cssClass: ""
+            status: '',
+            cssClass: ''
         });
     };
     StatusMessageService = __decorate([
-        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["A" /* Injectable */])(),
+        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["B" /* Injectable */])(),
         __metadata("design:paramtypes", [])
     ], StatusMessageService);
     return StatusMessageService;
@@ -1097,7 +1110,7 @@ var StatusMessageComponent = /** @class */ (function () {
         });
     };
     StatusMessageComponent = __decorate([
-        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["n" /* Component */])({
+        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["o" /* Component */])({
             selector: 'app-status-message',
             template: __webpack_require__("./src/app/status-message/status-message.component.html"),
             styles: [__webpack_require__("./src/app/status-message/status-message.component.css")]
@@ -1141,7 +1154,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
 
 if (__WEBPACK_IMPORTED_MODULE_3__environments_environment__["a" /* environment */].production) {
-    Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["_13" /* enableProdMode */])();
+    Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["_14" /* enableProdMode */])();
 }
 Object(__WEBPACK_IMPORTED_MODULE_1__angular_platform_browser_dynamic__["a" /* platformBrowserDynamic */])().bootstrapModule(__WEBPACK_IMPORTED_MODULE_2__app_app_module__["a" /* AppModule */])
     .catch(function (err) { return console.log(err); });
