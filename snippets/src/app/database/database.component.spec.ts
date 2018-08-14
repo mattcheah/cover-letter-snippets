@@ -48,4 +48,5 @@ describe('DatabaseComponent', () => {
     const compiled = fixture.debugElement.nativeElement;
     expect(compiled.querySelector('#db-title').textContent).toContain('Connect your Database:');
   }));
+
 });

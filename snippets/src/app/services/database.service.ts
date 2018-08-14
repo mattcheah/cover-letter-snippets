@@ -20,57 +20,49 @@ export class DatabaseService {
 
   startConnection(urlString): void {
     const self = this;
+    const errorMsg = 'There was an error connecting to the database: ';
     const dataObj = { databaseUrl: urlString };
-    fetch('api/connect-to-database', {
-      method: 'POST', // *GET, POST, PUT, DELETE, etc.
-      headers: {
-        'Content-Type': 'application/json; charset=utf-8',
-      },
-      body: JSON.stringify(dataObj)
-    }).then(function (res) {
-      return res.json();
-    }).then((data) => {
-      if ('error' in data) {
-        self.statusMessageService.newStatusMessage('There was an error connecting to the database: ' + data.error, 'error');
-      } else if (data.connected) {
-        self.database = data.data;
-        self.statusMessageService.newStatusMessage(data.responseMessage, 'success');
-        console.log('data from database');
-        console.log(self.database);
-        self.extractCategories();
-        self.connected = true;
-        self.showDatabase = true;
-      }
-    }).catch((err) => {
-      console.log('Error: ' + err);
-      self.statusMessageService.newStatusMessage('There was an error connecting to the database: ' + err, 'error');
+    this.connect(() => {
+      fetch('api/connect-to-database', {
+        method: 'POST', // *GET, POST, PUT, DELETE, etc.
+        headers: {
+          'Content-Type': 'application/json; charset=utf-8',
+        },
+        body: JSON.stringify(dataObj)
+      });
     });
   }
 
   startConnectionJson(): void {
+    this.connect(() => {
+      return fetch('api/get-json-data', {
+        method: 'GET', // *GET, POST, PUT, DELETE, etc.
+        headers: {
+          'Content-Type': 'application/json; charset=utf-8',
+        }
+      });
+    });
+  }
+
+  connect(fetchPromise): void {
     const self = this;
-    fetch('api/get-json-data', {
-      method: 'GET', // *GET, POST, PUT, DELETE, etc.
-      headers: {
-        'Content-Type': 'application/json; charset=utf-8',
-      }
-    }).then(function (res) {
+    const errorMsg = 'There was an error connecting to the JSON File: ';
+
+    fetchPromise().then(function (res) {
       return res.json();
     }).then((data) => {
       if ('error' in data) {
-        self.statusMessageService.newStatusMessage('There was an error connecting to the JSON File: ' + data.error, 'error');
+        self.statusMessageService.newStatusMessage(errorMsg + data.error, 'error');
       } else if (data.connected) {
         self.database = data.data;
         self.statusMessageService.newStatusMessage(data.responseMessage, 'success');
-        console.log('data from json');
-        console.log(self.database);
         self.extractCategories();
         self.connected = true;
         self.showDatabase = true;
       }
     }).catch((err) => {
       console.log('Error: ' + err);
-      self.statusMessageService.newStatusMessage('There was an error connecting to the JSON File: ' + err, 'error');
+      self.statusMessageService.newStatusMessage(errorMsg + err, 'error');
     });
   }
 
@@ -84,9 +76,9 @@ export class DatabaseService {
         },
         body: JSON.stringify(data)
     }).then(res => res.json()
-    ).then(data => {
-      self.statusMessageService.newStatusMessage(data.responseMessage, 'success');
-      self.database = data.data;
+    ).then(returnData => {
+      self.statusMessageService.newStatusMessage(returnData.responseMessage, 'success');
+      self.database = returnData.data;
       self.extractCategories();
     }).catch(error => {
       console.log('Error: ' + error);
@@ -104,9 +96,9 @@ export class DatabaseService {
       },
       body: JSON.stringify(data)
     }).then(res => res.json()
-    ).then(data => {
-      self.statusMessageService.newStatusMessage(data.responseMessage, 'success');
-      self.database = data.data;
+    ).then(returnData => {
+      self.statusMessageService.newStatusMessage(returnData.responseMessage, 'success');
+      self.database = returnData.data;
       self.extractCategories();
     }).catch(err => {
       self.statusMessageService.newStatusMessage(err, 'error');
