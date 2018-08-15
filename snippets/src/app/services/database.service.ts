@@ -8,15 +8,9 @@ export class DatabaseService {
   database: Array<any>;
   connected = false;
   showDatabase = false;
-  databaseStream: BehaviorSubject<any> = new BehaviorSubject(undefined);
   categories: any = {};
 
-
   constructor(private statusMessageService: StatusMessageService) { }
-
-  // getDatabaseStream():Observable<{}> {
-  //   return this.databaseStream.asObservable();
-  // }
 
   startConnection(urlString): void {
     const self = this;
