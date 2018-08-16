@@ -1,4 +1,5 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { HttpClient, HttpClientModule, HttpErrorResponse, HttpHeaders } from '@angular/common/http';
 
 import { StatusMessageComponent } from './status-message.component';
 
@@ -14,6 +15,9 @@ describe('StatusMessageComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
+      imports: [
+        HttpClientModule
+      ],
       declarations: [ StatusMessageComponent ],
       providers: [
         ParseDescriptionService,

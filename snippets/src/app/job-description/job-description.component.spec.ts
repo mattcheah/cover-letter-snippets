@@ -1,6 +1,7 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { RouterTestingModule } from '@angular/router/testing';
+import { HttpClient, HttpClientModule, HttpErrorResponse, HttpHeaders } from '@angular/common/http';
 
 import { JobDescriptionComponent } from './job-description.component';
 
@@ -19,7 +20,8 @@ describe('JobDescriptionComponent', () => {
       imports: [
         FormsModule,
         ReactiveFormsModule,
-        RouterTestingModule.withRoutes([])
+        RouterTestingModule.withRoutes([]),
+        HttpClientModule
       ],
       declarations: [ JobDescriptionComponent ],
       providers: [

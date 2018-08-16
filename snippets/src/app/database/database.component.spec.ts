@@ -1,5 +1,6 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { HttpClient, HttpClientModule, HttpErrorResponse, HttpHeaders } from '@angular/common/http';
 
 import { DatabaseComponent } from './database.component';
 
@@ -16,7 +17,8 @@ describe('DatabaseComponent', () => {
     TestBed.configureTestingModule({
       imports: [
         FormsModule,
-        ReactiveFormsModule
+        ReactiveFormsModule,
+        HttpClientModule
       ],
       declarations: [ DatabaseComponent ],
       providers: [

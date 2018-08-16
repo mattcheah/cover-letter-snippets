@@ -1,4 +1,5 @@
 import { async, TestBed, inject } from '@angular/core/testing';
+import { HttpClient, HttpClientModule, HttpErrorResponse, HttpHeaders } from '@angular/common/http';
 
 import { StatusMessageService } from './status-message.service';
 import { ParseDescriptionService } from '../services/parse-description.service';
@@ -9,6 +10,9 @@ import { identifierModuleUrl } from '@angular/compiler';
 describe('DatabaseService', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
+      imports: [
+        HttpClientModule
+      ],
       providers: [
         ParseDescriptionService,
         StatusMessageService,

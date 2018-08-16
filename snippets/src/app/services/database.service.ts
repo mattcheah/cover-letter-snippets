@@ -30,16 +30,19 @@ export class DatabaseService {
         'Content-Type': 'application/json; charset=utf-8'
       })
     };
-
-    return this.http.post<DatabaseResponse>('api/connect-to-database', dataObj, options)
-      .pipe(retry(2), catchError(this.handleError)
-    );
+    this.connect(() => {
+      return this.http.post<DatabaseResponse>('api/connect-to-database', dataObj, options)
+        .pipe(retry(2), catchError(this.handleError)
+      );
+    });
   }
 
-  startConnectionJson(jsonFileUrl = 'api/get-json-data'): Observable < {} > {
-    return this.http.get<DatabaseResponse>(jsonFileUrl)
-      .pipe(retry(2), catchError(this.handleError)
-    );
+  startConnectionJson(jsonFileUrl = 'api/get-json-data') {
+    this.connect(() => {
+      return this.http.get<DatabaseResponse>(jsonFileUrl)
+        .pipe(retry(2), catchError(this.handleError)
+      );
+    });
   }
 
   connect(httpObservable): void {
@@ -75,6 +78,9 @@ export class DatabaseService {
       console.log('Error: ' + error);
       self.statusMessageService.newStatusMessage('There was an error submitting your snippet: ' + error, 'error');
     });
+  }
+
+  addJsonSnippet(snippet, categories): void {
   }
 
   deleteSnippet(id): void {

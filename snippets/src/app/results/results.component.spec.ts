@@ -1,5 +1,5 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
-
+import { HttpClient, HttpClientModule, HttpErrorResponse, HttpHeaders } from '@angular/common/http';
 import { ResultsComponent } from './results.component';
 
 import { ParseDescriptionService } from '../services/parse-description.service';
@@ -28,6 +28,9 @@ describe('ResultsComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
+      imports: [
+        HttpClientModule
+      ],
       declarations: [
         ResultsComponent,
         HasKeywordsPipeMock

@@ -1,5 +1,6 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
+import { HttpClient, HttpClientModule, HttpErrorResponse, HttpHeaders } from '@angular/common/http';
 
 import { BuildCoverLetterComponent } from './build-cover-letter.component';
 
@@ -14,6 +15,9 @@ describe('BuildCoverLetterComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
+      imports: [
+        HttpClientModule
+      ],
       declarations: [ BuildCoverLetterComponent ],
       schemas: [CUSTOM_ELEMENTS_SCHEMA],
       providers: [

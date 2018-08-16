@@ -1,5 +1,6 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { HttpClient, HttpClientModule, HttpErrorResponse, HttpHeaders } from '@angular/common/http';
 
 import { AddSnippetComponent } from './add-snippet.component';
 import { DatabaseService } from '../services/database.service';
@@ -13,7 +14,8 @@ describe('AddSnippetComponent', () => {
     TestBed.configureTestingModule({
       imports: [
         FormsModule,
-        ReactiveFormsModule
+        ReactiveFormsModule,
+        HttpClientModule
       ],
       declarations: [ AddSnippetComponent ],
       providers: [
