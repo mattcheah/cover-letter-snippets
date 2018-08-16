@@ -146,7 +146,7 @@ describe('DatabaseService', () => {
       expect(foundSnippet).toEqual(false);
     }));
 
-    it('should delete the json record and return the new contents', inject([DatabaseService], (service: DatabaseService) => {
+    it('should delete the db record and return the new contents', inject([DatabaseService], (service: DatabaseService) => {
       service.startConnection('mockURL');
 
       const length = service.database.length;

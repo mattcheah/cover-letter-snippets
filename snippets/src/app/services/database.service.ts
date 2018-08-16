@@ -1,6 +1,14 @@
 import { Injectable } from '@angular/core';
-import { Observable, BehaviorSubject } from 'rxjs';
+import { HttpClient, HttpErrorResponse, HttpHeaders } from '@angular/common/http';
+import { Observable, BehaviorSubject, throwError } from 'rxjs';
+import { catchError, retry } from 'rxjs/operators';
 import { StatusMessageService } from './status-message.service';
+
+export interface DatabaseResponse {
+  connected: boolean;
+  responseMessage: String;
+  data: {};
+}
 
 @Injectable()
 export class DatabaseService {
@@ -10,53 +18,42 @@ export class DatabaseService {
   showDatabase = false;
   categories: any = {};
 
-  constructor(private statusMessageService: StatusMessageService) { }
+  constructor(
+    private http: HttpClient,
+    private statusMessageService: StatusMessageService,
+  ) { }
 
-  startConnection(urlString): void {
-    const self = this;
-    const errorMsg = 'There was an error connecting to the database: ';
+  startConnection(urlString) {
     const dataObj = { databaseUrl: urlString };
-    this.connect(() => {
-      fetch('api/connect-to-database', {
-        method: 'POST', // *GET, POST, PUT, DELETE, etc.
-        headers: {
-          'Content-Type': 'application/json; charset=utf-8',
-        },
-        body: JSON.stringify(dataObj)
-      });
-    });
+    const options = {
+      headers: new HttpHeaders({
+        'Content-Type': 'application/json; charset=utf-8'
+      })
+    };
+
+    return this.http.post<DatabaseResponse>('api/connect-to-database', dataObj, options)
+      .pipe(retry(2), catchError(this.handleError)
+    );
   }
 
-  startConnectionJson(): void {
-    this.connect(() => {
-      return fetch('api/get-json-data', {
-        method: 'GET', // *GET, POST, PUT, DELETE, etc.
-        headers: {
-          'Content-Type': 'application/json; charset=utf-8',
-        }
-      });
-    });
+  startConnectionJson(jsonFileUrl = 'api/get-json-data'): Observable < {} > {
+    return this.http.get<DatabaseResponse>(jsonFileUrl)
+      .pipe(retry(2), catchError(this.handleError)
+    );
   }
 
-  connect(fetchPromise): void {
+  connect(httpObservable): void {
     const self = this;
-    const errorMsg = 'There was an error connecting to the JSON File: ';
 
-    fetchPromise().then(function (res) {
-      return res.json();
-    }).then((data) => {
-      if ('error' in data) {
-        self.statusMessageService.newStatusMessage(errorMsg + data.error, 'error');
-      } else if (data.connected) {
+    httpObservable().subscribe((data) => {
+      console.log('Got data from jsonObservable:' + data);
+      if (data.connected) {
         self.database = data.data;
         self.statusMessageService.newStatusMessage(data.responseMessage, 'success');
-        self.extractCategories();
         self.connected = true;
         self.showDatabase = true;
+        self.extractCategories();
       }
-    }).catch((err) => {
-      console.log('Error: ' + err);
-      self.statusMessageService.newStatusMessage(errorMsg + err, 'error');
     });
   }
 
@@ -64,9 +61,9 @@ export class DatabaseService {
     const self = this;
     const data = {snippet: snippet, categories: categories};
     fetch('api/add-snippet', {
-        method: 'POST', // *GET, POST, PUT, DELETE, etc.
+        method:           'POST', // *GET, POST, PUT, DELETE, etc.
         headers: {
-          'Content-Type': 'application/json; charset=utf-8',
+          'Content-Type':           'application/json; charset=utf-8',
         },
         body: JSON.stringify(data)
     }).then(res => res.json()
@@ -84,9 +81,9 @@ export class DatabaseService {
     const self = this;
     const data = {id: id};
     fetch('api/delete-snippet', {
-      method: 'DELETE',
+      method:            'DELETE',
       headers: {
-        'Content-Type': 'application/json; charset=utf-8',
+        'Content-Type':            'application/json; charset=utf-8',
       },
       body: JSON.stringify(data)
     }).then(res => res.json()
@@ -115,6 +112,21 @@ export class DatabaseService {
         this.categories[category].ids.push(record);
       }
     }
+  }
+
+  private handleError(error: HttpErrorResponse) {
+    console.log('error obj: ');
+    console.log(error);
+
+    if (error.error instanceof ErrorEvent) {
+      console.error('Error: ', error.error.message);
+      this.statusMessageService.newStatusMessage('There was a network error with your request: ' + error.error.message, 'error');
+    } else {
+      console.error(`Backend returned code ${error.status}`);
+      console.error(`Error Body: ${error.error}`);
+      this.statusMessageService.newStatusMessage('There was a server error with your request: ' + error.error, 'error');
+    }
+    return throwError('error from throwerror');
   }
 
 }
