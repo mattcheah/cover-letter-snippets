@@ -5,9 +5,7 @@
   "browser": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "cd snippets && ng build && cd ../ && node index",
-    "back": "",
-    "front": "cd ~"
+    "dev": "cd snippets && ng build && cd ../ && node index"
   },
   "repository": {
     "type": "git",
@@ -35,6 +33,7 @@
   },
   "homepage": "https://github.com/mattcheah/cover-letter-snippets#readme",
   "dependencies": {
+    "@angular/cli": "^6.1.3",
     "express": "^4.16.3",
     "fs": "0.0.1-security",
     "mongoose": "^5.2.4",

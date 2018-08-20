@@ -1,10 +1,12 @@
 const fs = require('fs');
+const path = require('path');
 
 // CRUD routes for JSON file snippets entries. 
 module.exports = {
     getSnippets: (req,res) => {
-        const path = "../snippets-db.json";
-        if (!fs.existsSync(path)) {
+        const jsonPath = req.body.urlString;
+
+        if (!fs.existsSync(path.normalize(jsonPath))) {
             fs.open(path, "wx", function (err, fd) {
                 // create file if it doesn't exist.
                 if (err) {

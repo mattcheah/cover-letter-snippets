@@ -4,7 +4,7 @@ const mongoose = require('mongoose');
 module.exports = {
     connectToDatabase: (req, res) => {
 
-        const dburl = req.body.databaseUrl;
+        const dburl = req.body.urlString;
 
         if (dburl == "") {
             res.status(400).send("Please enter the URI of a mlab mongodb database!");

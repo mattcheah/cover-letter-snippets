@@ -6,15 +6,15 @@ const jsonRoutes = require("./controllers/json-routes");
 
 
 router.post('/connect-to-database', dbRoutes.connectToDatabase);
-router.get('/get-json-data', jsonRoutes.getSnippets);
+router.post('/get-json-data', jsonRoutes.getSnippets);
 
 router.post('/add-snippet', dbRoutes.addSnippet);
 router.post('/add-json-snippet', jsonRoutes.addSnippet);
 
-// router.update('/edit-snippet', );
-// router.update('/edit-json-snippet', );
+router.update('/edit-snippet', );
+router.update('/edit-json-snippet', );
 
 router.delete('/delete-snippet', dbRoutes.deleteSnippet);
-// router.delete('/delete-json-snippet', );
+router.delete('/delete-json-snippet', );
 
 module.exports = router;
