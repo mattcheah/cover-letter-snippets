@@ -7,12 +7,13 @@ import { StatusMessageService } from './status-message.service';
 export interface DatabaseResponse {
   responseMessage: String;
   connected: boolean;
-  data: {};
+  data: Array<{}>;
 }
 
 @Injectable()
 export class DatabaseService {
 
+  isJson: boolean;
   database: Array<any>;
   connected = false;
   showDatabase = false;
@@ -23,73 +24,94 @@ export class DatabaseService {
     private statusMessageService: StatusMessageService,
   ) { }
 
-  startConnection(urlString): void {
-    const dataObj = { databaseUrl: urlString };
-    const options = {
-      headers: new HttpHeaders({
-        'Content-Type': 'application/json; charset=utf-8'
-      })
-    };
-    this.connect(() => {
-      return this.http.post<DatabaseResponse>('api/connect-to-database', dataObj, options)
-        .pipe(retry(2), catchError(this.handleError)
-      );
-    });
-  }
-
-  startConnectionJson(jsonFileUrl = './snippets-db.json'): void {
-    const body = JSON.stringify({ jsonUrl: jsonFileUrl });
-    const options = {
-      headers: new HttpHeaders({
-        'Content-Type': 'application/json; charset=utf-8'
-      })
-    };
-    // console.log('starting connection json');
-    this.connect(() => {
-      return this.http.post<DatabaseResponse>('api/get-json-data', body, options)
-        .pipe(retry(2), catchError(this.handleError)
-      );
-    });
-  }
-
-  connect(httpObservable: () => Observable<any>): void {
+  startConnection(isJson = true, urlString = './snippets-db.json'): void {
     const self = this;
-    httpObservable().subscribe((data) => {
-      // console.log('Got data from jsonObservable:' + data);
-      if (data.connected) {
-        self.database = data.data;
-        self.statusMessageService.newStatusMessage(data.responseMessage, 'success');
+    const dataObj = JSON.stringify({ databaseUrl: urlString });
+    const options = {
+      headers: new HttpHeaders({
+        'Content-Type': 'application/json; charset=utf-8'
+      })
+    };
+    const url = isJson ? 'api/get-json-data' : 'api/connect-to-database';
+    self.isJson = isJson;
+
+    this.http.post<DatabaseResponse>(url, dataObj, options)
+      .pipe(retry(2), catchError(this.handleError)
+    ).subscribe(response => {
+      if (response.connected) {
+        self.database = response.data;
+        self.statusMessageService.newStatusMessage(response.responseMessage, 'success');
         self.connected = true;
         self.showDatabase = true;
 
         if (self.database.length > 0) {
           self.extractCategories();
         }
-     }
+      }
     });
   }
+
+  // startConnectionJson(jsonFileUrl = './snippets-db.json'): void {
+  //   const body = JSON.stringify({ jsonUrl: jsonFileUrl });
+  //   const options = {
+  //     headers: new HttpHeaders({
+  //       'Content-Type': 'application/json; charset=utf-8'
+  //     })
+  //   };
+  //   // console.log('starting connection json');
+  //   this.connect(() => {
+  //     return this.http.post<DatabaseResponse>('api/get-json-data', body, options)
+  //       .pipe(retry(2), catchError(this.handleError)
+  //     );
+  //   });
+  // }
+
+  // connect(httpObservable: () => Observable<any>): void {
+  //   const self = this;
+  //   httpObservable().subscribe((data) => {
+  //     // console.log('Got data from jsonObservable:' + data);
+
+  //   });
+  // }
 
   addSnippet(snippet, categories): void {
     const self = this;
     const data = {snippet: snippet, categories: categories};
-    fetch('api/add-snippet', {
-        method: 'POST', // *GET, POST, PUT, DELETE, etc.
-        headers: {
-          'Content-Type': 'application/json; charset=utf-8',
-        },
-        body: JSON.stringify(data)
-    }).then(res => res.json()
-    ).then(returnData => {
-      self.statusMessageService.newStatusMessage(returnData.responseMessage, 'success');
-      self.database = returnData.data;
-      self.extractCategories();
-    }).catch(error => {
-      console.log('Error: ' + error);
-      self.statusMessageService.newStatusMessage('There was an error submitting your snippet: ' + error, 'error');
+    const options = {
+      headers: new HttpHeaders({
+        'Content-Type': 'application/json; charset=utf-8'
+      })
+    };
+
+    this.http.post<DatabaseResponse>('api/add-snippet', JSON.stringify(data), options)
+      .pipe(retry(2), catchError(this.handleError)
+    ).subscribe(returnData => {
+      if (returnData.connected) {
+        self.statusMessageService.newStatusMessage(returnData.responseMessage, 'success');
+        self.database = returnData.data;
+        self.extractCategories();
+      }
     });
   }
 
   addJsonSnippet(snippet, categories): void {
+    const self = this;
+    const data = { snippet: snippet, categories: categories };
+    const options = {
+      headers: new HttpHeaders({
+        'Content-Type': 'application/json; charset=utf-8'
+      })
+    };
+
+    this.http.post<DatabaseResponse>('api/add-json-snippet', JSON.stringify(data), options)
+      .pipe(retry(2), catchError(this.handleError)
+      ).subscribe(returnData => {
+        if (returnData.connected) {
+          self.statusMessageService.newStatusMessage(returnData.responseMessage, 'success');
+          self.database = returnData.data;
+          self.extractCategories();
+        }
+      });
   }
 
   editDbSnippet(id, snippet, categories): void {

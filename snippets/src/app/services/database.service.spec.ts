@@ -10,10 +10,6 @@ import { identifierModuleUrl } from '@angular/compiler';
 import { Observable, of } from 'rxjs';
 
 describe('DatabaseService', () => {
-  // let databaseServiceSpy: {
-    // startConnectionJson: jasmine.Spy
-  // };
-  // let databaseService: DatabaseService;
 
   beforeEach(() => {
     TestBed.configureTestingModule({
@@ -22,15 +18,13 @@ describe('DatabaseService', () => {
         HttpClientTestingModule
       ],
       providers: [
-        ParseDescriptionService,
-        StatusMessageService,
-        CoverLetterService,
+        // ParseDescriptionService,
+        // StatusMessageService,
+        // CoverLetterService,
         DatabaseService,
       ]
     });
 
-    // databaseServiceSpy = jasmine.createSpyObj('DatabaseService', ['startConnectionJson']);
-    // databaseService = new DatabaseService(<any> DatabaseServiceSpy);
   });
 
   afterEach(inject([HttpTestingController], (backend: HttpTestingController) => {
@@ -42,22 +36,105 @@ describe('DatabaseService', () => {
     expect(service).toBeTruthy();
   }));
 
-  fdescribe('Connecting to a Database', () => {
-    it(
-      'should connect to the JSON file and return the contents',
+  describe('Connecting to a Database', () => {
+    it('should connect to the JSON file and return the contents',
+    inject([DatabaseService, HttpTestingController],
+    (service: DatabaseService, backend: HttpTestingController) => {
+
+      service.startConnection(true);
+
+      backend.expectOne((req: HttpRequest<any>) => {
+        const body = JSON.parse(req.body);
+
+        return req.url === 'api/get-json-data'
+        && req.method === 'POST'
+        && body.urlString === './snippets-db.json';
+
+      }).flush({
+        connected: true,
+        responseMessage: 'Hello!',
+        data: [
+          {
+            _id: '1',
+            snippet: 'snippets1',
+            categories: ['intro', 'outro']
+          },
+          {
+            _id: '2',
+            snippet: 'snippets2',
+            categories: ['intro', 'outro']
+          }
+        ]
+      });
+
+      expect(service.connected).toBe(true);
+      expect(service.database).toEqual([
+        {
+          _id: '1',
+          snippet: 'snippets1',
+          categories: ['intro', 'outro']
+        },
+        {
+          _id: '2',
+          snippet: 'snippets2',
+          categories: ['intro', 'outro']
+        }
+      ]);
+    }));
+
+    it('should connect to the db and return the contents',
       inject([DatabaseService, HttpTestingController],
       (service: DatabaseService, backend: HttpTestingController) => {
 
-        service.startConnectionJson();
+      service.startConnection(false, 'mongodb://user:testtest1@ds119660.mlab.com:19660/snippets-sandbox');
+      backend.expectOne((req: HttpRequest<any>) => {
+        const body = JSON.parse(req.body);
 
-        backend.expectOne((req: HttpRequest<any>) => {
-          const body = JSON.parse(req.body);
+        return req.url === 'api/connect-to-database'
+        && req.method === 'POST'
+        && body.urlString === 'mongodb://user:testtest1@ds119660.mlab.com:19660/snippets-sandbox';
+      }).flush({
+        connected: true,
+        responseMessage: 'Hello!',
+        data: [
+          {
+            _id: '1',
+            snippet: 'snippets1',
+            categories: ['intro', 'outro']
+          },
+          {
+            _id: '2',
+            snippet: 'snippets2',
+            categories: ['intro', 'outro']
+          }
+        ]
+      });
 
-          return req.url === 'api/get-json-data'
-          && req.method === 'POST'
-          && body.jsonUrl === './snippets-db.json';
+      expect(service.connected).toBe(true);
+      expect(service.database).toEqual([
+        {
+          _id: '1',
+          snippet: 'snippets1',
+          categories: ['intro', 'outro']
+        },
+        {
+          _id: '2',
+          snippet: 'snippets2',
+          categories: ['intro', 'outro']
+        }
+      ]);
+    }));
+  });
 
-        }).flush({
+  describe('Adding snippet to a Database', () => {
+    const categories = ['newSnippet'];
+    const snippet =  'Hello new Snippet';
+
+    it('should add the object to json and return the new contents',
+      inject([DatabaseService, HttpTestingController],
+      (service: DatabaseService, backend: HttpTestingController) => {
+        service.startConnection(true);
+        backend.expectOne('api/connect-to-database').flush({
           connected: true,
           responseMessage: 'Hello!',
           data: [
@@ -74,8 +151,21 @@ describe('DatabaseService', () => {
           ]
         });
 
-        expect(service.connected).toBe(true);
-        expect(service.database).toEqual([
+
+      const length = service.database.length;
+
+      service.addJsonSnippet(snippet, categories);
+      backend.expectOne((req) => {
+        const body = JSON.parse(req.body);
+
+        return req.url === 'api/add-snippet'
+        && req.method === 'POST'
+        && body.snippet === snippet
+        && body.categories === categories;
+      }).flush({
+        connected: true,
+        responseMessage: 'Hello!',
+        data: [
           {
             _id: '1',
             snippet: 'snippets1',
@@ -85,28 +175,17 @@ describe('DatabaseService', () => {
             _id: '2',
             snippet: 'snippets2',
             categories: ['intro', 'outro']
+          },
+          {
+            _id: '3',
+            snippet: 'Hello new Snippet',
+            categories: ['newSnippet']
           }
-        ]);
-    }));
+        ]
+      });
 
-    it('should connect to the db and return the contents', inject([DatabaseService], (service: DatabaseService) => {
-      service.startConnection('mongodb://user:testtest1@ds119660.mlab.com:19660/snippets-sandbox');
-      expect(service.connected).toBe(true);
-    }));
-  });
-
-  describe('Adding snippet to a Database', () => {
-    const categories = ['intro', 'outro'];
-    const snippet =  'Hello new Snippet';
-
-    it('should add the object to json and return the new contents', inject([DatabaseService], (service: DatabaseService) => {
-      service.startConnectionJson();
-
-      const length = service.database.length;
-      console.log('hi');
-      service.addJsonSnippet(snippet, categories);
       expect(service.database.length).toEqual(length + 1);
-      expect(service.database[service.database.length - 1].categories).toEqual(['intro', 'outro']);
+      expect(service.database[service.database.length - 1].categories).toEqual(['newSnippet']);
       expect(service.database[service.database.length - 1].snippet).toEqual('Hello new Snippet');
     }));
 

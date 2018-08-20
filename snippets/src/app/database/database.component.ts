@@ -20,13 +20,13 @@ export class DatabaseComponent implements OnInit {
   ngOnInit() {
   }
 
-  connectJson(): void {
-    this.databaseService.startConnectionJson();
+  connectJson(jsonString: string = ''): void {
+    this.databaseService.startConnection(true, jsonString);
   }
 
   connect(connectString: string): void {
     // console.log("connecting to mongoose db: response is:");
-    this.databaseService.startConnection(connectString);
+    this.databaseService.startConnection(false, connectString);
   }
 
   deleteRecord(id) {
