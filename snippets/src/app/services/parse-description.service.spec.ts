@@ -13,13 +13,13 @@ describe('ParseDescriptionService', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
       imports: [
-        HttpClientModule
+        HttpClientModule,
       ],
       providers: [
         ParseDescriptionService,
         StatusMessageService,
         CoverLetterService,
-        DatabaseService
+        DatabaseService,
       ]
     });
 
@@ -131,7 +131,7 @@ describe('ParseDescriptionService', () => {
 
   it('should parse the job description into different keywords.', () => {
 
-    const databaseService = new DatabaseService(new StatusMessageService);
+    const databaseService = TestBed.get(DatabaseService);
     databaseService.categories = mockCategories;
 
     const parseDescriptionService = new ParseDescriptionService(databaseService, new StatusMessageService);
@@ -151,7 +151,7 @@ describe('ParseDescriptionService', () => {
   describe('resetJobKeywords()', () => {
     it('should reset all jobKeywords in the database categories object', () => {
 
-      const databaseService = new DatabaseService(new StatusMessageService);
+      const databaseService = TestBed.get(DatabaseService);
       databaseService.categories = mockCategories;
 
       const parseDescriptionService = new ParseDescriptionService(databaseService, new StatusMessageService);

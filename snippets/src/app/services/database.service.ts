@@ -5,8 +5,8 @@ import { catchError, retry } from 'rxjs/operators';
 import { StatusMessageService } from './status-message.service';
 
 export interface DatabaseResponse {
-  connected: boolean;
   responseMessage: String;
+  connected: boolean;
   data: {};
 }
 
@@ -23,7 +23,7 @@ export class DatabaseService {
     private statusMessageService: StatusMessageService,
   ) { }
 
-  startConnection(urlString) {
+  startConnection(urlString): void {
     const dataObj = { databaseUrl: urlString };
     const options = {
       headers: new HttpHeaders({
@@ -37,26 +37,35 @@ export class DatabaseService {
     });
   }
 
-  startConnectionJson(jsonFileUrl = 'api/get-json-data') {
+  startConnectionJson(jsonFileUrl = './snippets-db.json'): void {
+    const body = JSON.stringify({ jsonUrl: jsonFileUrl });
+    const options = {
+      headers: new HttpHeaders({
+        'Content-Type': 'application/json; charset=utf-8'
+      })
+    };
+    // console.log('starting connection json');
     this.connect(() => {
-      return this.http.get<DatabaseResponse>(jsonFileUrl)
+      return this.http.post<DatabaseResponse>('api/get-json-data', body, options)
         .pipe(retry(2), catchError(this.handleError)
       );
     });
   }
 
-  connect(httpObservable): void {
+  connect(httpObservable: () => Observable<any>): void {
     const self = this;
-
     httpObservable().subscribe((data) => {
-      console.log('Got data from jsonObservable:' + data);
+      // console.log('Got data from jsonObservable:' + data);
       if (data.connected) {
         self.database = data.data;
         self.statusMessageService.newStatusMessage(data.responseMessage, 'success');
         self.connected = true;
         self.showDatabase = true;
-        self.extractCategories();
-      }
+
+        if (self.database.length > 0) {
+          self.extractCategories();
+        }
+     }
     });
   }
 
@@ -64,9 +73,9 @@ export class DatabaseService {
     const self = this;
     const data = {snippet: snippet, categories: categories};
     fetch('api/add-snippet', {
-        method:           'POST', // *GET, POST, PUT, DELETE, etc.
+        method: 'POST', // *GET, POST, PUT, DELETE, etc.
         headers: {
-          'Content-Type':           'application/json; charset=utf-8',
+          'Content-Type': 'application/json; charset=utf-8',
         },
         body: JSON.stringify(data)
     }).then(res => res.json()
@@ -83,13 +92,19 @@ export class DatabaseService {
   addJsonSnippet(snippet, categories): void {
   }
 
+  editDbSnippet(id, snippet, categories): void {
+  }
+
+  editJsonSnippet(id, snippet, categories): void {
+  }
+
   deleteSnippet(id): void {
     const self = this;
     const data = {id: id};
     fetch('api/delete-snippet', {
-      method:            'DELETE',
+      method: 'DELETE',
       headers: {
-        'Content-Type':            'application/json; charset=utf-8',
+        'Content-Type': 'application/json; charset=utf-8',
       },
       body: JSON.stringify(data)
     }).then(res => res.json()
@@ -104,7 +119,6 @@ export class DatabaseService {
 
   extractCategories(): void {
     this.categories = {};
-
     for (let i = 0; i < this.database.length; i++) {
       const record = this.database[i];
       for (let j = 0; j < record.categories.length; j++) {

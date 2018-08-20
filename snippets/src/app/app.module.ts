@@ -57,7 +57,7 @@ const appRoutes: Routes = [
     DatabaseService,
     ParseDescriptionService,
     StatusMessageService,
-    CoverLetterService
+    CoverLetterService,
   ],
   bootstrap: [AppComponent],
   schemas: [
