@@ -10,18 +10,18 @@ import { DatabaseService } from '../services/database.service';
 })
 export class AddSnippetComponent implements OnInit {
 
-  snippet:String = "";
-  categories:String = "";
+  snippet: String = '';
+  categories: String = '';
 
-  constructor(public databaseService:DatabaseService) { }
+  constructor(public databaseService: DatabaseService) { }
 
   ngOnInit() {
   }
 
   addSnippet() {
-    let categoriesArray = this.categories.split(",");
+    const categoriesArray = this.categories.split(',');
     this.databaseService.addSnippet(this.snippet, categoriesArray);
-    this.snippet = "";
-    this.categories = "";
+    this.snippet = '';
+    this.categories = '';
   }
 }

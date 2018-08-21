@@ -83,7 +83,9 @@ export class DatabaseService {
       })
     };
 
-    this.http.post<DatabaseResponse>('api/add-snippet', JSON.stringify(data), options)
+    const url = self.isJson ? 'api/add-json-snippet' : 'api/add-snippet';
+
+    this.http.post<DatabaseResponse>(url, JSON.stringify(data), options)
       .pipe(retry(2), catchError(this.handleError)
     ).subscribe(returnData => {
       if (returnData.connected) {
@@ -92,26 +94,6 @@ export class DatabaseService {
         self.extractCategories();
       }
     });
-  }
-
-  addJsonSnippet(snippet, categories): void {
-    const self = this;
-    const data = { snippet: snippet, categories: categories };
-    const options = {
-      headers: new HttpHeaders({
-        'Content-Type': 'application/json; charset=utf-8'
-      })
-    };
-
-    this.http.post<DatabaseResponse>('api/add-json-snippet', JSON.stringify(data), options)
-      .pipe(retry(2), catchError(this.handleError)
-      ).subscribe(returnData => {
-        if (returnData.connected) {
-          self.statusMessageService.newStatusMessage(returnData.responseMessage, 'success');
-          self.database = returnData.data;
-          self.extractCategories();
-        }
-      });
   }
 
   editDbSnippet(id, snippet, categories): void {
