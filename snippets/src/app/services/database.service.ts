@@ -25,7 +25,7 @@ export class DatabaseService {
     private statusMessageService: StatusMessageService,
   ) { }
 
-  startConnection(isJson = true, urlString = './snippets-db.json'): void {
+  startConnection(isJson = true, urlString = 'snippets-db.json'): void {
     const self = this;
     const dataObj = JSON.stringify({ databaseUrl: urlString });
     const options = {
@@ -39,7 +39,7 @@ export class DatabaseService {
     this.http.post<DatabaseResponse>(url, dataObj, options)
       .pipe(retry(2), catchError(this.handleError)
     ).subscribe(response => {
-      if (response.connected) {
+      if (response.connected && !response.error) {
         self.database = response.data;
         self.statusMessageService.newStatusMessage(response.responseMessage, 'success');
         self.connected = true;

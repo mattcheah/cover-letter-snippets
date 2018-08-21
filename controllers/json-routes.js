@@ -5,21 +5,33 @@ const path = require('path');
 module.exports = {
     jsonFilePath: "",
     getSnippets: (req,res) => {
+        console.log("Called GetSnippets!");
         module.exports.jsonFilePath = path.normalize(req.body.databaseUrl);
 
         // create file if it doesn't exist.
-        fs.open(module.exports.jsonFilePath, "wx", function (err, fd) {
-            if (err) {
-                console.log("error creating new json file: " + err);
-            }
-            fs.close(fd, function (err) {
-                if (err) {
-                    console.log("error closing created json file: " + err);
-                }
-            });
-        });
-        
+        console.log(module.exports.jsonFilePath);
+        try {
 
+            fs.open(module.exports.jsonFilePath, "wx", function (err, fd) {
+                if (err) {
+                    console.log("error! exists?");
+                } else {
+
+                    fs.close(fd, function (err) {
+                        if (err) {
+                            console.log("error closing created json file: " + err);
+                        }
+                    });
+                }
+                
+            });
+        } catch(err) {
+            console.log("Error: Thrown error");
+            // console.log(err);
+        }
+        console.log("after fs.open");
+        console.log(module.exports.jsonFilePath);
+        console.log(module.exports.returnJsonData);
         module.exports.returnJsonData().then(data => {
             let returnObj = {
                 responseMessage: "Connected to JSON file and Returned Results!",
@@ -126,6 +138,7 @@ module.exports = {
     },
 
     returnJsonData: () => {
+        console.log("Called returnJsonData");
         return new Promise((response, reject) => {
             try {
                 const database = require(module.exports.jsonFilePath);

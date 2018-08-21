@@ -71,16 +71,16 @@ var __metadata = (undefined && undefined.__metadata) || function (k, v) {
 var AddSnippetComponent = /** @class */ (function () {
     function AddSnippetComponent(databaseService) {
         this.databaseService = databaseService;
-        this.snippet = "";
-        this.categories = "";
+        this.snippet = '';
+        this.categories = '';
     }
     AddSnippetComponent.prototype.ngOnInit = function () {
     };
     AddSnippetComponent.prototype.addSnippet = function () {
-        var categoriesArray = this.categories.split(",");
+        var categoriesArray = this.categories.split(',');
         this.databaseService.addSnippet(this.snippet, categoriesArray);
-        this.snippet = "";
-        this.categories = "";
+        this.snippet = '';
+        this.categories = '';
     };
     AddSnippetComponent = __decorate([
         Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["Component"])({
@@ -168,22 +168,23 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _angular_platform_browser__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @angular/platform-browser */ "./node_modules/@angular/platform-browser/fesm5/platform-browser.js");
 /* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm5/core.js");
 /* harmony import */ var _angular_forms__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @angular/forms */ "./node_modules/@angular/forms/fesm5/forms.js");
-/* harmony import */ var _app_component__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./app.component */ "./src/app/app.component.ts");
-/* harmony import */ var _angular_router__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @angular/router */ "./node_modules/@angular/router/fesm5/router.js");
-/* harmony import */ var _job_description_job_description_component__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./job-description/job-description.component */ "./src/app/job-description/job-description.component.ts");
-/* harmony import */ var _database_database_component__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./database/database.component */ "./src/app/database/database.component.ts");
-/* harmony import */ var _results_results_component__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./results/results.component */ "./src/app/results/results.component.ts");
-/* harmony import */ var _add_snippet_add_snippet_component__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./add-snippet/add-snippet.component */ "./src/app/add-snippet/add-snippet.component.ts");
-/* harmony import */ var _status_message_status_message_component__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ./status-message/status-message.component */ "./src/app/status-message/status-message.component.ts");
-/* harmony import */ var _has_keywords_pipe__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ./has-keywords.pipe */ "./src/app/has-keywords.pipe.ts");
-/* harmony import */ var _cover_letter_cover_letter_component__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ./cover-letter/cover-letter.component */ "./src/app/cover-letter/cover-letter.component.ts");
-/* harmony import */ var _build_cover_letter_build_cover_letter_component__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! ./build-cover-letter/build-cover-letter.component */ "./src/app/build-cover-letter/build-cover-letter.component.ts");
-/* harmony import */ var _export_export_component__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! ./export/export.component */ "./src/app/export/export.component.ts");
-/* harmony import */ var _nav_nav_component__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(/*! ./nav/nav.component */ "./src/app/nav/nav.component.ts");
-/* harmony import */ var _services_database_service__WEBPACK_IMPORTED_MODULE_15__ = __webpack_require__(/*! ./services/database.service */ "./src/app/services/database.service.ts");
-/* harmony import */ var _services_parse_description_service__WEBPACK_IMPORTED_MODULE_16__ = __webpack_require__(/*! ./services/parse-description.service */ "./src/app/services/parse-description.service.ts");
-/* harmony import */ var _services_status_message_service__WEBPACK_IMPORTED_MODULE_17__ = __webpack_require__(/*! ./services/status-message.service */ "./src/app/services/status-message.service.ts");
-/* harmony import */ var _services_cover_letter_service__WEBPACK_IMPORTED_MODULE_18__ = __webpack_require__(/*! ./services/cover-letter.service */ "./src/app/services/cover-letter.service.ts");
+/* harmony import */ var _angular_common_http__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @angular/common/http */ "./node_modules/@angular/common/fesm5/http.js");
+/* harmony import */ var _app_component__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./app.component */ "./src/app/app.component.ts");
+/* harmony import */ var _angular_router__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @angular/router */ "./node_modules/@angular/router/fesm5/router.js");
+/* harmony import */ var _job_description_job_description_component__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./job-description/job-description.component */ "./src/app/job-description/job-description.component.ts");
+/* harmony import */ var _database_database_component__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./database/database.component */ "./src/app/database/database.component.ts");
+/* harmony import */ var _results_results_component__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./results/results.component */ "./src/app/results/results.component.ts");
+/* harmony import */ var _add_snippet_add_snippet_component__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ./add-snippet/add-snippet.component */ "./src/app/add-snippet/add-snippet.component.ts");
+/* harmony import */ var _status_message_status_message_component__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ./status-message/status-message.component */ "./src/app/status-message/status-message.component.ts");
+/* harmony import */ var _has_keywords_pipe__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ./has-keywords.pipe */ "./src/app/has-keywords.pipe.ts");
+/* harmony import */ var _cover_letter_cover_letter_component__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! ./cover-letter/cover-letter.component */ "./src/app/cover-letter/cover-letter.component.ts");
+/* harmony import */ var _build_cover_letter_build_cover_letter_component__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! ./build-cover-letter/build-cover-letter.component */ "./src/app/build-cover-letter/build-cover-letter.component.ts");
+/* harmony import */ var _export_export_component__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(/*! ./export/export.component */ "./src/app/export/export.component.ts");
+/* harmony import */ var _nav_nav_component__WEBPACK_IMPORTED_MODULE_15__ = __webpack_require__(/*! ./nav/nav.component */ "./src/app/nav/nav.component.ts");
+/* harmony import */ var _services_database_service__WEBPACK_IMPORTED_MODULE_16__ = __webpack_require__(/*! ./services/database.service */ "./src/app/services/database.service.ts");
+/* harmony import */ var _services_parse_description_service__WEBPACK_IMPORTED_MODULE_17__ = __webpack_require__(/*! ./services/parse-description.service */ "./src/app/services/parse-description.service.ts");
+/* harmony import */ var _services_status_message_service__WEBPACK_IMPORTED_MODULE_18__ = __webpack_require__(/*! ./services/status-message.service */ "./src/app/services/status-message.service.ts");
+/* harmony import */ var _services_cover_letter_service__WEBPACK_IMPORTED_MODULE_19__ = __webpack_require__(/*! ./services/cover-letter.service */ "./src/app/services/cover-letter.service.ts");
 var __decorate = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -210,11 +211,12 @@ var __decorate = (undefined && undefined.__decorate) || function (decorators, ta
 
 
 
+
 var appRoutes = [
-    { path: '', component: _database_database_component__WEBPACK_IMPORTED_MODULE_6__["DatabaseComponent"] },
-    { path: 'add-snippet', component: _add_snippet_add_snippet_component__WEBPACK_IMPORTED_MODULE_8__["AddSnippetComponent"] },
-    { path: 'build-cover-letter', component: _build_cover_letter_build_cover_letter_component__WEBPACK_IMPORTED_MODULE_12__["BuildCoverLetterComponent"] },
-    { path: 'export-cover-letter', component: _export_export_component__WEBPACK_IMPORTED_MODULE_13__["ExportComponent"] }
+    { path: '', component: _database_database_component__WEBPACK_IMPORTED_MODULE_7__["DatabaseComponent"] },
+    { path: 'add-snippet', component: _add_snippet_add_snippet_component__WEBPACK_IMPORTED_MODULE_9__["AddSnippetComponent"] },
+    { path: 'build-cover-letter', component: _build_cover_letter_build_cover_letter_component__WEBPACK_IMPORTED_MODULE_13__["BuildCoverLetterComponent"] },
+    { path: 'export-cover-letter', component: _export_export_component__WEBPACK_IMPORTED_MODULE_14__["ExportComponent"] }
 ];
 var AppModule = /** @class */ (function () {
     function AppModule() {
@@ -222,30 +224,31 @@ var AppModule = /** @class */ (function () {
     AppModule = __decorate([
         Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["NgModule"])({
             declarations: [
-                _app_component__WEBPACK_IMPORTED_MODULE_3__["AppComponent"],
-                _job_description_job_description_component__WEBPACK_IMPORTED_MODULE_5__["JobDescriptionComponent"],
-                _database_database_component__WEBPACK_IMPORTED_MODULE_6__["DatabaseComponent"],
-                _results_results_component__WEBPACK_IMPORTED_MODULE_7__["ResultsComponent"],
-                _add_snippet_add_snippet_component__WEBPACK_IMPORTED_MODULE_8__["AddSnippetComponent"],
-                _status_message_status_message_component__WEBPACK_IMPORTED_MODULE_9__["StatusMessageComponent"],
-                _has_keywords_pipe__WEBPACK_IMPORTED_MODULE_10__["HasKeywordsPipe"],
-                _cover_letter_cover_letter_component__WEBPACK_IMPORTED_MODULE_11__["CoverLetterComponent"],
-                _export_export_component__WEBPACK_IMPORTED_MODULE_13__["ExportComponent"],
-                _build_cover_letter_build_cover_letter_component__WEBPACK_IMPORTED_MODULE_12__["BuildCoverLetterComponent"],
-                _nav_nav_component__WEBPACK_IMPORTED_MODULE_14__["NavComponent"]
+                _app_component__WEBPACK_IMPORTED_MODULE_4__["AppComponent"],
+                _job_description_job_description_component__WEBPACK_IMPORTED_MODULE_6__["JobDescriptionComponent"],
+                _database_database_component__WEBPACK_IMPORTED_MODULE_7__["DatabaseComponent"],
+                _results_results_component__WEBPACK_IMPORTED_MODULE_8__["ResultsComponent"],
+                _add_snippet_add_snippet_component__WEBPACK_IMPORTED_MODULE_9__["AddSnippetComponent"],
+                _status_message_status_message_component__WEBPACK_IMPORTED_MODULE_10__["StatusMessageComponent"],
+                _has_keywords_pipe__WEBPACK_IMPORTED_MODULE_11__["HasKeywordsPipe"],
+                _cover_letter_cover_letter_component__WEBPACK_IMPORTED_MODULE_12__["CoverLetterComponent"],
+                _export_export_component__WEBPACK_IMPORTED_MODULE_14__["ExportComponent"],
+                _build_cover_letter_build_cover_letter_component__WEBPACK_IMPORTED_MODULE_13__["BuildCoverLetterComponent"],
+                _nav_nav_component__WEBPACK_IMPORTED_MODULE_15__["NavComponent"]
             ],
             imports: [
-                _angular_router__WEBPACK_IMPORTED_MODULE_4__["RouterModule"].forRoot(appRoutes),
+                _angular_router__WEBPACK_IMPORTED_MODULE_5__["RouterModule"].forRoot(appRoutes),
                 _angular_platform_browser__WEBPACK_IMPORTED_MODULE_0__["BrowserModule"],
-                _angular_forms__WEBPACK_IMPORTED_MODULE_2__["FormsModule"]
+                _angular_forms__WEBPACK_IMPORTED_MODULE_2__["FormsModule"],
+                _angular_common_http__WEBPACK_IMPORTED_MODULE_3__["HttpClientModule"]
             ],
             providers: [
-                _services_database_service__WEBPACK_IMPORTED_MODULE_15__["DatabaseService"],
-                _services_parse_description_service__WEBPACK_IMPORTED_MODULE_16__["ParseDescriptionService"],
-                _services_status_message_service__WEBPACK_IMPORTED_MODULE_17__["StatusMessageService"],
-                _services_cover_letter_service__WEBPACK_IMPORTED_MODULE_18__["CoverLetterService"]
+                _services_database_service__WEBPACK_IMPORTED_MODULE_16__["DatabaseService"],
+                _services_parse_description_service__WEBPACK_IMPORTED_MODULE_17__["ParseDescriptionService"],
+                _services_status_message_service__WEBPACK_IMPORTED_MODULE_18__["StatusMessageService"],
+                _services_cover_letter_service__WEBPACK_IMPORTED_MODULE_19__["CoverLetterService"],
             ],
-            bootstrap: [_app_component__WEBPACK_IMPORTED_MODULE_3__["AppComponent"]],
+            bootstrap: [_app_component__WEBPACK_IMPORTED_MODULE_4__["AppComponent"]],
             schemas: [
                 _angular_core__WEBPACK_IMPORTED_MODULE_1__["CUSTOM_ELEMENTS_SCHEMA"]
             ]
@@ -460,12 +463,12 @@ var DatabaseComponent = /** @class */ (function () {
     }
     DatabaseComponent.prototype.ngOnInit = function () {
     };
-    DatabaseComponent.prototype.connectJson = function () {
-        this.databaseService.startConnectionJson();
+    DatabaseComponent.prototype.connectJson = function (jsonString) {
+        this.databaseService.startConnection(true, jsonString);
     };
     DatabaseComponent.prototype.connect = function (connectString) {
         // console.log("connecting to mongoose db: response is:");
-        this.databaseService.startConnection(connectString);
+        this.databaseService.startConnection(false, connectString);
     };
     DatabaseComponent.prototype.deleteRecord = function (id) {
         // console.log("delete id: "+id);
@@ -912,7 +915,10 @@ var CoverLetterService = /** @class */ (function () {
 __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "DatabaseService", function() { return DatabaseService; });
 /* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm5/core.js");
-/* harmony import */ var _status_message_service__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./status-message.service */ "./src/app/services/status-message.service.ts");
+/* harmony import */ var _angular_common_http__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/common/http */ "./node_modules/@angular/common/fesm5/http.js");
+/* harmony import */ var rxjs__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! rxjs */ "./node_modules/rxjs/_esm5/index.js");
+/* harmony import */ var rxjs_operators__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! rxjs/operators */ "./node_modules/rxjs/_esm5/operators/index.js");
+/* harmony import */ var _status_message_service__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./status-message.service */ "./src/app/services/status-message.service.ts");
 var __decorate = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -924,91 +930,98 @@ var __metadata = (undefined && undefined.__metadata) || function (k, v) {
 };
 
 
+
+
+
 var DatabaseService = /** @class */ (function () {
-    function DatabaseService(statusMessageService) {
+    function DatabaseService(http, statusMessageService) {
+        this.http = http;
         this.statusMessageService = statusMessageService;
         this.connected = false;
         this.showDatabase = false;
         this.categories = {};
     }
-    DatabaseService.prototype.startConnection = function (urlString) {
+    DatabaseService.prototype.startConnection = function (isJson, urlString) {
+        if (isJson === void 0) { isJson = true; }
+        if (urlString === void 0) { urlString = 'snippets-db.json'; }
         var self = this;
-        var errorMsg = 'There was an error connecting to the database: ';
-        var dataObj = { databaseUrl: urlString };
-        this.connect(function () {
-            fetch('api/connect-to-database', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json; charset=utf-8',
-                },
-                body: JSON.stringify(dataObj)
-            });
-        });
-    };
-    DatabaseService.prototype.startConnectionJson = function () {
-        this.connect(function () {
-            return fetch('api/get-json-data', {
-                method: 'GET',
-                headers: {
-                    'Content-Type': 'application/json; charset=utf-8',
-                }
-            });
-        });
-    };
-    DatabaseService.prototype.connect = function (fetchPromise) {
-        var self = this;
-        var errorMsg = 'There was an error connecting to the JSON File: ';
-        fetchPromise().then(function (res) {
-            return res.json();
-        }).then(function (data) {
-            if ('error' in data) {
-                self.statusMessageService.newStatusMessage(errorMsg + data.error, 'error');
-            }
-            else if (data.connected) {
-                self.database = data.data;
-                self.statusMessageService.newStatusMessage(data.responseMessage, 'success');
-                self.extractCategories();
+        var dataObj = JSON.stringify({ databaseUrl: urlString });
+        var options = {
+            headers: new _angular_common_http__WEBPACK_IMPORTED_MODULE_1__["HttpHeaders"]({
+                'Content-Type': 'application/json; charset=utf-8'
+            })
+        };
+        var url = isJson ? 'api/get-json-data' : 'api/connect-to-database';
+        self.isJson = isJson;
+        this.http.post(url, dataObj, options)
+            .pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_3__["retry"])(2), Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_3__["catchError"])(this.handleError)).subscribe(function (response) {
+            if (response.connected && !response.error) {
+                self.database = response.data;
+                self.statusMessageService.newStatusMessage(response.responseMessage, 'success');
                 self.connected = true;
                 self.showDatabase = true;
+                if (self.database.length > 0) {
+                    self.extractCategories();
+                }
             }
-        }).catch(function (err) {
-            console.log('Error: ' + err);
-            self.statusMessageService.newStatusMessage(errorMsg + err, 'error');
         });
     };
     DatabaseService.prototype.addSnippet = function (snippet, categories) {
         var self = this;
         var data = { snippet: snippet, categories: categories };
-        fetch('api/add-snippet', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json; charset=utf-8',
-            },
-            body: JSON.stringify(data)
-        }).then(function (res) { return res.json(); }).then(function (returnData) {
-            self.statusMessageService.newStatusMessage(returnData.responseMessage, 'success');
-            self.database = returnData.data;
-            self.extractCategories();
-        }).catch(function (error) {
-            console.log('Error: ' + error);
-            self.statusMessageService.newStatusMessage('There was an error submitting your snippet: ' + error, 'error');
+        var options = {
+            headers: new _angular_common_http__WEBPACK_IMPORTED_MODULE_1__["HttpHeaders"]({
+                'Content-Type': 'application/json; charset=utf-8'
+            })
+        };
+        var url = self.isJson ? 'api/add-json-snippet' : 'api/add-snippet';
+        this.http.post(url, JSON.stringify(data), options)
+            .pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_3__["retry"])(2), Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_3__["catchError"])(this.handleError)).subscribe(function (returnData) {
+            if (returnData.connected) {
+                self.statusMessageService.newStatusMessage(returnData.responseMessage, 'success');
+                self.database = returnData.data;
+                self.extractCategories();
+            }
+            else if (returnData.error) {
+                self.statusMessageService.newStatusMessage(returnData.responseMessage, 'error');
+            }
+        });
+    };
+    DatabaseService.prototype.editSnippet = function (id, snippet, categories) {
+        var self = this;
+        var url = self.isJson ? 'api/edit-json-snippet' : 'api/edit-snippet';
+        var data = { id: id, snippet: snippet, categories: categories };
+        var options = {
+            headers: new _angular_common_http__WEBPACK_IMPORTED_MODULE_1__["HttpHeaders"]({
+                'Content-Type': 'application/json; charset=utf-8'
+            })
+        };
+        this.http.put(url, JSON.stringify(data), options)
+            .pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_3__["retry"])(2), Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_3__["catchError"])(this.handleError)).subscribe(function (returnData) {
+            if (returnData.connected && !returnData.error) {
+                self.statusMessageService.newStatusMessage(returnData.responseMessage, 'success');
+                self.database = returnData.data;
+                self.extractCategories();
+            }
         });
     };
     DatabaseService.prototype.deleteSnippet = function (id) {
         var self = this;
         var data = { id: id };
-        fetch('api/delete-snippet', {
-            method: 'DELETE',
-            headers: {
-                'Content-Type': 'application/json; charset=utf-8',
-            },
+        var url = self.isJson ? 'api/delete-json-snippet' : 'api/delete-snippet';
+        var options = {
+            headers: new _angular_common_http__WEBPACK_IMPORTED_MODULE_1__["HttpHeaders"]({
+                'Content-Type': 'application/json; charset=utf-8'
+            }),
             body: JSON.stringify(data)
-        }).then(function (res) { return res.json(); }).then(function (returnData) {
-            self.statusMessageService.newStatusMessage(returnData.responseMessage, 'success');
-            self.database = returnData.data;
-            self.extractCategories();
-        }).catch(function (err) {
-            self.statusMessageService.newStatusMessage(err, 'error');
+        };
+        this.http.delete(url, options)
+            .pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_3__["retry"])(2), Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_3__["catchError"])(this.handleError)).subscribe(function (returnData) {
+            if (returnData.connected && !returnData.error) {
+                self.statusMessageService.newStatusMessage(returnData.responseMessage, 'success');
+                self.database = returnData.data;
+                self.extractCategories();
+            }
         });
     };
     DatabaseService.prototype.extractCategories = function () {
@@ -1027,9 +1040,24 @@ var DatabaseService = /** @class */ (function () {
             }
         }
     };
+    DatabaseService.prototype.handleError = function (error) {
+        console.log('error obj: ');
+        console.log(error);
+        if (error.error instanceof ErrorEvent) {
+            console.error('Error: ', error.error.message);
+            this.statusMessageService.newStatusMessage('There was a network error with your request: ' + error.error.message, 'error');
+        }
+        else {
+            console.error("Backend returned code " + error.status);
+            console.error("Error Body: " + error.error);
+            this.statusMessageService.newStatusMessage('There was a server error with your request: ' + error.error, 'error');
+        }
+        return Object(rxjs__WEBPACK_IMPORTED_MODULE_2__["throwError"])('error from throwerror');
+    };
     DatabaseService = __decorate([
         Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["Injectable"])(),
-        __metadata("design:paramtypes", [_status_message_service__WEBPACK_IMPORTED_MODULE_1__["StatusMessageService"]])
+        __metadata("design:paramtypes", [_angular_common_http__WEBPACK_IMPORTED_MODULE_1__["HttpClient"],
+            _status_message_service__WEBPACK_IMPORTED_MODULE_4__["StatusMessageService"]])
     ], DatabaseService);
     return DatabaseService;
 }());

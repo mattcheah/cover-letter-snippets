@@ -20,7 +20,7 @@ export class DatabaseComponent implements OnInit {
   ngOnInit() {
   }
 
-  connectJson(jsonString: string = ''): void {
+  connectJson(jsonString: string): void {
     this.databaseService.startConnection(true, jsonString);
   }
 
