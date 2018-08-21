@@ -5,9 +5,10 @@ import { catchError, retry } from 'rxjs/operators';
 import { StatusMessageService } from './status-message.service';
 
 export interface DatabaseResponse {
-  responseMessage: String;
+  responseMessage: string;
   connected: boolean;
   data: Array<{}>;
+  error: boolean
 }
 
 @Injectable()
@@ -51,29 +52,6 @@ export class DatabaseService {
     });
   }
 
-  // startConnectionJson(jsonFileUrl = './snippets-db.json'): void {
-  //   const body = JSON.stringify({ jsonUrl: jsonFileUrl });
-  //   const options = {
-  //     headers: new HttpHeaders({
-  //       'Content-Type': 'application/json; charset=utf-8'
-  //     })
-  //   };
-  //   // console.log('starting connection json');
-  //   this.connect(() => {
-  //     return this.http.post<DatabaseResponse>('api/get-json-data', body, options)
-  //       .pipe(retry(2), catchError(this.handleError)
-  //     );
-  //   });
-  // }
-
-  // connect(httpObservable: () => Observable<any>): void {
-  //   const self = this;
-  //   httpObservable().subscribe((data) => {
-  //     // console.log('Got data from jsonObservable:' + data);
-
-  //   });
-  // }
-
   addSnippet(snippet, categories): void {
     const self = this;
     const data = {snippet: snippet, categories: categories};
@@ -92,33 +70,53 @@ export class DatabaseService {
         self.statusMessageService.newStatusMessage(returnData.responseMessage, 'success');
         self.database = returnData.data;
         self.extractCategories();
+      } else if (returnData.error) {
+        self.statusMessageService.newStatusMessage(returnData.responseMessage, 'error');
       }
     });
   }
 
-  editDbSnippet(id, snippet, categories): void {
-  }
+  editSnippet(id, snippet, categories): void {
+    const self = this;
+    const url = self.isJson ? 'api/edit-json-snippet' : 'api/edit-snippet';
+    const data = { id: id, snippet: snippet, categories: categories };
+    const options = {
+      headers: new HttpHeaders({
+        'Content-Type': 'application/json; charset=utf-8'
+      })
+    };
 
-  editJsonSnippet(id, snippet, categories): void {
+    this.http.put<DatabaseResponse>(url, JSON.stringify(data), options)
+    .pipe(retry(2), catchError(this.handleError)
+    ).subscribe(returnData => {
+      if (returnData.connected && !returnData.error) {
+        self.statusMessageService.newStatusMessage(returnData.responseMessage, 'success');
+        self.database = returnData.data;
+        self.extractCategories();
+      }
+    });
   }
 
   deleteSnippet(id): void {
     const self = this;
     const data = {id: id};
-    fetch('api/delete-snippet', {
-      method: 'DELETE',
-      headers: {
-        'Content-Type': 'application/json; charset=utf-8',
-      },
+    const url = self.isJson ? 'api/delete-json-snippet' : 'api/delete-snippet';
+    const options = {
+      headers: new HttpHeaders({
+        'Content-Type': 'application/json; charset=utf-8'
+      }),
       body: JSON.stringify(data)
-    }).then(res => res.json()
-    ).then(returnData => {
-      self.statusMessageService.newStatusMessage(returnData.responseMessage, 'success');
-      self.database = returnData.data;
-      self.extractCategories();
-    }).catch(err => {
-      self.statusMessageService.newStatusMessage(err, 'error');
-    });
+    };
+
+    this.http.delete<DatabaseResponse>(url, options)
+      .pipe(retry(2), catchError(this.handleError)
+      ).subscribe(returnData => {
+        if (returnData.connected && !returnData.error) {
+          self.statusMessageService.newStatusMessage(returnData.responseMessage, 'success');
+          self.database = returnData.data;
+          self.extractCategories();
+        }
+      });
   }
 
   extractCategories(): void {
