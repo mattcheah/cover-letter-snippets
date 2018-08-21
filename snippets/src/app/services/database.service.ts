@@ -119,7 +119,7 @@ export class DatabaseService {
       });
   }
 
-  extractCategories(): void {
+  private extractCategories(): void {
     this.categories = {};
     for (let i = 0; i < this.database.length; i++) {
       const record = this.database[i];

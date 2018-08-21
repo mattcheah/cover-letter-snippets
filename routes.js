@@ -11,8 +11,8 @@ router.post('/get-json-data', jsonRoutes.getSnippets);
 router.post('/add-snippet', dbRoutes.addSnippet);
 router.post('/add-json-snippet', jsonRoutes.addSnippet);
 
-router.update('/edit-snippet', );
-router.update('/edit-json-snippet', );
+router.put('/edit-snippet', );
+router.put('/edit-json-snippet', );
 
 router.delete('/delete-snippet', dbRoutes.deleteSnippet);
 router.delete('/delete-json-snippet', );

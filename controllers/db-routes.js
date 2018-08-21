@@ -69,13 +69,16 @@ module.exports = {
             Snippet.find({}, function (err, data) {
                 if (err) {
                     rej({
-                        error: err,
-                        connected: false
+                        error: true,
+                        connected: false,
+                        data: [],
+                        responseMessage: err
                     });
                 }
                 returnObj = {
-                    responseMessage: successMessage,
                     connected: true,
+                    error: false,
+                    responseMessage: successMessage,
                     data: data
                 };
                 res(returnObj);
