@@ -37,14 +37,14 @@
             <div class="snippet no-edit" style="display:block">
               {{snippet.snippet}}
             </div>
-            <textarea  [(ngModel)]="editSnippetObject ? editSnippetObject.snippet : ''" class="snippet-edit editable" (keydown)="snippetEdited = true" (keyup.enter)="saveEdit(editSnippetObject)" style="display:none">
+            <textarea  [(ngModel)]="editSnippetObject ? editSnippetObject.snippet : snippet.snippet" class="snippet-edit editable" (keydown)="snippetEdited = true" (keyup.enter)="saveEdit(editSnippetObject)" style="display:none">
             </textarea>
           </td>
           <td (click)="toggleEditCategories(snippet)" >
             <div class="categories no-edit" style="display:block">
               {{snippet.categories}}
             </div>
-            <input [(ngModel)]="editSnippetObject ? editSnippetObject.categories : ''" class="categories-edit editable" value="{{editSnippetObject ? editSnippetObject.categories : ''}}" (keydown)="snippetEdited = true" (keyup.enter)="saveEdit(editSnippetObject)" style="display:none">
+            <input [(ngModel)]="editSnippetObject ? editSnippetObject.categories : snippet.categories" class="categories-edit editable" value="{{editSnippetObject ? editSnippetObject.categories : ''}}" (keydown)="snippetEdited = true" (keyup.enter)="saveEdit(editSnippetObject)" style="display:none">
           </td>
           <!-- <td><a (click)="deleteRecord(snippet.id)">Edit</a></td> -->
           <td class="delete"><a (click)="deleteRecord(snippet._id)">Delete</a></td>

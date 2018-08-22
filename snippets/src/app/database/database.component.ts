@@ -96,9 +96,12 @@ export class DatabaseComponent implements OnInit {
   }
 
   saveEdit(snippet): void {
-    console.log('Save edit called. snippet:');
-    console.log(snippet);
-    console.log(typeof snippet.categories);
+
+    const newSnip: HTMLInputElement = document.querySelector('#snippet-' + snippet._id + ' .snippet-edit');
+    const newCat: HTMLInputElement = document.querySelector('#snippet-' + snippet._id + ' .categories-edit');
+
+    snippet.snippet = newSnip.value;
+    snippet.categories = newCat.value;
     if (this.snippetEdited) {
       console.log('SNIPPET WAS EDITED. WE\'RE SAVING BROS');
       if (typeof snippet.categories === 'string') {
