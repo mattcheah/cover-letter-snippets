@@ -41,7 +41,7 @@ module.exports = "#snippet {\r\n    height:160px;\r\n}"
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<div *ngIf=\"databaseService.connected\">\r\n\r\n  <h4>Add Snippet</h4>\r\n  <p>Enter a snippet from your cover letter that you feel is well articulated and communicates your experience well. Then fill out the categories (experiences, languages, skills) that relate to this cover letter.</p>\r\n  <textarea id=\"snippet\" ref-textarea [(ngModel)]=\"snippet\" placeholder=\"Copy/Paste a cover letter snippet here.\"></textarea>\r\n  <textarea ref-textarea [(ngModel)]=\"categories\" placeholder=\"Add your categories here, separated by a comma (no spaces). eg. PHP,javascript,Node,mysql\"></textarea>\r\n  <button (click)=\"addSnippet()\">Submit Snippet</button>\r\n</div>\r\n"
+module.exports = "<div *ngIf=\"databaseService.connected\">\r\n\r\n  <h4>Add Snippet</h4>\r\n  <p>Enter a snippet from your cover letter that you feel is well articulated and communicates your experience well. Then fill out the categories (experiences, languages, skills) that relate to this cover letter.</p>\r\n  <textarea id=\"snippet\" ref-textarea [(ngModel)]=\"snippet\" placeholder=\"Copy/Paste a cover letter snippet here.\"></textarea>\r\n  <textarea ref-textarea [(ngModel)]=\"categories\" placeholder=\"Add your categories here, separated by a comma. eg. PHP, javascript, Node, mysql\"></textarea>\r\n  <button (click)=\"addSnippet()\">Submit Snippet</button>\r\n</div>\r\n"
 
 /***/ }),
 
@@ -77,6 +77,7 @@ var AddSnippetComponent = /** @class */ (function () {
     AddSnippetComponent.prototype.ngOnInit = function () {
     };
     AddSnippetComponent.prototype.addSnippet = function () {
+        this.categories.replace(' ', '');
         var categoriesArray = this.categories.split(',');
         this.databaseService.addSnippet(this.snippet, categoriesArray);
         this.snippet = '';
@@ -417,7 +418,7 @@ var CoverLetterComponent = /** @class */ (function () {
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = ".table-container {\r\n    max-height: 300px;\r\n}\r\n\r\n#database-table thead td:first-child {\r\n    width:60%;\r\n}\r\n\r\n#database-table thead td:nth-child(2) {\r\n    width:25%;\r\n}\r\n\r\n#database-table thead td:nth-child(3) {\r\n    width:15%;\r\n}\r\n"
+module.exports = ".table-container {\r\n    max-height: 300px;\r\n}\r\n\r\n#database-table thead td:first-child {\r\n    width:60%;\r\n}\r\n\r\n#database-table thead td:nth-child(2) {\r\n    width:25%;\r\n}\r\n\r\n#database-table thead td:nth-child(3) {\r\n    width:15%;\r\n}\r\n\r\n.snippet-edit {\r\n  display:none;\r\n}\r\n\r\n.categories-edit {\r\n  display:none;\r\n}\r\n"
 
 /***/ }),
 
@@ -428,7 +429,7 @@ module.exports = ".table-container {\r\n    max-height: 300px;\r\n}\r\n\r\n#data
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<div *ngIf=\"!databaseService.connected\">\r\n  <h4 id=\"json-title\">Use JSON File:</h4>\r\n  <p>\r\n    Click here to store/pull data from a local JSON file.\r\n  </p>\r\n  <button (click)=\"connectJson()\">Connect to JSON File</button>\r\n\r\n  <br>\r\n\r\n  <h4 id=\"db-title\">Connect your Database:</h4>\r\n  <p>\r\n    Paste your MongoDB url here with credentials and we will connect to your database.\r\n    For instructions on how to create a cloud-hosted database, <a href=\"https://github.com/mattcheah/cover-letter-snippets#setting-up-a-database\">visit the README</a>.\r\n  </p>\r\n  <p>The database string here is a test sandbox for anyone to use. Please play nice.</p>\r\n  <input [(ngModel)]=\"databaseString\"/><br>\r\n  <button [ngClass]=\"{inactive: databaseString == ''}\" (click)=\"connect(databaseString)\">Connect to Database</button>\r\n</div>\r\n\r\n<div *ngIf=\"databaseService.showDatabase\">\r\n  <p>Your Snippets Database has {{databaseService.database.length}} entries.</p>\r\n  <div class=\"table-container\">\r\n\r\n    <table id=\"database-table\">\r\n      <thead>\r\n        <tr>\r\n          <td>Snippet</td>\r\n          <td>Categories</td>\r\n          <!-- <td>Edit</td> -->\r\n          <td>Delete</td>\r\n        </tr>\r\n      </thead>\r\n      <tbody>\r\n        <tr *ngFor=\"let snippet of databaseService.database\">\r\n          <td class=\"snippet\">{{snippet.snippet}}</td>\r\n          <td class=\"categories\">{{snippet.categories}}</td>\r\n          <!-- <td><a (click)=\"deleteRecord(snippet.id)\">Edit</a></td> -->\r\n          <td class=\"delete\"><a (click)=\"deleteRecord(snippet._id)\">Delete</a></td>\r\n        </tr>\r\n      </tbody>\r\n    </table>\r\n\r\n  </div>\r\n</div>\r\n"
+module.exports = "<div *ngIf=\"!databaseService.connected\">\r\n  <h4 id=\"json-title\">Use JSON File:</h4>\r\n  <p>\r\n    Click here to store/pull data from a local JSON file.\r\n  </p>\r\n  <button (click)=\"connectJson()\">Connect to JSON File</button>\r\n\r\n  <br>\r\n\r\n  <h4 id=\"db-title\">Connect your Database:</h4>\r\n  <p>\r\n    Paste your MongoDB url here with credentials and we will connect to your database.\r\n    For instructions on how to create a cloud-hosted database, <a href=\"https://github.com/mattcheah/cover-letter-snippets#setting-up-a-database\">visit the README</a>.\r\n  </p>\r\n  <p>The database string here is a test sandbox for anyone to use. Please play nice.</p>\r\n  <input [(ngModel)]=\"databaseString\"/><br>\r\n  <button [ngClass]=\"{inactive: databaseString == ''}\" (click)=\"connect(databaseString)\">Connect to Database</button>\r\n</div>\r\n\r\n<div *ngIf=\"databaseService.showDatabase\">\r\n  <p>Your Snippets Database has {{databaseService.database.length}} entries.</p>\r\n  <p><small>Click to Edit</small></p>\r\n  <div class=\"table-container\">\r\n\r\n    <table id=\"database-table\">\r\n      <thead>\r\n        <tr>\r\n          <td>Snippet</td>\r\n          <td>Categories</td>\r\n          <!-- <td>Edit</td> -->\r\n          <td>Delete</td>\r\n        </tr>\r\n      </thead>\r\n      <tbody>\r\n        <tr [id]=\"'snippet-'+snippet._id\" *ngFor=\"let snippet of databaseService.database\">\r\n          <td (click)=\"toggleEditSnippet(snippet)\" >\r\n            <div class=\"snippet no-edit\" style=\"display:block\">\r\n              {{snippet.snippet}}\r\n            </div>\r\n            <textarea  class=\"snippet-edit editable\" (keydown)=\"snippetEdited = true\" (keyup.enter)=\"saveEdit(editSnippetObject)\" style=\"display:none\">\r\n               {{editSnippetObject ? editSnippetObject.snippet : \"\"}}}\r\n              </textarea>\r\n              <!-- *ngIf=\"editSnippetObject && editSnippetObject._id === snippet._id\" -->\r\n          </td>\r\n          <td (click)=\"toggleEditCategories(snippet)\" >\r\n            <div class=\"categories no-edit\" style=\"display:block\">\r\n              {{snippet.categories}}\r\n            </div>\r\n            <input  class=\"categories-edit editable\" value=\"{{editSnippetObject ? editSnippetObject.categories : ''}}\" (keydown)=\"snippetEdited = true\" (keyup.enter)=\"saveEdit(editSnippetObject)\" style=\"display:none\">\r\n             <!-- *ngIf=\"editSnippetObject && editSnippetObject._id === snippet._id\" -->\r\n          </td>\r\n          <!-- <td><a (click)=\"deleteRecord(snippet.id)\">Edit</a></td> -->\r\n          <td class=\"delete\"><a (click)=\"deleteRecord(snippet._id)\">Delete</a></td>\r\n        </tr>\r\n      </tbody>\r\n    </table>\r\n  </div>\r\n\r\n</div>\r\n"
 
 /***/ }),
 
@@ -460,6 +461,7 @@ var DatabaseComponent = /** @class */ (function () {
         this.databaseService = databaseService;
         this.showConnectForm = true;
         this.databaseString = 'mongodb://user:testtest1@ds119660.mlab.com:19660/snippets-sandbox';
+        this.snippetEdited = false;
     }
     DatabaseComponent.prototype.ngOnInit = function () {
     };
@@ -469,6 +471,68 @@ var DatabaseComponent = /** @class */ (function () {
     DatabaseComponent.prototype.connect = function (connectString) {
         // console.log("connecting to mongoose db: response is:");
         this.databaseService.startConnection(false, connectString);
+    };
+    DatabaseComponent.prototype.toggleEditSnippet = function (snippet) {
+        console.log('===================== START');
+        console.log('clicked on new snippet:');
+        console.log(snippet);
+        if (!this.editSnippetObject || snippet._id !== this.editSnippetObject._id) {
+            console.log('no current editing object or we\'re switching objects');
+            if (this.editSnippetObject) {
+                console.log('We are switching objects and we need to save and flush');
+                this.saveEdit(this.editSnippetObject);
+            }
+            console.log('lets display the editable box');
+            this.editSnippetObject = snippet;
+            var snippetLabel = document.querySelector('#snippet-' + snippet._id + ' .snippet');
+            var snippetEdit = document.querySelector('#snippet-' + snippet._id + ' .snippet-edit');
+            snippetLabel.style.display = 'none';
+            snippetEdit.style.display = 'block';
+        }
+        console.log('================================ END');
+    };
+    DatabaseComponent.prototype.toggleEditCategories = function (snippet) {
+        if (!this.editSnippetObject || snippet._id !== this.editSnippetObject._id) {
+            console.log('no current editing object or we\'re switching objects');
+            if (this.editSnippetObject) {
+                console.log('We are switching objects and we need to save and flush');
+                this.saveEdit(this.editSnippetObject);
+            }
+            console.log('lets display the editable box');
+            this.editSnippetObject = snippet;
+            var categoriesLabel = document.querySelector('#snippet-' + snippet._id + ' .categories');
+            var categoriesEdit = document.querySelector('#snippet-' + snippet._id + ' .categories-edit');
+            categoriesLabel.style.display = 'none';
+            categoriesEdit.style.display = 'block';
+        }
+    };
+    DatabaseComponent.prototype.toggleOffEditing = function () {
+        if (this.editSnippetObject) {
+            this.editSnippetObject = undefined;
+            var noEdits = document.getElementsByClassName('no-edit');
+            var edits = document.getElementsByClassName('editable');
+            for (var i = 0; i < edits.length; i++) {
+                edits[i].style.display = 'none';
+            }
+            for (var j = 0; j < noEdits.length; j++) {
+                noEdits[j].style.display = 'block';
+            }
+        }
+    };
+    DatabaseComponent.prototype.saveEdit = function (snippet) {
+        console.log('Save edit called. snippet:');
+        console.log(snippet);
+        console.log(typeof snippet.categories);
+        if (this.snippetEdited) {
+            console.log('SNIPPET WAS EDITED. WE\'RE SAVING BROS');
+            if (typeof snippet.categories === 'string') {
+                snippet.categories.replace(' ', '');
+                snippet.categories = snippet.categories.split(',');
+            }
+            this.databaseService.editSnippet(snippet._id, snippet.snippet, snippet.categories);
+            this.snippetEdited = false;
+        }
+        this.toggleOffEditing();
     };
     DatabaseComponent.prototype.deleteRecord = function (id) {
         // console.log("delete id: "+id);
@@ -692,7 +756,7 @@ module.exports = "ul {\r\n  list-style-type: none;\r\n}\r\n\r\nli a {\r\n  color
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<ul class=\"flex\">\n  <li><a [routerLink]=\"['']\" [routerLinkActive]=\"['is-active']\" [routerLinkActiveOptions]=\"{ exact: true }\">Connect Database</a></li>\n\n  <li *ngIf=\"databaseService.connected\"><a [routerLink]=\"['add-snippet']\" [routerLinkActive]=\"['is-active']\" [routerLinkActiveOptions]=\"{ exact: true }\" [ngClass]=\"{disabled: !databaseService.connected}\">Add Snippets</a></li>\n  <li *ngIf=\"!databaseService.connected\"><a class=\"disabled\">Add Snippets</a></li>\n\n  <li *ngIf=\"databaseService.connected\"><a [routerLink]=\"['build-cover-letter']\" [routerLinkActive]=\"['is-active']\" [routerLinkActiveOptions]=\"{ exact: true }\">Build Cover Letter</a></li>\n  <li *ngIf=\"!databaseService.connected\"><a class=\"disabled\">Build Cover Letter</a></li>\n\n  <li *ngIf=\"coverLetterService.addedSnippets.length != 0\"><a [routerLink]=\"['export-cover-letter']\" [routerLinkActive]=\"['is-active']\">Export Cover Letter</a></li>\n  <li *ngIf=\"coverLetterService.addedSnippets.length == 0\"><a  class=\"disabled\">Export Cover Letter</a></li>\n</ul>\n"
+module.exports = "<ul class=\"flex\">\n  <li><a [routerLink]=\"['']\" [routerLinkActive]=\"['is-active']\" [routerLinkActiveOptions]=\"{ exact: true }\">Database</a></li>\n\n  <li *ngIf=\"databaseService.connected\"><a [routerLink]=\"['add-snippet']\" [routerLinkActive]=\"['is-active']\" [routerLinkActiveOptions]=\"{ exact: true }\" [ngClass]=\"{disabled: !databaseService.connected}\">Add Snippets</a></li>\n  <li *ngIf=\"!databaseService.connected\"><a class=\"disabled\">Add Snippets</a></li>\n\n  <li *ngIf=\"databaseService.connected\"><a [routerLink]=\"['build-cover-letter']\" [routerLinkActive]=\"['is-active']\" [routerLinkActiveOptions]=\"{ exact: true }\">Build Cover Letter</a></li>\n  <li *ngIf=\"!databaseService.connected\"><a class=\"disabled\">Build Cover Letter</a></li>\n\n  <li *ngIf=\"coverLetterService.addedSnippets.length != 0\"><a [routerLink]=\"['export-cover-letter']\" [routerLinkActive]=\"['is-active']\">Export Cover Letter</a></li>\n  <li *ngIf=\"coverLetterService.addedSnippets.length == 0\"><a  class=\"disabled\">Export Cover Letter</a></li>\n</ul>\n"
 
 /***/ }),
 

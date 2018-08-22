@@ -13,3 +13,11 @@
 #database-table thead td:nth-child(3) {
     width:15%;
 }
+
+.snippet-edit {
+  display:none;
+}
+
+.categories-edit {
+  display:none;
+}

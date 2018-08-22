@@ -93,25 +93,25 @@ const self = module.exports = {
             for(let i = 0; i < db.length; i++) {
                 if (db[i]._id === id) {
                     db[i].snippet = snippet;
-                    db[i].categproes = categories;
+                    db[i].categories = categories;
                     foundSnippet = true;
                 }
             }
             
             if (foundSnippet) {
-                module.exports.writeJson(db);
-                res.json(module.exports.createResponseObject(db, "Edited your snipped with an id of: " + id));
+                self.writeJson(db);
+                res.json(self.createResponseObject(db, "Edited your snipped with an id of: " + id));
             } else {
-                module.exports.catchError("Could not find snippet with an id of: " + id, res, 400);
+                self.catchError("Could not find snippet with an id of: " + id, res, 400);
             }
 
         }).catch((err) => {
-            module.exports.catchError(err, res);
+            self.catchError(err, res);
         });
     },
     deleteSnippet: (req,res) => {
         const id = req.body.id;
-        module.exports.returnJsonData().then(data => {
+        self.returnJsonData().then(data => {
             let db = data;
             let foundSnippet = false;
 
@@ -124,14 +124,14 @@ const self = module.exports = {
             }
 
             if (foundSnippet) {
-                module.exports.writeJson(db);
-                res.json(module.exports.createResponseObject(db, "Successfully deleted snippet with Id of "+id));
+                self.writeJson(db);
+                res.json(self.createResponseObject(db, "Successfully deleted snippet with Id of "+id));
             } else {
-                module.exports.catchError("Could not find snippet with an id of: " + id, res, 400);
+                self.catchError("Could not find snippet with an id of: " + id, res, 400);
             }
 
         }).catch(err => {
-            module.exports.catchError(err,res);
+            self.catchError(err,res);
         });
     },
     returnJsonData: () => {

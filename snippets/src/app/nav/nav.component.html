@@ -1,5 +1,5 @@
 <ul class="flex">
-  <li><a [routerLink]="['']" [routerLinkActive]="['is-active']" [routerLinkActiveOptions]="{ exact: true }">Connect Database</a></li>
+  <li><a [routerLink]="['']" [routerLinkActive]="['is-active']" [routerLinkActiveOptions]="{ exact: true }">Database</a></li>
 
   <li *ngIf="databaseService.connected"><a [routerLink]="['add-snippet']" [routerLinkActive]="['is-active']" [routerLinkActiveOptions]="{ exact: true }" [ngClass]="{disabled: !databaseService.connected}">Add Snippets</a></li>
   <li *ngIf="!databaseService.connected"><a class="disabled">Add Snippets</a></li>

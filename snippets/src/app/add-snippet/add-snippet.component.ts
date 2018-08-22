@@ -19,6 +19,7 @@ export class AddSnippetComponent implements OnInit {
   }
 
   addSnippet() {
+    this.categories.replace(' ', '');
     const categoriesArray = this.categories.split(',');
     this.databaseService.addSnippet(this.snippet, categoriesArray);
     this.snippet = '';
