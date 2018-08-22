@@ -2,37 +2,36 @@ const fs = require('fs');
 const path = require('path');
 
 // CRUD routes for JSON file snippets entries. 
-module.exports = {
+const self = module.exports = {
     jsonFilePath: "",
     getSnippets: (req,res) => {
         console.log("Called GetSnippets!");
-        module.exports.jsonFilePath = path.normalize(req.body.databaseUrl);
+        self.jsonFilePath = path.normalize(req.body.databaseUrl);
 
         // create file if it doesn't exist.
-        console.log(module.exports.jsonFilePath);
-        try {
+        // try {
 
-            fs.open(module.exports.jsonFilePath, "wx", function (err, fd) {
-                if (err) {
-                    console.log("error! exists?");
-                } else {
+        //     fs.open(self.jsonFilePath, "wx", function (err, fd) {
+        //         if (err) {
+        //             // throw(err);
+        //             console.log("File exists already");
+        //         } else {
 
-                    fs.close(fd, function (err) {
-                        if (err) {
-                            console.log("error closing created json file: " + err);
-                        }
-                    });
-                }
+        //             fs.close(fd, function (err) {
+        //                 if (err) {
+        //                     console.log("error closing created json file: " + err);
+        //                 }
+        //             });
+        //         }
                 
-            });
-        } catch(err) {
-            console.log("Error: Thrown error");
-            // console.log(err);
-        }
-        console.log("after fs.open");
-        console.log(module.exports.jsonFilePath);
-        console.log(module.exports.returnJsonData);
-        module.exports.returnJsonData().then(data => {
+        //     });
+        // } catch(err) {
+        //     console.log("Error: Thrown error");
+        //     console.log(err);
+        // }
+
+        self.returnJsonData().then(data => {
+            console.log("promise return from getSnippets");
             let returnObj = {
                 responseMessage: "Connected to JSON file and Returned Results!",
                 connected: true,
@@ -49,26 +48,25 @@ module.exports = {
         });
     },
     addSnippet: (req,res) => {
+        console.log("calling addSnippet");
         const snippet = req.body.snippet;
         const categories = req.body.categories;
        
-        let db;
-        module.exports.returnJsonData().then(data => {
-            db = data;
+        
+        self.returnJsonData().then(data => {
+            console.log("promise return from addSnippet");
+            let db = data;
             const snippetObject = {
-                id: module.exports.createUniqueId(db),
+                _id: self.createUniqueId(db),
                 snippet: snippet,
                 categories: categories
             };
+
             db.push(snippetObject);
-            fs.writeFile(module.exports.jsonFilePath,JSON.stringify(db), (err)=> {
-                if (err) {
-                    console.log("Error writing to JSON file!");
-                    throw err;
-                }
-                console.log("Snippet added!");
-                res.json(db);
-            });
+
+            self.writeJson(db);
+            res.json(self.createResponseObject(db, "Added Snippet to the Database Successfully!"));
+
         }).catch(err => {
             let returnObj = {
                 error: true,
@@ -88,7 +86,7 @@ module.exports = {
             categories: categories
         };
 
-        module.exports.returnJsonData().then(data => {
+        self.returnJsonData().then(data => {
             let db = data;
             let foundSnippet = false; 
             
@@ -136,13 +134,15 @@ module.exports = {
             module.exports.catchError(err,res);
         });
     },
-
     returnJsonData: () => {
-        console.log("Called returnJsonData");
+        console.log("called returnJsonData");
         return new Promise((response, reject) => {
             try {
-                const database = require(module.exports.jsonFilePath);
-                console.log("Got JSON DB");
+               
+                const database = require(path.resolve(__dirname, "../", self.jsonFilePath));
+                
+                console.log("Got JSON DB. Last entry:");
+                console.log(database[database.length-1]._id);
                 response(database);
             } catch (err) {
                 reject(err);
@@ -152,23 +152,22 @@ module.exports = {
     createUniqueId: (db) => {
         let newId = Math.floor(Math.random() * 1000000);
         for(let i = 0; i < db.length; i++) {
-            if(db[i]._id === id) {
-                return module.exports.createUniqueId(db);
+            if(db[i]._id === newId) {
+                return self.createUniqueId(db);
             }
         }
-        return id;
+        return newId;
     },
     writeJson: (db) => {
-        fs.writeFile(module.exports.jsonFilePath, JSON.stringify(db), (err) => {
+        fs.writeFile(path.resolve(__dirname, "../", self.jsonFilePath), JSON.stringify(db), (err) => {
             if (err) {
                 console.log("Error writing to JSON file!");
                 throw err;
             }
-            console.log(success);
-            
         });
     },
     createResponseObject: (db, successMsg) => {
+        console.log(successMsg);
         return {
             error: false,
             responseMessage: successMsg,
