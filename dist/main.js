@@ -418,7 +418,7 @@ var CoverLetterComponent = /** @class */ (function () {
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = ".table-container {\r\n    max-height: 300px;\r\n}\r\n\r\n#database-table thead td:first-child {\r\n    width:60%;\r\n}\r\n\r\n#database-table thead td:nth-child(2) {\r\n    width:25%;\r\n}\r\n\r\n#database-table thead td:nth-child(3) {\r\n    width:15%;\r\n}\r\n\r\n.snippet-edit {\r\n  display:none;\r\n}\r\n\r\n.categories-edit {\r\n  display:none;\r\n}\r\n"
+module.exports = ".table-container {\r\n    max-height: 300px;\r\n}\r\n\r\n#database-table thead td:first-child {\r\n    width:60%;\r\n}\r\n\r\n#database-table thead td:nth-child(2) {\r\n    width:25%;\r\n}\r\n\r\n#database-table thead td:nth-child(3) {\r\n    width:15%;\r\n}\r\n\r\n.snippet-edit, .categories-edit {\r\n  background-color: #00000000;\r\n  color:#c9c9c9;\r\n  border:none;\r\n  font-size: 11px;\r\n  font-family: sans-serif;\r\n}\r\n\r\n.snippet-edit {\r\n  display:none;\r\n  min-height: 75px;\r\n}\r\n\r\n.categories-edit {\r\n  display:none;\r\n}\r\n"
 
 /***/ }),
 
@@ -429,7 +429,7 @@ module.exports = ".table-container {\r\n    max-height: 300px;\r\n}\r\n\r\n#data
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<div *ngIf=\"!databaseService.connected\">\r\n  <h4 id=\"json-title\">Use JSON File:</h4>\r\n  <p>\r\n    Click here to store/pull data from a local JSON file.\r\n  </p>\r\n  <button (click)=\"connectJson()\">Connect to JSON File</button>\r\n\r\n  <br>\r\n\r\n  <h4 id=\"db-title\">Connect your Database:</h4>\r\n  <p>\r\n    Paste your MongoDB url here with credentials and we will connect to your database.\r\n    For instructions on how to create a cloud-hosted database, <a href=\"https://github.com/mattcheah/cover-letter-snippets#setting-up-a-database\">visit the README</a>.\r\n  </p>\r\n  <p>The database string here is a test sandbox for anyone to use. Please play nice.</p>\r\n  <input [(ngModel)]=\"databaseString\"/><br>\r\n  <button [ngClass]=\"{inactive: databaseString == ''}\" (click)=\"connect(databaseString)\">Connect to Database</button>\r\n</div>\r\n\r\n<div *ngIf=\"databaseService.showDatabase\">\r\n  <p>Your Snippets Database has {{databaseService.database.length}} entries.</p>\r\n  <p><small>Click to Edit</small></p>\r\n  <div class=\"table-container\">\r\n\r\n    <table id=\"database-table\">\r\n      <thead>\r\n        <tr>\r\n          <td>Snippet</td>\r\n          <td>Categories</td>\r\n          <!-- <td>Edit</td> -->\r\n          <td>Delete</td>\r\n        </tr>\r\n      </thead>\r\n      <tbody>\r\n        <tr [id]=\"'snippet-'+snippet._id\" *ngFor=\"let snippet of databaseService.database\">\r\n          <td (click)=\"toggleEditSnippet(snippet)\" >\r\n            <div class=\"snippet no-edit\" style=\"display:block\">\r\n              {{snippet.snippet}}\r\n            </div>\r\n            <textarea  [(ngModel)]=\"editSnippetObject ? editSnippetObject.snippet : snippet.snippet\" class=\"snippet-edit editable\" (keydown)=\"snippetEdited = true\" (keyup.enter)=\"saveEdit(editSnippetObject)\" style=\"display:none\">\r\n            </textarea>\r\n          </td>\r\n          <td (click)=\"toggleEditCategories(snippet)\" >\r\n            <div class=\"categories no-edit\" style=\"display:block\">\r\n              {{snippet.categories}}\r\n            </div>\r\n            <input [(ngModel)]=\"editSnippetObject ? editSnippetObject.categories : snippet.categories\" class=\"categories-edit editable\" value=\"{{editSnippetObject ? editSnippetObject.categories : ''}}\" (keydown)=\"snippetEdited = true\" (keyup.enter)=\"saveEdit(editSnippetObject)\" style=\"display:none\">\r\n          </td>\r\n          <!-- <td><a (click)=\"deleteRecord(snippet.id)\">Edit</a></td> -->\r\n          <td class=\"delete\"><a (click)=\"deleteRecord(snippet._id)\">Delete</a></td>\r\n        </tr>\r\n      </tbody>\r\n    </table>\r\n  </div>\r\n\r\n</div>\r\n"
+module.exports = "<div *ngIf=\"!databaseService.connected\">\r\n  <h4 id=\"json-title\">Use JSON File:</h4>\r\n  <p>\r\n    Click here to store/pull data from a local JSON file.\r\n  </p>\r\n  <button (click)=\"connectJson()\">Connect to JSON File</button>\r\n\r\n  <br>\r\n\r\n  <h4 id=\"db-title\">Connect your Database:</h4>\r\n  <p>\r\n    Paste your MongoDB url here with credentials and we will connect to your database.\r\n    For instructions on how to create a cloud-hosted database, <a href=\"https://github.com/mattcheah/cover-letter-snippets#setting-up-a-database\">visit the README</a>.\r\n  </p>\r\n  <p>The database string here is a test sandbox for anyone to use. Please play nice.</p>\r\n  <input [(ngModel)]=\"databaseString\"/><br>\r\n  <button [ngClass]=\"{inactive: databaseString == ''}\" (click)=\"connect(databaseString)\">Connect to Database</button>\r\n</div>\r\n\r\n<div *ngIf=\"databaseService.showDatabase\">\r\n  <p>\r\n    Your Snippets Database has {{databaseService.database.length}} entries.<br>\r\n    <small>Click a snippet or category to edit and press 'enter' to save</small>\r\n  </p>\r\n  <div class=\"table-container\">\r\n\r\n    <table id=\"database-table\">\r\n      <thead>\r\n        <tr>\r\n          <td>Snippet</td>\r\n          <td>Categories</td>\r\n          <td>Delete</td>\r\n        </tr>\r\n      </thead>\r\n      <tbody>\r\n        <tr [id]=\"'snippet-'+snippet._id\" *ngFor=\"let snippet of databaseService.database\">\r\n          <td (click)=\"toggleEditSnippet(snippet)\" >\r\n            <div class=\"snippet no-edit\" style=\"display:block\">\r\n              {{snippet.snippet}}\r\n            </div>\r\n            <textarea  \r\n            [(ngModel)]=\"editSnippetObject ? editSnippetObject.snippet : snippet.snippet\" \r\n            (keydown)=\"snippetEdited = true\" \r\n            (keyup.enter)=\"saveEdit(editSnippetObject)\" \r\n            (blur)=\"saveEdit(editSnippetObject)\"\r\n            class=\"snippet-edit editable\" >\r\n            </textarea>\r\n          </td>\r\n          <td (click)=\"toggleEditCategories(snippet)\" >\r\n            <div class=\"categories no-edit\" style=\"display:block\">\r\n              {{snippet.categories}}\r\n            </div>\r\n            <input \r\n            [(ngModel)]=\"editSnippetObject ? editSnippetObject.categories : snippet.categories\" \r\n            (keydown)=\"snippetEdited = true\" \r\n            (keyup.enter)=\"saveEdit(editSnippetObject)\" \r\n            (blur)=\"saveEdit(editSnippetObject)\"\r\n            class=\"categories-edit editable\" >\r\n          </td>\r\n          <td class=\"delete\"><a (click)=\"deleteRecord(snippet._id)\">Delete</a></td>\r\n        </tr>\r\n      </tbody>\r\n    </table>\r\n  </div>\r\n\r\n</div>\r\n"
 
 /***/ }),
 
@@ -474,34 +474,24 @@ var DatabaseComponent = /** @class */ (function () {
         this.databaseService.startConnection(false, connectString);
     };
     DatabaseComponent.prototype.toggleEditSnippet = function (snippet) {
-        console.log('===================== START');
-        console.log('clicked on new snippet:');
-        console.log(snippet);
         if (!this.editSnippetObject || snippet._id !== this.editSnippetObject._id || this.editingCategory) {
-            console.log('no current editing object or we\'re switching objects');
             this.editingCategory = false;
             if (this.editSnippetObject) {
-                console.log('We are switching objects and we need to save and flush');
                 this.saveEdit(this.editSnippetObject);
             }
-            console.log('lets display the editable box');
             this.editSnippetObject = snippet;
             var snippetLabel = document.querySelector('#snippet-' + snippet._id + ' .snippet');
             var snippetEdit = document.querySelector('#snippet-' + snippet._id + ' .snippet-edit');
             snippetLabel.style.display = 'none';
             snippetEdit.style.display = 'block';
         }
-        console.log('================================ END');
     };
     DatabaseComponent.prototype.toggleEditCategories = function (snippet) {
         if (!this.editSnippetObject || snippet._id !== this.editSnippetObject._id || !this.editingCategory) {
-            console.log('no current editing object or we\'re switching objects');
             this.editingCategory = true;
             if (this.editSnippetObject) {
-                console.log('We are switching objects and we need to save and flush');
                 this.saveEdit(this.editSnippetObject);
             }
-            console.log('lets display the editable box');
             this.editSnippetObject = snippet;
             var categoriesLabel = document.querySelector('#snippet-' + snippet._id + ' .categories');
             var categoriesEdit = document.querySelector('#snippet-' + snippet._id + ' .categories-edit');
@@ -523,12 +513,12 @@ var DatabaseComponent = /** @class */ (function () {
         }
     };
     DatabaseComponent.prototype.saveEdit = function (snippet) {
+        // setting variables for edited content so that
         var newSnip = document.querySelector('#snippet-' + snippet._id + ' .snippet-edit');
         var newCat = document.querySelector('#snippet-' + snippet._id + ' .categories-edit');
         snippet.snippet = newSnip.value;
         snippet.categories = newCat.value;
         if (this.snippetEdited) {
-            console.log('SNIPPET WAS EDITED. WE\'RE SAVING BROS');
             if (typeof snippet.categories === 'string') {
                 snippet.categories.replace(' ', '');
                 snippet.categories = snippet.categories.split(',');
@@ -1044,7 +1034,7 @@ var DatabaseService = /** @class */ (function () {
         };
         var url = self.isJson ? 'api/add-json-snippet' : 'api/add-snippet';
         this.http.post(url, JSON.stringify(data), options)
-            .pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_3__["retry"])(2), Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_3__["catchError"])(this.handleError)).subscribe(function (returnData) {
+            .pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_3__["catchError"])(this.handleError)).subscribe(function (returnData) {
             if (returnData.connected) {
                 self.statusMessageService.newStatusMessage(returnData.responseMessage, 'success');
                 self.database = returnData.data;
@@ -1065,7 +1055,7 @@ var DatabaseService = /** @class */ (function () {
             })
         };
         this.http.put(url, JSON.stringify(data), options)
-            .pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_3__["retry"])(2), Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_3__["catchError"])(this.handleError)).subscribe(function (returnData) {
+            .pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_3__["catchError"])(this.handleError)).subscribe(function (returnData) {
             if (returnData.connected && !returnData.error) {
                 self.statusMessageService.newStatusMessage(returnData.responseMessage, 'success');
                 self.database = returnData.data;
@@ -1084,7 +1074,7 @@ var DatabaseService = /** @class */ (function () {
             body: JSON.stringify(data)
         };
         this.http.delete(url, options)
-            .pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_3__["retry"])(2), Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_3__["catchError"])(this.handleError)).subscribe(function (returnData) {
+            .pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_3__["catchError"])(this.handleError)).subscribe(function (returnData) {
             if (returnData.connected && !returnData.error) {
                 self.statusMessageService.newStatusMessage(returnData.responseMessage, 'success');
                 self.database = returnData.data;

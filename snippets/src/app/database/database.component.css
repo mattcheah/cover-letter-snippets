@@ -14,8 +14,17 @@
     width:15%;
 }
 
+.snippet-edit, .categories-edit {
+  background-color: #00000000;
+  color:#c9c9c9;
+  border:none;
+  font-size: 11px;
+  font-family: sans-serif;
+}
+
 .snippet-edit {
   display:none;
+  min-height: 75px;
 }
 
 .categories-edit {

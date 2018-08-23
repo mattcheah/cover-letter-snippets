@@ -64,7 +64,7 @@ export class DatabaseService {
     const url = self.isJson ? 'api/add-json-snippet' : 'api/add-snippet';
 
     this.http.post<DatabaseResponse>(url, JSON.stringify(data), options)
-      .pipe(retry(2), catchError(this.handleError)
+      .pipe(catchError(this.handleError)
     ).subscribe(returnData => {
       if (returnData.connected) {
         self.statusMessageService.newStatusMessage(returnData.responseMessage, 'success');
@@ -87,7 +87,7 @@ export class DatabaseService {
     };
 
     this.http.put<DatabaseResponse>(url, JSON.stringify(data), options)
-    .pipe(retry(2), catchError(this.handleError)
+    .pipe(catchError(this.handleError)
     ).subscribe(returnData => {
       if (returnData.connected && !returnData.error) {
         self.statusMessageService.newStatusMessage(returnData.responseMessage, 'success');
@@ -109,7 +109,7 @@ export class DatabaseService {
     };
 
     this.http.delete<DatabaseResponse>(url, options)
-      .pipe(retry(2), catchError(this.handleError)
+      .pipe(catchError(this.handleError)
       ).subscribe(returnData => {
         if (returnData.connected && !returnData.error) {
           self.statusMessageService.newStatusMessage(returnData.responseMessage, 'success');

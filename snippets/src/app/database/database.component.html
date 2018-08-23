@@ -18,8 +18,10 @@
 </div>
 
 <div *ngIf="databaseService.showDatabase">
-  <p>Your Snippets Database has {{databaseService.database.length}} entries.</p>
-  <p><small>Click to Edit</small></p>
+  <p>
+    Your Snippets Database has {{databaseService.database.length}} entries.<br>
+    <small>Click a snippet or category to edit and press 'enter' to save</small>
+  </p>
   <div class="table-container">
 
     <table id="database-table">
@@ -27,7 +29,6 @@
         <tr>
           <td>Snippet</td>
           <td>Categories</td>
-          <!-- <td>Edit</td> -->
           <td>Delete</td>
         </tr>
       </thead>
@@ -37,16 +38,25 @@
             <div class="snippet no-edit" style="display:block">
               {{snippet.snippet}}
             </div>
-            <textarea  [(ngModel)]="editSnippetObject ? editSnippetObject.snippet : snippet.snippet" class="snippet-edit editable" (keydown)="snippetEdited = true" (keyup.enter)="saveEdit(editSnippetObject)" style="display:none">
+            <textarea  
+            [(ngModel)]="editSnippetObject ? editSnippetObject.snippet : snippet.snippet" 
+            (keydown)="snippetEdited = true" 
+            (keyup.enter)="saveEdit(editSnippetObject)" 
+            (blur)="saveEdit(editSnippetObject)"
+            class="snippet-edit editable" >
             </textarea>
           </td>
           <td (click)="toggleEditCategories(snippet)" >
             <div class="categories no-edit" style="display:block">
               {{snippet.categories}}
             </div>
-            <input [(ngModel)]="editSnippetObject ? editSnippetObject.categories : snippet.categories" class="categories-edit editable" value="{{editSnippetObject ? editSnippetObject.categories : ''}}" (keydown)="snippetEdited = true" (keyup.enter)="saveEdit(editSnippetObject)" style="display:none">
+            <input 
+            [(ngModel)]="editSnippetObject ? editSnippetObject.categories : snippet.categories" 
+            (keydown)="snippetEdited = true" 
+            (keyup.enter)="saveEdit(editSnippetObject)" 
+            (blur)="saveEdit(editSnippetObject)"
+            class="categories-edit editable" >
           </td>
-          <!-- <td><a (click)="deleteRecord(snippet.id)">Edit</a></td> -->
           <td class="delete"><a (click)="deleteRecord(snippet._id)">Delete</a></td>
         </tr>
       </tbody>
