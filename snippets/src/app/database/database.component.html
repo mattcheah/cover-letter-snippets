@@ -1,5 +1,13 @@
 <div *ngIf="!databaseService.connected">
-  <h4>Connect your Database:</h4>
+  <h4 id="json-title">Use JSON File:</h4>
+  <p>
+    Click here to store/pull data from a local JSON file.
+  </p>
+  <button (click)="connectJson()">Connect to JSON File</button>
+
+  <br>
+
+  <h4 id="db-title">Connect your Database:</h4>
   <p>
     Paste your MongoDB url here with credentials and we will connect to your database.
     For instructions on how to create a cloud-hosted database, <a href="https://github.com/mattcheah/cover-letter-snippets#setting-up-a-database">visit the README</a>.
@@ -10,7 +18,10 @@
 </div>
 
 <div *ngIf="databaseService.showDatabase">
-  <p>Your Snippets Database has {{databaseService.database.length}} entries.</p>
+  <p>
+    Your Snippets Database has {{databaseService.database.length}} entries.<br>
+    <small>Click a snippet or category to edit and press 'enter' to save</small>
+  </p>
   <div class="table-container">
 
     <table id="database-table">
@@ -18,19 +29,38 @@
         <tr>
           <td>Snippet</td>
           <td>Categories</td>
-          <!-- <td>Edit</td> -->
           <td>Delete</td>
         </tr>
       </thead>
       <tbody>
-        <tr *ngFor="let snippet of databaseService.database">
-          <td class="snippet">{{snippet.snippet}}</td>
-          <td class="categories">{{snippet.categories}}</td>
-          <!-- <td><a (click)="deleteRecord(snippet.id)">Edit</a></td> -->
+        <tr [id]="'snippet-'+snippet._id" *ngFor="let snippet of databaseService.database">
+          <td (click)="toggleEditSnippet(snippet)" >
+            <div class="snippet no-edit" style="display:block">
+              {{snippet.snippet}}
+            </div>
+            <textarea  
+            [(ngModel)]="editSnippetObject ? editSnippetObject.snippet : snippet.snippet" 
+            (keydown)="snippetEdited = true" 
+            (keyup.enter)="saveEdit(editSnippetObject)" 
+            (blur)="saveEdit(editSnippetObject)"
+            class="snippet-edit editable" >
+            </textarea>
+          </td>
+          <td (click)="toggleEditCategories(snippet)" >
+            <div class="categories no-edit" style="display:block">
+              {{snippet.categories}}
+            </div>
+            <input 
+            [(ngModel)]="editSnippetObject ? editSnippetObject.categories : snippet.categories" 
+            (keydown)="snippetEdited = true" 
+            (keyup.enter)="saveEdit(editSnippetObject)" 
+            (blur)="saveEdit(editSnippetObject)"
+            class="categories-edit editable" >
+          </td>
           <td class="delete"><a (click)="deleteRecord(snippet._id)">Delete</a></td>
         </tr>
       </tbody>
     </table>
-
   </div>
+
 </div>

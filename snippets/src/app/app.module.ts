@@ -1,6 +1,7 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
+import { HttpClientModule } from '@angular/common/http';
 
 import { AppComponent } from './app.component';
 import { RouterModule, Routes } from '@angular/router';
@@ -21,7 +22,9 @@ import { ParseDescriptionService } from './services/parse-description.service';
 import { StatusMessageService } from './services/status-message.service';
 import { CoverLetterService } from './services/cover-letter.service';
 
-const appRoutes:Routes = [
+import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
+
+const appRoutes: Routes = [
   { path: '', component: DatabaseComponent },
   { path: 'add-snippet', component: AddSnippetComponent },
   { path: 'build-cover-letter', component: BuildCoverLetterComponent },
@@ -47,14 +50,18 @@ const appRoutes:Routes = [
       appRoutes,
     ),
     BrowserModule,
-    FormsModule
+    FormsModule,
+    HttpClientModule
   ],
   providers: [
     DatabaseService,
     ParseDescriptionService,
     StatusMessageService,
-    CoverLetterService
+    CoverLetterService,
   ],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
+  schemas: [
+    CUSTOM_ELEMENTS_SCHEMA
+  ]
 })
 export class AppModule { }

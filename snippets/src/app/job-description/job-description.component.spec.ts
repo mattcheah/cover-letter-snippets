@@ -1,6 +1,15 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { RouterTestingModule } from '@angular/router/testing';
+import { HttpClient, HttpClientModule, HttpErrorResponse, HttpHeaders } from '@angular/common/http';
+
 import { JobDescriptionComponent } from './job-description.component';
+
+import { ParseDescriptionService } from '../services/parse-description.service';
+import { DatabaseService } from '../services/database.service';
+import { StatusMessageService } from '../services/status-message.service';
+import { CoverLetterService } from '../services/cover-letter.service';
+
 
 describe('JobDescriptionComponent', () => {
   let component: JobDescriptionComponent;
@@ -9,9 +18,18 @@ describe('JobDescriptionComponent', () => {
   beforeEach(async(() => {
     TestBed.configureTestingModule({
       imports: [
-        FormsModule
+        FormsModule,
+        ReactiveFormsModule,
+        RouterTestingModule.withRoutes([]),
+        HttpClientModule
       ],
-      declarations: [ JobDescriptionComponent ]
+      declarations: [ JobDescriptionComponent ],
+      providers: [
+        ParseDescriptionService,
+        StatusMessageService,
+        CoverLetterService,
+        DatabaseService
+      ]
     })
     .compileComponents();
   }));
@@ -25,4 +43,11 @@ describe('JobDescriptionComponent', () => {
   it('should create', () => {
     expect(component).toBeTruthy();
   });
+
+  it('should render "Job Description" in an h4', async(() => {
+    fixture = TestBed.createComponent(JobDescriptionComponent);
+    fixture.detectChanges();
+    const compiled = fixture.debugElement.nativeElement;
+    expect(compiled.querySelector('h4').textContent).toContain('Job Description');
+  }));
 });
