@@ -48,6 +48,8 @@ export class DatabaseService {
         if (self.database.length > 0) {
           self.extractCategories();
         }
+      } else if (response.error) {
+        self.statusMessageService.newStatusMessage(response.responseMessage, 'errir');
       }
     });
   }
@@ -93,6 +95,8 @@ export class DatabaseService {
         self.statusMessageService.newStatusMessage(returnData.responseMessage, 'success');
         self.database = returnData.data;
         self.extractCategories();
+      } else if (returnData.error) {
+        self.statusMessageService.newStatusMessage(returnData.responseMessage, 'errir');
       }
     });
   }
@@ -115,6 +119,8 @@ export class DatabaseService {
           self.statusMessageService.newStatusMessage(returnData.responseMessage, 'success');
           self.database = returnData.data;
           self.extractCategories();
+        } else if (returnData.error) {
+          self.statusMessageService.newStatusMessage(returnData.responseMessage, 'errir');
         }
       });
   }

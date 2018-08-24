@@ -63,4 +63,4 @@ typings/
 # vscode workspace
 *.code-workspace
 
-./snippets-db.json
+*snippets-db.json
