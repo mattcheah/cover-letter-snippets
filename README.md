@@ -1,5 +1,5 @@
 # cover-letter-snippets
-Angular/MongoDB/Node.js Express local application for quickly composing a cover letter that discusses each keyword and technology on a job listing.
+Angular/MongoDB/Node.js Express local application for quickly composing a cover letter that contains important keywords and technology on the job listing(s) that you provide. You can use this tool to figure out what keywords appear most frequently in a job description, and quickly add paragraphs from your previous cover letters that discuss those important keywords.
 
 ![Put together your Cover Letter Gif](/readme-images/snippets-part-2.gif)
 
@@ -16,7 +16,12 @@ Install Cover-Letter-Snippets with `npm i cover-letter-snippets`
 Enter the command `snippets` to run the program. 
 This will start a localhost server that will serve the application on `localhost:3141`. A browser will open automatically.
 
-First, paste the URI (including UN and Password) from your Mlab database and click "Connect to Database". ([Setting up a database](https://github.com/mattcheah/cover-letter-snippets#setting-up-a-database))
+The easiest way to save your cover letter snippets is to store them in a JSON file. Click "Connect to JSON File" to create a file that you can read from/write to. 
+
+If you'd like to use Cover Letter Snippets across computers, store your data in an Mlab Database.
+Follow the instructions here: ([Setting up a database](https://github.com/mattcheah/cover-letter-snippets#setting-up-a-database)) 
+
+First, paste the URI (including UN and Password) from your Mlab database and click "Connect to Database". 
 
 If you want to play around with the app, there is an existing database URI string in the form field. Please be a good person or I will have to take it out. 
 
@@ -47,6 +52,12 @@ It's also important for you to add an 'intro' and 'outro' category, so that you 
 
 ![Connect to Database Gif](/readme-images/snippets-part-1.gif)
 
+## Editing Snippets and Categories
+
+On the "Database" page, you'll see a table with a list of all of the cover letter snippets in your database. 
+
+From here you can click on each individual snippet or list of categories to edit them. Click off the table to save.  
+
 ## Build Cover Letter
 
 First, copy/paste a job description into the textarea field and click "Parse Job Description". The application will check if any of the words in the job description match any of your snippet categories.
@@ -76,7 +87,6 @@ If you'd like to help, there's a ton of work that can be done to improve the pro
  - [Add button to show more snippets even if they haven't been mentioned in job desc.](https://github.com/mattcheah/cover-letter-snippets/issues/2)
  - [Create a fixed div as a sidebar that shows the parsed job description when you're adding snippets.](https://github.com/mattcheah/cover-letter-snippets/issues/4)
  - [Create an array of aliases for category names](https://github.com/mattcheah/cover-letter-snippets/issues/5) (ie. a job description listing 'RoR' or 'Ruby/Rails' would match your category of 'rails'. Each category and aliases would have to be set up by the user individually.)
- - [Create an option to use a JSON file locally instead of mlab db.](https://github.com/mattcheah/cover-letter-snippets/issues/3)
  - [Sort addable snippets by which ones have the most relevant categories in the job description.](https://github.com/mattcheah/cover-letter-snippets/issues/6)
 
 # Other
