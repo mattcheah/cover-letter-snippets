@@ -47,6 +47,37 @@ module.exports = {
         });
     },
     editSnippet: (req, res) => {
+        let Snippet = module.exports.setUpSchema();
+
+        const id = req.body.id;
+        const snippet = req.body.snippet;
+        const categories = req.body.categories;
+        
+        Snippet.findById(id, function (err, response) {
+            if(err) {
+                res.status(400).json({
+                    error: true,
+                    connected: true,
+                    data: [],
+                    responseMessage: err
+                });
+            }
+            response.snippet = snippet;
+            response.categories = categories;
+            response.save((err) => {
+                if (err) {
+                    res.status(500).json({
+                        error: true,
+                        connected: true,
+                        data: [],
+                        responseMessage: err
+                    });
+                }
+                module.exports.getAllSnippets(Snippet, "Edited Snippet: " + snippet.substring(0, 30) + "...").then(data => {
+                    res.json(data);
+                });
+            });
+        });
 
     },
     deleteSnippet: (req, res) => {
