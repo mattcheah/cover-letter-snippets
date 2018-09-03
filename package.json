@@ -17,6 +17,7 @@
   "files": [
     "dist",
     "controlers",
+    "index.js",
     "cl-snippets.sh",
     "routes.js"
   ],
