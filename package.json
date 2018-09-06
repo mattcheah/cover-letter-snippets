@@ -1,6 +1,6 @@
 {
   "name": "cover-letter-snippets",
-  "version": "1.1.0",
+  "version": "1.1.2",
   "description": "An Angular/Node/MongoDB app that helps compose cover letters based on keywords in a job description.",
   "browser": "index.js",
   "scripts": {
@@ -16,7 +16,9 @@
   },
   "files": [
     "dist",
-    "cl-snippets.sh"
+    "controllers",
+    "index.js",
+    "routes.js"
   ],
   "keywords": [
     "cover letter",
@@ -33,7 +35,6 @@
   },
   "homepage": "https://github.com/mattcheah/cover-letter-snippets#readme",
   "dependencies": {
-    "@angular/cli": "^6.1.3",
     "express": "^4.16.3",
     "fs": "0.0.1-security",
     "mongoose": "^5.2.4",

@@ -1,5 +1,8 @@
 # Ignore the Angular Development App
 /snippets/
 
+# Ignore Created DB.
+./snippets-db.json
+
 # vscode workspace
 *.code-workspace
