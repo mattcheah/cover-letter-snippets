@@ -12,3 +12,8 @@ button {
 #intro-outro {
   margin:20px 0
 }
+#show-more-header {
+  border: none;
+  text-align: center;
+  background-color: rgba(34, 34, 34, 1);
+}
