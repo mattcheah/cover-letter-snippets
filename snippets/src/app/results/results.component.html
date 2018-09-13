@@ -29,11 +29,26 @@
           </td>
         </tr>
       </tbody>
+
+      <thead *ngIf="showAllValues">
+        <tr>
+          <th id="show-more-header" colspan="3">Showing More Categories...</th>
+        </tr>
+      </thead>
+      <tbody *ngIf="showAllValues">
+        <tr *ngFor="let keyword of parseDescriptionService.keywordArray | hasKeywords:'showAllValues'">
+          <td colspan="2">{{ keyword.keyword }}</td>
+          <td colspan="2">
+            <a (click)="displaySnippets(keyword.keyword)">Show Snippets</a>
+          </td>
+        </tr>
+      </tbody>
     </table>
   </div>
 
   <div id="intro-outro" class="flex">
     <button (click)="displaySnippets('intro')">Show Intros</button>
+    <button (click)="showAllValues = !showAllValues">{{showAllValues ? 'Show Less' : 'Show More'}}</button>
     <button (click)="displaySnippets('outro')">Show Outros</button>
   </div>
 

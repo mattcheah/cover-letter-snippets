@@ -14,6 +14,7 @@ export class ResultsComponent implements OnInit {
   filteredSnippets: Array<any>;
   displayedCategory = '';
   showFilteredSnippetsTable = false;
+  showAllValues = false;
 
   constructor(
     public parseDescriptionService: ParseDescriptionService,
