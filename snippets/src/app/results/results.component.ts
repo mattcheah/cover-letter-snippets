@@ -10,7 +10,6 @@ import { CoverLetterService } from '../services/cover-letter.service';
   styleUrls: ['./results.component.css']
 })
 export class ResultsComponent implements OnInit {
-
   filteredSnippets: Array<any>;
   displayedCategory = '';
   showFilteredSnippetsTable = false;
@@ -21,20 +20,34 @@ export class ResultsComponent implements OnInit {
     public coverLetterService: CoverLetterService,
     private databaseService: DatabaseService,
     private statusMessageService: StatusMessageService
-  ) { }
+  ) {}
 
-  ngOnInit() {
-  }
+  ngOnInit() {}
 
   displaySnippets(keyword): void {
     this.filteredSnippets = [];
     const snippets = this.databaseService.database;
-    for (let i = 0; i < snippets.length; i++) {
-      if (snippets[i].categories.includes(keyword)) { this.filteredSnippets.push(snippets[i]); }
-    }
+    this.filteredSnippets = snippets
+      .filter(x => x.categories.includes(keyword))
+      .sort((a, b) => {
+        // nullcheck
+        if (
+          !this.parseDescriptionService.keywordArray ||
+          !a.categories ||
+          !b.categories
+        ) {
+          return 0;
+        }
+
+        // descending order
+        return this.getMatchingCategoriesCount(b) - this.getMatchingCategoriesCount(a);
+      });
     this.displayedCategory = keyword;
     this.showFilteredSnippetsTable = true;
-    this.statusMessageService.newStatusMessage('Displaying Snippets from category: ' + keyword, 'primary');
+    this.statusMessageService.newStatusMessage(
+      'Displaying Snippets from category: ' + keyword,
+      'primary'
+    );
   }
 
   enterNewDescription() {
@@ -43,7 +56,18 @@ export class ResultsComponent implements OnInit {
     this.parseDescriptionService.showParsingResults = false;
     this.parseDescriptionService.jobDescription = '';
     this.parseDescriptionService.keywordArray = [];
-    this.statusMessageService.newStatusMessage('Resetting Job Description', 'warning');
+    this.statusMessageService.newStatusMessage(
+      'Resetting Job Description',
+      'warning'
+    );
   }
 
+  private getMatchingCategoriesCount(snippet: any): number {
+    return snippet.categories.filter(
+      x =>
+        !!this.parseDescriptionService.keywordArray.filter(y => y['jobKeywords'] > 0).find(
+          y => y['keyword'] === x
+        )
+    ).length;
+  }
 }
