@@ -1,16 +1,16 @@
-#filtered-snippets-table thead td:first-child {
-    width:75%;
+#filtered-snippets-table thead td {
+  width: fit-content;
+  white-space: nowrap;
 }
-
-#filtered-snippets-table thead td:nth-child(2) {
-    max-width:25%;
+#filtered-snippets-table thead td:first-child {
+  width: 75%;
 }
 button {
   margin: 0 auto;
   display: block;
 }
 #intro-outro {
-  margin:20px 0
+  margin: 20px 0;
 }
 #show-more-header {
   border: none;

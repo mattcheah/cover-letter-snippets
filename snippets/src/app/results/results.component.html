@@ -61,14 +61,14 @@
         <thead>
           <tr>
             <td>Snippet</td>
-            <!-- <td>Categories</td> -->
+            <td># Matches</td>
             <td>Add to Letter</td>
           </tr>
         </thead>
         <tbody>
           <tr *ngFor="let snippet of filteredSnippets">
             <td class="snippet">{{snippet.snippet}}</td>
-            <!-- <td class="categories">{{snippet.categories}}</td> -->
+            <td>{{snippet.matchesCount}}</td>
             <td class="add" (click)="coverLetterService.addSnippet(snippet)">
               <a>Add</a>
             </td>
