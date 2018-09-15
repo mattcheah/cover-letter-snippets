@@ -29,6 +29,10 @@ export class ResultsComponent implements OnInit {
     const snippets = this.databaseService.database;
     this.filteredSnippets = snippets
       .filter(x => x.categories.includes(keyword))
+      .map(x => {
+        x.matchesCount = this.getMatchingCategoriesCount(x);
+        return x;
+      })
       .sort((a, b) => {
         // nullcheck
         if (
@@ -38,9 +42,8 @@ export class ResultsComponent implements OnInit {
         ) {
           return 0;
         }
-
         // descending order
-        return this.getMatchingCategoriesCount(b) - this.getMatchingCategoriesCount(a);
+        return b.matchesCount - a.matchesCount;
       });
     this.displayedCategory = keyword;
     this.showFilteredSnippetsTable = true;
