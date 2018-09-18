@@ -1,6 +1,6 @@
 {
   "name": "cover-letter-snippets",
-  "version": "1.1.2",
+  "version": "1.3.0",
   "description": "An Angular/Node/MongoDB app that helps compose cover letters based on keywords in a job description.",
   "browser": "index.js",
   "scripts": {
@@ -29,6 +29,10 @@
     "database"
   ],
   "author": "matt cheah <matt.cheah@gmail.com> (http://mattcheah.com)",
+  "contributors": [
+    "Treven Trujillo <treventrujillo@gmail.com (https://github.com/treventrujillo)", 
+    "Slay4Joy (https://github.com/slay4joy)"
+  ],
   "license": "ISC",
   "bugs": {
     "url": "https://github.com/mattcheah/cover-letter-snippets/issues"
