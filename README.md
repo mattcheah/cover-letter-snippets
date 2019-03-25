@@ -1,83 +1,95 @@
-# cover-letter-snippets
-Angular/MongoDB/Node.js Express local application for quickly composing a cover letter that contains important keywords and technology on the job listing(s) that you provide. You can use this tool to figure out what keywords appear most frequently in a job description, and quickly add paragraphs from your previous cover letters that discuss those important keywords.
+# Cover Letter Snippets
+Cover Letter Snippets is an Angular/MongoDB/Node.js Express application that helps you figure out the keywords on a job listing and then compose a cover letter customized for the job by reusing the relevant content from your previous cover letters.
 
-![Put together your Cover Letter Gif](/readme-images/snippets-part-2.gif)
+<img src="/readme-images/snippets-part-2.gif" alt="Snippets"
+	title="Snippets" />
 
+## Installing and Running Cover Letter Snippets
 
-## Using Snippets
+Note: The following instructions have been tested for MacOS only.
 
-#### To Install Snippets:
+To install and run Cover Letter Snippets:
+1. Run `npm i cover-letter-snippets`
 
-Install Cover-Letter-Snippets with `npm i cover-letter-snippets`
-(Note: Some users may have to install globally `npm i -g cover-letter-snippets`)
+   Note: In some cases, you might have to install the package globally: `npm i -g cover-letter-snippets`
 
-#### To Run Snippets:
+2. Run `snippets`
 
-Enter the command `snippets` to run the program. 
-This will start a localhost server that will serve the application on `localhost:3141`. A browser will open automatically.
+The application opens on the browser at `localhost:3141`.
 
-The easiest way to save your cover letter snippets is to store them in a JSON file. Click "Connect to JSON File" to create a file that you can read from/write to. 
+## Configuring Cover Letter Snippets
 
-If you'd like to use Cover Letter Snippets across computers, store your data in an Mlab Database.
-Follow the instructions here: ([Setting up a database](https://github.com/mattcheah/cover-letter-snippets#setting-up-a-database)) 
+The easiest and recommended way to configure the application is to save the cover letter snippets as a JSON file on your local machine. To do so, click **Connect to JSON file** on the Database page. 
 
-First, paste the URI (including UN and Password) from your Mlab database and click "Connect to Database". 
+However, if you want to use the application across computers, you can store the cover letter snippets in a MongoDB database on MLab.com. This is an advanced use-case. For instructions to save the snippets in a MongoDB database, see [Save snippets in a MongoDB database](https://github.com/mattcheah/cover-letter-snippets#save-the-snippets-in-a-mongodb-database-optional).
 
-If you want to play around with the app, there is an existing database URI string in the form field. Please be a good person or I will have to take it out. 
-
-From here you can Add Snippets to your database or Build your cover letter. 
-
-#### Setting up a database
-
-Snippets uses a MongoDB database on Mlab.com to store your cover letter snippets data. 
-
-- Go to mlab.com and sign up or log in.
-- Click "Create New" under deployments.
-- Choose AWS and the Free Sandbox plan.
-- Pick a region and name your database.
-- Follow the prompts to submit and create your database.
-- Click on your new database.
-- Navigate to the users tab and click the button to create a new user.
-- Fill out the username and password.
-- copy/paste the MongoDB URI for your database and enter your username/password in the appropriate place in the URI. 
-
-
-## Adding Snippets
-
-Copy/Paste a small snippet of a previous cover letter covering one or more related skills, and fill out the categories field with the keywords that you want to match to the job description. (Comma Separated, no spaces.)
-
-![Add a new snippet to your database](/readme-images/snippets-snippet.png)
-
-It's also important for you to add an 'intro' and 'outro' category, so that you can add intro and outro snippets easily. 
+## Using Cover Letter Snippets
 
 ![Connect to Database Gif](/readme-images/snippets-part-1.gif)
 
-## Editing Snippets and Categories
+### Adding snippets
 
-On the "Database" page, you'll see a table with a list of all of the cover letter snippets in your database. 
+Note: To add a snippet to the database, you need to have your existing cover letter(s) handy. 
 
-From here you can click on each individual snippet or list of categories to edit them. Click off the table to save.  
+1. Navigate to the **Add Snippet** page.
+2. From your existing cover letter, copy and paste a snippet related to one or more skills or technology. For example, add one snippet for a paragraph that describes your experience with Python. Add another snippet describing a side-project involving Go.
+3. For each snippet, add the relevant keywords (comma separated, no spaces) in the **Categories** field. 
+   
+   Important: The category names are case-sensitive.
 
-## Build Cover Letter
+4. Click **Submit Snippet**.
+5. Add `intro` snippet and add the keyword `intro` to its **Categories** field. Click **Submit Snippet**.
+6. Add an `outro` snippet and add the keyword `outro` in its **Categories** field. Click **Submit Snippet**.
 
-First, copy/paste a job description into the textarea field and click "Parse Job Description". The application will check if any of the words in the job description match any of your snippet categories.
+### Editing snippets and categories
 
-A table of results will be returned where you can see how many times a category has been mentioned. Click on the "Show Snippets" link to see the snippets that match those categories. ie. If you're applying for a Java Developer position, you should probably see a lot of matches for the category "java", and those are the important snippets that you want to add to your cover letter first.  
+To edit the snippets and their categories:
 
+1. Navigate to the **Database** page. A table displaying the cover letter snippets is displayed.
+2. Click on the snippet you want to edit and make the desired changes.
+3. Click on the category you want to edit and make the desired changes.
+4. Click off the table to save the changes.
+
+### Building the cover letter
+
+To build the cover letter:
+
+1. Navigate to the **Build Cover Letter** page.
+2. Copy the job description for the job you want to apply to. Paste the job description in the text box.
+3. Click **Parse Job Description**. A table containing a list of keywords, their frequency in the job description, and the relevant snippets appears.
 ![View Parsed Job Description and Category Matches](/readme-images/snippets-results.png)
-
-Once you see snippets from a category, you can add those snippets to your cover letter, and also see the intro and outro snippets you added earlier. 
-
+4. Click **Show More**. 
+5. For the relevant snippet, click **Show Snippet**.
+6. If you decide to include the snippet in the cover letter, click **Add** in the **Add to Letter** column.
+7. Repeat step 6 for all relevant snippets.
+8. Repeat steps 4-6 to add intro and outro snippets.
 ![Add snippets to your cover letter.](/readme-images/snippets-outro.png)
- 
-Once you're done arranging your snippets in the cover letter table, you can press the export button.  
-
-## Export Cover Letter
-
-You're basically done! You can edit the text in the textarea, and you can copy/paste your cover letter into your word doc or PDF that you're submitting with an application. 
+9. Reorder the snippets by clicking **Move Up** and **Move Down** as required.
+10. Once you are done making all changes, click **Export and Tweak Cover Letter**. The  Exported Cover Letter appears on the **Export Cover Letter** page.
+11. Copy and paste the contents of the cover letter into a Word doc or Google doc.
 
 ![Connect to Database Gif](/readme-images/snippets-part-3.gif)
 
+### Saving the snippets in a MongoDB database (optional)
+
+Note: This is an advanced use-case.
+
+If you plan to use the application across computers, you can store the cover letter snippets in the preconfigured MongoDB database or your own MongoDB database on MLab.com. 
+
+If you want to play around with the app, there is a preconfigured database URI string in the form field. Please be a good person or I will have to take it out. Also, after you are done trying out the app, delete your entries from the database to ensure that other users don't see your entries.
+
+Alternatively, to store the snippets in your MongoDB database:
+1. Go to mlab.com and sign up or log in.
+2. Click **Create New** under Deployments.
+3. Choose **AWS** and the **Free Sandbox** plan.
+4. Pick a region and name your database.
+5. Follow the prompts to submit and create your database.
+6. Click on your new database.
+7. Navigate to the **Users** tab and create a new user.
+8. Fill out the username and password.
+9. Copy the MongoDB URI for your database. 
+10. Navigate to the Cover Letter Snippets application. On the **Database** page, paste the MongoDB URI for your database. Replace the username/password with your credentials in the URI. 
+11. Click **Connect to Database**.
 
 # Contributing
 
