@@ -1,7 +1,7 @@
 # Cover Letter Snippets
 Cover Letter Snippets is an Angular/MongoDB/Node.js Express application that helps you figure out the keywords on a job listing and then compose a cover letter customized for the job by reusing the relevant content from your previous cover letters.
 
-<img src="/readme-images/snippets-part-2.gif)" alt="Snippets"
+<img src="/readme-images/snippets-part-2.gif" alt="Snippets"
 	title="Snippets" />
 
 ## Installing and Running Cover Letter Snippets
