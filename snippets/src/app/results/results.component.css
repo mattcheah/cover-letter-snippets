@@ -17,3 +17,19 @@ button {
   text-align: center;
   background-color: rgba(34, 34, 34, 1);
 }
+.panel-container{
+  width: 100%;
+  padding-bottom: 20px;
+}
+.accordion{
+  cursor: pointer;
+  padding-left: 2px;
+  border: white solid 1px;
+  background-color: rgb(218, 214, 214);
+  color:rgba(34, 34, 34, 1);
+}
+.panel{
+  display: none;
+  word-wrap: break-word;
+}
+

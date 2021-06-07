@@ -8,8 +8,15 @@
 
   <div class="line-break"></div>
 
-  <h4 id="results-title">Results for the job description:</h4>
-  <small>{{parseDescriptionService.jobDescription.substring(0,200)}}...</small>
+  <div class="panel-container">
+    <div class="accordion" (click)="toggleAccordian($event)"> Job Description (click me!) </div>
+    <div class="panel">
+      <p> {{parseDescriptionService.jobDescription}} </p>
+    </div>
+  </div>
+
+  <!-- <h4 id="results-title">Results for the job description:</h4>
+  <small>{{parseDescriptionService.jobDescription.substring(0,200)}}...</small> -->
 
   <div id="keyword-results-table-container" class="table-container">
     <table id="keyword-results-table">
