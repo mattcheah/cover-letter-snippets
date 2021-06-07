@@ -4,12 +4,13 @@
 
   <div class="flex">
     <button (click)="enterNewDescription()">Enter new job description</button>
+    <button (click)="toggleAccordian()">View Current Job Description</button>
   </div>
 
   <div class="line-break"></div>
 
-  <div class="panel-container">
-    <div class="accordion" (click)="toggleAccordian($event)"> Job Description (click me!) </div>
+  <div *ngIf="showDescriptionPanel" class="panel-container">
+    <div class="accordion"> Parsed Job Description </div>
     <div class="panel">
       <p> {{parseDescriptionService.jobDescription}} </p>
     </div>

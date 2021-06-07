@@ -15,6 +15,7 @@ export class ResultsComponent implements OnInit {
   showFilteredSnippetsTable = false;
   showAllValues = false;
   jobDescription: string;
+  showDescriptionPanel = false;
 
   constructor(
     public parseDescriptionService: ParseDescriptionService,
@@ -77,14 +78,7 @@ export class ResultsComponent implements OnInit {
     ).length;
   }
 
-  toggleAccordian(event) {
-    var element = event.target;
-    element.classList.toggle("active");      
-    var panel = element.nextElementSibling;
-    if (panel.style.display === "block") {
-      panel.style.display = "none";
-    } else {
-      panel.style.display = "block";
-    }
+  toggleAccordian() {
+    this.showDescriptionPanel = !this.showDescriptionPanel;
   }
 }
