@@ -14,6 +14,9 @@ export class ResultsComponent implements OnInit {
   displayedCategory = '';
   showFilteredSnippetsTable = false;
   showAllValues = false;
+  jobDescription: string;
+  showDescriptionPanel = false;
+  panelLabel = false;
 
   constructor(
     public parseDescriptionService: ParseDescriptionService,
@@ -22,7 +25,9 @@ export class ResultsComponent implements OnInit {
     private statusMessageService: StatusMessageService
   ) {}
 
-  ngOnInit() {}
+  ngOnInit() {
+    this.displaySnippets('intro');
+  }
 
   displaySnippets(keyword): void {
     this.filteredSnippets = [];
@@ -72,5 +77,10 @@ export class ResultsComponent implements OnInit {
           y => y['keyword'] === x
         )
     ).length;
+  }
+
+  toggleAccordian() {
+    this.showDescriptionPanel = !this.showDescriptionPanel;
+    this.panelLabel = !this.panelLabel;
   }
 }
