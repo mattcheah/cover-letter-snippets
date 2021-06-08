@@ -16,6 +16,7 @@ export class ResultsComponent implements OnInit {
   showAllValues = false;
   jobDescription: string;
   showDescriptionPanel = false;
+  panelLabel = false;
 
   constructor(
     public parseDescriptionService: ParseDescriptionService,
@@ -80,5 +81,6 @@ export class ResultsComponent implements OnInit {
 
   toggleAccordian() {
     this.showDescriptionPanel = !this.showDescriptionPanel;
+    this.panelLabel = !this.panelLabel;
   }
 }
