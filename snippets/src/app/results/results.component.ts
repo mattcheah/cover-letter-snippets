@@ -74,7 +74,7 @@ export class ResultsComponent implements OnInit {
     return snippet.categories.filter(
       x =>
         !!this.parseDescriptionService.keywordArray.filter(y => y['jobKeywords'] > 0).find(
-          y => y['keyword'] === x
+          y => y['keyword'] === x 
         )
     ).length;
   }

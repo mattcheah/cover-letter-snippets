@@ -5,4 +5,11 @@
   <textarea id="snippet" ref-textarea [(ngModel)]="snippet" placeholder="Copy/Paste a cover letter snippet here."></textarea>
   <textarea ref-textarea [(ngModel)]="categories" placeholder="Add your categories here, separated by a comma. eg. PHP, javascript, Node, mysql"></textarea>
   <button (click)="addSnippet()">Submit Snippet</button>
+
+  <h5>Add Aliases</h5>
+  <p>Enter a category from your cover letter that you feel requires aliases. </p>
+  <textarea id="category" ref-textarea [(ngModel)]="category" placeholder="Enter a category. e.g. php"></textarea>
+  <textarea ref-textarea [(ngModel)]="aliases" placeholder="Add your aliases here, separated by a comma. e.g. php7"></textarea>
+  <button (click)="addCategoryAndAliases()">Submit Category and Aliases</button>
+
 </div>

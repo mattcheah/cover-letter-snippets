@@ -12,13 +12,12 @@ export interface DatabaseResponse {
 }
 
 @Injectable()
-export class DatabaseService {
+export class DatabaseCategoryAliasesService {
 
   isJson: boolean;
   database: Array<any>;
   connected = false;
   showDatabase = false;
-  categories: any = {};
   aliases: any = {};
 
   constructor(
@@ -26,9 +25,8 @@ export class DatabaseService {
     private statusMessageService: StatusMessageService,
   ) { }
 
-  startConnection(isJson = true, urlString = 'snippets-db.json'): void {
-    console.log("inside start connection. url string: " + urlString);
-
+  startAliasConnection(isJson = true, urlString = 'category-aliases-db.json'): void {
+    console.log("in db category alias service startconnection");
     const self = this;
     const dataObj = JSON.stringify({ databaseUrl: urlString });
     const options = {
@@ -36,7 +34,10 @@ export class DatabaseService {
         'Content-Type': 'application/json; charset=utf-8'
       })
     };
-    const url = isJson ? 'api/get-json-data' : 'api/connect-to-database';
+    //const url = isJson ? 'api/get-json-category-aliases-data' : 'api/connect-to-database';
+    const url = 'api/get-json-category-aliases-data';
+
+    console.log("category alias url: " + url);
     self.isJson = isJson;
 
     this.http.post<DatabaseResponse>(url, dataObj, options)
@@ -49,7 +50,8 @@ export class DatabaseService {
         self.showDatabase = true;
 
         if (self.database.length > 0) {
-          self.extractCategories();
+          console.log("calling extractAliases")
+          self.extractAliases();
         }
       } else if (response.error) {
         self.statusMessageService.newStatusMessage(response.responseMessage, 'errir');
@@ -57,18 +59,16 @@ export class DatabaseService {
     });
   }
 
-  addSnippet(snippet, categories): void {
-    console.log("in add snippet");
+  addCategoryAliases(category, aliases): void {
     const self = this;
-    const data = {snippet: snippet, categories: categories};
+    const data = {category: category, aliases: aliases};
     const options = {
       headers: new HttpHeaders({
         'Content-Type': 'application/json; charset=utf-8'
       })
     };
 
-    const url = self.isJson ? 'api/add-json-snippet' : 'api/add-snippet';
-    console.log("(snippet) database service file url: " + url);
+    const url = self.isJson ? 'api/add-json-category-aliases' : 'api/add-snippet';
 
     this.http.post<DatabaseResponse>(url, JSON.stringify(data), options)
       .pipe(catchError(this.handleError)
@@ -76,17 +76,17 @@ export class DatabaseService {
       if (returnData.connected) {
         self.statusMessageService.newStatusMessage(returnData.responseMessage, 'success');
         self.database = returnData.data;
-        self.extractCategories();
+        self.extractAliases();
       } else if (returnData.error) {
         self.statusMessageService.newStatusMessage(returnData.responseMessage, 'error');
       }
     });
   }
 
-  editSnippet(id, snippet, categories): void {
+  editCategoryAliases(id, category, aliases): void {
     const self = this;
-    const url = self.isJson ? 'api/edit-json-snippet' : 'api/edit-snippet';
-    const data = { id: id, snippet: snippet, categories: categories };
+    const url = self.isJson ? 'api/edit-json-category-aliases' : 'api/edit-snippet';
+    const data = { id: id, category: category, aliases: aliases };
     const options = {
       headers: new HttpHeaders({
         'Content-Type': 'application/json; charset=utf-8'
@@ -99,17 +99,17 @@ export class DatabaseService {
       if (returnData.connected && !returnData.error) {
         self.statusMessageService.newStatusMessage(returnData.responseMessage, 'success');
         self.database = returnData.data;
-        self.extractCategories();
+        self.extractAliases();
       } else if (returnData.error) {
         self.statusMessageService.newStatusMessage(returnData.responseMessage, 'errir');
       }
     });
   }
 
-  deleteSnippet(id): void {
+  deleteCategory(id): void {
     const self = this;
     const data = {id: id};
-    const url = self.isJson ? 'api/delete-json-snippet' : 'api/delete-snippet';
+    const url = self.isJson ? 'api/delete-json-category-aliases' : 'api/delete-snippet';
     const options = {
       headers: new HttpHeaders({
         'Content-Type': 'application/json; charset=utf-8'
@@ -123,30 +123,31 @@ export class DatabaseService {
         if (returnData.connected && !returnData.error) {
           self.statusMessageService.newStatusMessage(returnData.responseMessage, 'success');
           self.database = returnData.data;
-          self.extractCategories();
+          self.extractAliases();
         } else if (returnData.error) {
           self.statusMessageService.newStatusMessage(returnData.responseMessage, 'errir');
         }
-      }); 
+      });
   }
 
-  private extractCategories(): void {
-    this.categories = {};
+  private extractAliases(): void {
+    this.aliases = {};
     for (let i = 0; i < this.database.length; i++) {
       const record = this.database[i];
-      for (let j = 0; j < record.categories.length; j++) {
-        const category = record.categories[j];
-        if (!(category in this.categories)) {
-          this.categories[category] = {
+      for (let j = 0; j < record.aliases.length; j++) {
+        const alias = record.aliases[j];
+        if (!(alias in this.aliases)) {
+          this.aliases[alias] = {
             ids: [],
             jobKeywords: 0
           };
         }
-        this.categories[category].ids.push(record);
+        this.aliases[alias].ids.push(record);
       }
     }
+    console.log("aliases: " + this.aliases)
   }
-  
+
   private handleError(error: HttpErrorResponse) {
     console.log('error obj: ');
     console.log(error);

@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 
 import { DatabaseService } from '../services/database.service';
-
+import { DatabaseCategoryAliasesService } from '../services/databaseCategoryAliases.service';
 
 
 @Component({
@@ -19,13 +19,20 @@ export class DatabaseComponent implements OnInit {
   editingCategory = false;
   snippetEdited = false;
 
-  constructor(public databaseService: DatabaseService) { }
+  constructor(
+      public databaseService: DatabaseService, 
+      public databaseCategoryAliasesService : DatabaseCategoryAliasesService
+    ) { }
 
   ngOnInit() {
   }
 
   connectJson(jsonString: string): void {
+    console.log("in db component connectJson");
     this.databaseService.startConnection(true, jsonString);
+    console.log("json string for db service: " + jsonString);
+    
+    this.databaseCategoryAliasesService.startAliasConnection(true, jsonString);
   }
 
   connect(connectString: string): void {
@@ -44,6 +51,11 @@ export class DatabaseComponent implements OnInit {
       this.editSnippetObject = snippet;
       const snippetLabel: HTMLElement = document.querySelector('#snippet-' + snippet._id + ' .snippet');
       const snippetEdit: HTMLElement = document.querySelector('#snippet-' + snippet._id + ' .snippet-edit');
+
+      console.log("snippet label: ");
+      console.log(snippetLabel);
+      console.log("snippet edited: ");
+      console.log(snippetEdit);
 
       snippetLabel.style.display = 'none';
       snippetEdit.style.display = 'block';

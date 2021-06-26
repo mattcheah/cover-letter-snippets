@@ -16,4 +16,13 @@ router.put('/edit-json-snippet', jsonRoutes.editSnippet);
 router.delete('/delete-snippet', dbRoutes.deleteSnippet);
 router.delete('/delete-json-snippet', jsonRoutes.deleteSnippet);
 
+// for aliases
+router.post('/get-json-category-aliases-data', jsonRoutes.getCategoryAliases);
+
+router.post('/add-json-category-aliases', jsonRoutes.addCategoryAliases);
+
+router.put('/edit-json-category-aliases', jsonRoutes.editCategoryAliases);
+
+router.delete('/delete-json-category-aliases', jsonRoutes.deleteCategoryAliases);
+
 module.exports = router;

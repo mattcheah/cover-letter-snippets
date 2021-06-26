@@ -41,7 +41,7 @@ module.exports = "#snippet {\r\n    height:160px;\r\n}"
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<div *ngIf=\"databaseService.connected\">\r\n\r\n  <h4>Add Snippet</h4>\r\n  <p>Enter a snippet from your cover letter that you feel is well articulated and communicates your experience well. Then fill out the categories (experiences, languages, skills) that relate to this cover letter.</p>\r\n  <textarea id=\"snippet\" ref-textarea [(ngModel)]=\"snippet\" placeholder=\"Copy/Paste a cover letter snippet here.\"></textarea>\r\n  <textarea ref-textarea [(ngModel)]=\"categories\" placeholder=\"Add your categories here, separated by a comma. eg. PHP, javascript, Node, mysql\"></textarea>\r\n  <button (click)=\"addSnippet()\">Submit Snippet</button>\r\n</div>\r\n"
+module.exports = "<div *ngIf=\"databaseService.connected\">\r\n\r\n  <h4>Add Snippet</h4>\r\n  <p>Enter a snippet from your cover letter that you feel is well articulated and communicates your experience well. Then fill out the categories (experiences, languages, skills) that relate to this cover letter.</p>\r\n  <textarea id=\"snippet\" ref-textarea [(ngModel)]=\"snippet\" placeholder=\"Copy/Paste a cover letter snippet here.\"></textarea>\r\n  <textarea ref-textarea [(ngModel)]=\"categories\" placeholder=\"Add your categories here, separated by a comma. eg. PHP, javascript, Node, mysql\"></textarea>\r\n  <button (click)=\"addSnippet()\">Submit Snippet</button>\r\n\r\n  <h5>Add Aliases</h5>\r\n  <p>Enter a category from your cover letter that you feel requires aliases. </p>\r\n  <textarea id=\"category\" ref-textarea [(ngModel)]=\"category\" placeholder=\"Enter a category. e.g. php\"></textarea>\r\n  <textarea ref-textarea [(ngModel)]=\"aliases\" placeholder=\"Add your aliases here, separated by a comma. e.g. php7\"></textarea>\r\n  <button (click)=\"addCategoryAndAliases()\">Submit Category and Aliases</button>\r\n\r\n</div>\r\n"
 
 /***/ }),
 
@@ -57,6 +57,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "AddSnippetComponent", function() { return AddSnippetComponent; });
 /* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm5/core.js");
 /* harmony import */ var _services_database_service__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../services/database.service */ "./src/app/services/database.service.ts");
+/* harmony import */ var _services_databaseCategoryAliases_service__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../services/databaseCategoryAliases.service */ "./src/app/services/databaseCategoryAliases.service.ts");
 var __decorate = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -68,20 +69,33 @@ var __metadata = (undefined && undefined.__metadata) || function (k, v) {
 };
 
 
+
 var AddSnippetComponent = /** @class */ (function () {
-    function AddSnippetComponent(databaseService) {
+    function AddSnippetComponent(databaseService, databaseAliasService) {
         this.databaseService = databaseService;
+        this.databaseAliasService = databaseAliasService;
         this.snippet = '';
         this.categories = '';
+        this.category = '';
+        this.aliases = '';
     }
     AddSnippetComponent.prototype.ngOnInit = function () {
     };
     AddSnippetComponent.prototype.addSnippet = function () {
+        console.log("snippet being added");
         this.categories.replace(' ', '');
         var categoriesArray = this.categories.split(',');
         this.databaseService.addSnippet(this.snippet, categoriesArray);
         this.snippet = '';
         this.categories = '';
+    };
+    AddSnippetComponent.prototype.addCategoryAndAliases = function () {
+        console.log("alias being added");
+        this.aliases.replace(' ', '');
+        var aliasesArray = this.aliases.split(',');
+        this.databaseAliasService.addCategoryAliases(this.category, aliasesArray);
+        this.category = '';
+        this.aliases = '';
     };
     AddSnippetComponent = __decorate([
         Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["Component"])({
@@ -89,7 +103,7 @@ var AddSnippetComponent = /** @class */ (function () {
             template: __webpack_require__(/*! ./add-snippet.component.html */ "./src/app/add-snippet/add-snippet.component.html"),
             styles: [__webpack_require__(/*! ./add-snippet.component.css */ "./src/app/add-snippet/add-snippet.component.css")]
         }),
-        __metadata("design:paramtypes", [_services_database_service__WEBPACK_IMPORTED_MODULE_1__["DatabaseService"]])
+        __metadata("design:paramtypes", [_services_database_service__WEBPACK_IMPORTED_MODULE_1__["DatabaseService"], _services_databaseCategoryAliases_service__WEBPACK_IMPORTED_MODULE_2__["DatabaseCategoryAliasesService"]])
     ], AddSnippetComponent);
     return AddSnippetComponent;
 }());
@@ -174,18 +188,20 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _angular_router__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @angular/router */ "./node_modules/@angular/router/fesm5/router.js");
 /* harmony import */ var _job_description_job_description_component__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./job-description/job-description.component */ "./src/app/job-description/job-description.component.ts");
 /* harmony import */ var _database_database_component__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./database/database.component */ "./src/app/database/database.component.ts");
-/* harmony import */ var _results_results_component__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./results/results.component */ "./src/app/results/results.component.ts");
-/* harmony import */ var _add_snippet_add_snippet_component__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ./add-snippet/add-snippet.component */ "./src/app/add-snippet/add-snippet.component.ts");
-/* harmony import */ var _status_message_status_message_component__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ./status-message/status-message.component */ "./src/app/status-message/status-message.component.ts");
-/* harmony import */ var _has_keywords_pipe__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ./has-keywords.pipe */ "./src/app/has-keywords.pipe.ts");
-/* harmony import */ var _cover_letter_cover_letter_component__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! ./cover-letter/cover-letter.component */ "./src/app/cover-letter/cover-letter.component.ts");
-/* harmony import */ var _build_cover_letter_build_cover_letter_component__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! ./build-cover-letter/build-cover-letter.component */ "./src/app/build-cover-letter/build-cover-letter.component.ts");
-/* harmony import */ var _export_export_component__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(/*! ./export/export.component */ "./src/app/export/export.component.ts");
-/* harmony import */ var _nav_nav_component__WEBPACK_IMPORTED_MODULE_15__ = __webpack_require__(/*! ./nav/nav.component */ "./src/app/nav/nav.component.ts");
-/* harmony import */ var _services_database_service__WEBPACK_IMPORTED_MODULE_16__ = __webpack_require__(/*! ./services/database.service */ "./src/app/services/database.service.ts");
-/* harmony import */ var _services_parse_description_service__WEBPACK_IMPORTED_MODULE_17__ = __webpack_require__(/*! ./services/parse-description.service */ "./src/app/services/parse-description.service.ts");
-/* harmony import */ var _services_status_message_service__WEBPACK_IMPORTED_MODULE_18__ = __webpack_require__(/*! ./services/status-message.service */ "./src/app/services/status-message.service.ts");
-/* harmony import */ var _services_cover_letter_service__WEBPACK_IMPORTED_MODULE_19__ = __webpack_require__(/*! ./services/cover-letter.service */ "./src/app/services/cover-letter.service.ts");
+/* harmony import */ var _category_aliases_db_category_aliases_db_component__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./category-aliases-db/category-aliases-db.component */ "./src/app/category-aliases-db/category-aliases-db.component.ts");
+/* harmony import */ var _results_results_component__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ./results/results.component */ "./src/app/results/results.component.ts");
+/* harmony import */ var _add_snippet_add_snippet_component__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ./add-snippet/add-snippet.component */ "./src/app/add-snippet/add-snippet.component.ts");
+/* harmony import */ var _status_message_status_message_component__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ./status-message/status-message.component */ "./src/app/status-message/status-message.component.ts");
+/* harmony import */ var _has_keywords_pipe__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! ./has-keywords.pipe */ "./src/app/has-keywords.pipe.ts");
+/* harmony import */ var _cover_letter_cover_letter_component__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! ./cover-letter/cover-letter.component */ "./src/app/cover-letter/cover-letter.component.ts");
+/* harmony import */ var _build_cover_letter_build_cover_letter_component__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(/*! ./build-cover-letter/build-cover-letter.component */ "./src/app/build-cover-letter/build-cover-letter.component.ts");
+/* harmony import */ var _export_export_component__WEBPACK_IMPORTED_MODULE_15__ = __webpack_require__(/*! ./export/export.component */ "./src/app/export/export.component.ts");
+/* harmony import */ var _nav_nav_component__WEBPACK_IMPORTED_MODULE_16__ = __webpack_require__(/*! ./nav/nav.component */ "./src/app/nav/nav.component.ts");
+/* harmony import */ var _services_database_service__WEBPACK_IMPORTED_MODULE_17__ = __webpack_require__(/*! ./services/database.service */ "./src/app/services/database.service.ts");
+/* harmony import */ var _services_databaseCategoryAliases_service__WEBPACK_IMPORTED_MODULE_18__ = __webpack_require__(/*! ./services/databaseCategoryAliases.service */ "./src/app/services/databaseCategoryAliases.service.ts");
+/* harmony import */ var _services_parse_description_service__WEBPACK_IMPORTED_MODULE_19__ = __webpack_require__(/*! ./services/parse-description.service */ "./src/app/services/parse-description.service.ts");
+/* harmony import */ var _services_status_message_service__WEBPACK_IMPORTED_MODULE_20__ = __webpack_require__(/*! ./services/status-message.service */ "./src/app/services/status-message.service.ts");
+/* harmony import */ var _services_cover_letter_service__WEBPACK_IMPORTED_MODULE_21__ = __webpack_require__(/*! ./services/cover-letter.service */ "./src/app/services/cover-letter.service.ts");
 var __decorate = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -213,11 +229,13 @@ var __decorate = (undefined && undefined.__decorate) || function (decorators, ta
 
 
 
+
+
 var appRoutes = [
     { path: '', component: _database_database_component__WEBPACK_IMPORTED_MODULE_7__["DatabaseComponent"] },
-    { path: 'add-snippet', component: _add_snippet_add_snippet_component__WEBPACK_IMPORTED_MODULE_9__["AddSnippetComponent"] },
-    { path: 'build-cover-letter', component: _build_cover_letter_build_cover_letter_component__WEBPACK_IMPORTED_MODULE_13__["BuildCoverLetterComponent"] },
-    { path: 'export-cover-letter', component: _export_export_component__WEBPACK_IMPORTED_MODULE_14__["ExportComponent"] }
+    { path: 'add-snippet', component: _add_snippet_add_snippet_component__WEBPACK_IMPORTED_MODULE_10__["AddSnippetComponent"] },
+    { path: 'build-cover-letter', component: _build_cover_letter_build_cover_letter_component__WEBPACK_IMPORTED_MODULE_14__["BuildCoverLetterComponent"] },
+    { path: 'export-cover-letter', component: _export_export_component__WEBPACK_IMPORTED_MODULE_15__["ExportComponent"] }
 ];
 var AppModule = /** @class */ (function () {
     function AppModule() {
@@ -228,14 +246,15 @@ var AppModule = /** @class */ (function () {
                 _app_component__WEBPACK_IMPORTED_MODULE_4__["AppComponent"],
                 _job_description_job_description_component__WEBPACK_IMPORTED_MODULE_6__["JobDescriptionComponent"],
                 _database_database_component__WEBPACK_IMPORTED_MODULE_7__["DatabaseComponent"],
-                _results_results_component__WEBPACK_IMPORTED_MODULE_8__["ResultsComponent"],
-                _add_snippet_add_snippet_component__WEBPACK_IMPORTED_MODULE_9__["AddSnippetComponent"],
-                _status_message_status_message_component__WEBPACK_IMPORTED_MODULE_10__["StatusMessageComponent"],
-                _has_keywords_pipe__WEBPACK_IMPORTED_MODULE_11__["HasKeywordsPipe"],
-                _cover_letter_cover_letter_component__WEBPACK_IMPORTED_MODULE_12__["CoverLetterComponent"],
-                _export_export_component__WEBPACK_IMPORTED_MODULE_14__["ExportComponent"],
-                _build_cover_letter_build_cover_letter_component__WEBPACK_IMPORTED_MODULE_13__["BuildCoverLetterComponent"],
-                _nav_nav_component__WEBPACK_IMPORTED_MODULE_15__["NavComponent"]
+                _category_aliases_db_category_aliases_db_component__WEBPACK_IMPORTED_MODULE_8__["CategoryAliasesDatabaseComponent"],
+                _results_results_component__WEBPACK_IMPORTED_MODULE_9__["ResultsComponent"],
+                _add_snippet_add_snippet_component__WEBPACK_IMPORTED_MODULE_10__["AddSnippetComponent"],
+                _status_message_status_message_component__WEBPACK_IMPORTED_MODULE_11__["StatusMessageComponent"],
+                _has_keywords_pipe__WEBPACK_IMPORTED_MODULE_12__["HasKeywordsPipe"],
+                _cover_letter_cover_letter_component__WEBPACK_IMPORTED_MODULE_13__["CoverLetterComponent"],
+                _export_export_component__WEBPACK_IMPORTED_MODULE_15__["ExportComponent"],
+                _build_cover_letter_build_cover_letter_component__WEBPACK_IMPORTED_MODULE_14__["BuildCoverLetterComponent"],
+                _nav_nav_component__WEBPACK_IMPORTED_MODULE_16__["NavComponent"]
             ],
             imports: [
                 _angular_router__WEBPACK_IMPORTED_MODULE_5__["RouterModule"].forRoot(appRoutes),
@@ -244,10 +263,11 @@ var AppModule = /** @class */ (function () {
                 _angular_common_http__WEBPACK_IMPORTED_MODULE_3__["HttpClientModule"]
             ],
             providers: [
-                _services_database_service__WEBPACK_IMPORTED_MODULE_16__["DatabaseService"],
-                _services_parse_description_service__WEBPACK_IMPORTED_MODULE_17__["ParseDescriptionService"],
-                _services_status_message_service__WEBPACK_IMPORTED_MODULE_18__["StatusMessageService"],
-                _services_cover_letter_service__WEBPACK_IMPORTED_MODULE_19__["CoverLetterService"],
+                _services_database_service__WEBPACK_IMPORTED_MODULE_17__["DatabaseService"],
+                _services_databaseCategoryAliases_service__WEBPACK_IMPORTED_MODULE_18__["DatabaseCategoryAliasesService"],
+                _services_parse_description_service__WEBPACK_IMPORTED_MODULE_19__["ParseDescriptionService"],
+                _services_status_message_service__WEBPACK_IMPORTED_MODULE_20__["StatusMessageService"],
+                _services_cover_letter_service__WEBPACK_IMPORTED_MODULE_21__["CoverLetterService"],
             ],
             bootstrap: [_app_component__WEBPACK_IMPORTED_MODULE_4__["AppComponent"]],
             schemas: [
@@ -326,6 +346,158 @@ var BuildCoverLetterComponent = /** @class */ (function () {
             _services_cover_letter_service__WEBPACK_IMPORTED_MODULE_2__["CoverLetterService"]])
     ], BuildCoverLetterComponent);
     return BuildCoverLetterComponent;
+}());
+
+
+
+/***/ }),
+
+/***/ "./src/app/category-aliases-db/category-aliases-db.component.css":
+/*!***********************************************************************!*\
+  !*** ./src/app/category-aliases-db/category-aliases-db.component.css ***!
+  \***********************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+module.exports = ".table-container {\r\n    max-height: 300px;\r\n}\r\n\r\n#database-table thead td:first-child {\r\n    width:60%;\r\n}\r\n\r\n#database-table thead td:nth-child(2) {\r\n    width:25%;\r\n}\r\n\r\n#database-table thead td:nth-child(3) {\r\n    width:15%;\r\n}\r\n\r\n.category-edit, .aliases-edit {\r\n  background-color: #00000000;\r\n  color:#c9c9c9;\r\n  border:none;\r\n  font-size: 11px;\r\n  font-family: sans-serif;\r\n}\r\n\r\n.category-edit {\r\n  display:none;\r\n  min-height: 75px;\r\n}\r\n\r\n.aliases-edit {\r\n  display:none;\r\n}\r\n"
+
+/***/ }),
+
+/***/ "./src/app/category-aliases-db/category-aliases-db.component.html":
+/*!************************************************************************!*\
+  !*** ./src/app/category-aliases-db/category-aliases-db.component.html ***!
+  \************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+module.exports = "<div *ngIf=\"!dbAliasService.connected\">\r\n  <h4 id=\"json-title\">Use JSON File:</h4>\r\n  <p>\r\n    Click here to store/pull data from a local JSON file.\r\n  </p>\r\n  <button (click)=\"connectAliasJson()\">Connect to JSON File</button>\r\n\r\n  <br>\r\n\r\n  <h4 id=\"db-title\">Connect your Database:</h4>\r\n  <p>\r\n    Paste your MongoDB url here with credentials and we will connect to your database.\r\n    For instructions on how to create a cloud-hosted database, <a href=\"https://github.com/mattcheah/cover-letter-snippets#setting-up-a-database\">visit the README</a>.\r\n  </p>\r\n  <p>The database string here is a test sandbox for anyone to use. Please play nice.</p>\r\n  <input [(ngModel)]=\"databaseString\"/><br>\r\n  <button [ngClass]=\"{inactive: databaseString == ''}\" (click)=\"connect(databaseString)\">Connect to Database</button>\r\n</div>\r\n\r\n<div *ngIf=\"dbAliasService.showDatabase\">\r\n  <p>\r\n    Your Snippets Database has {{dbAliasService.database.length}} categories.<br>\r\n    <small>Click a category or aliases to edit and press 'enter' to save</small>\r\n  </p>\r\n  <div class=\"table-container\">\r\n\r\n    <table id=\"database-table\">\r\n      <thead>\r\n        <tr>\r\n          <td>Category</td>\r\n          <td>Aliases</td>\r\n          <td>Delete</td>\r\n        </tr>\r\n      </thead>\r\n      <tbody>\r\n        <tr [id]=\"'category-'+category._id\" *ngFor=\"let category of dbAliasService.database\">\r\n          <td (click)=\"toggleEditCategory(category)\" >\r\n            <div class=\"category no-edit\" style=\"display:block\">\r\n              {{category.category}}\r\n            </div>\r\n            <textarea  \r\n            [(ngModel)]=\"editCategoryObject ? editCategoryObject.category : category.category\" \r\n            (keydown)=\"categoryEdited = true\" \r\n            (keyup.enter)=\"saveEdit(editCategoryObject)\" \r\n            class=\"category-edit editable\" >\r\n            </textarea>\r\n          </td>\r\n          <td (click)=\"toggleEditAliases(category)\" >\r\n            <div class=\"aliases no-edit\" style=\"display:block\">\r\n              {{category.aliases}}\r\n            </div>\r\n            <input \r\n            [(ngModel)]=\"editCategoryObject ? editCategoryObject.aliases : category.aliases\" \r\n            (keydown)=\"categoryEdited = true\" \r\n            (keyup.enter)=\"saveEdit(editCategoryObject)\" \r\n            class=\"aliases-edit editable\" >\r\n          </td>\r\n          <td class=\"delete\"><a (click)=\"deleteRecord(category._id)\">Delete</a></td>\r\n        </tr>\r\n      </tbody>\r\n    </table>\r\n  </div>\r\n\r\n</div>\r\n"
+
+/***/ }),
+
+/***/ "./src/app/category-aliases-db/category-aliases-db.component.ts":
+/*!**********************************************************************!*\
+  !*** ./src/app/category-aliases-db/category-aliases-db.component.ts ***!
+  \**********************************************************************/
+/*! exports provided: CategoryAliasesDatabaseComponent */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "CategoryAliasesDatabaseComponent", function() { return CategoryAliasesDatabaseComponent; });
+/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm5/core.js");
+/* harmony import */ var _services_databaseCategoryAliases_service__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../services/databaseCategoryAliases.service */ "./src/app/services/databaseCategoryAliases.service.ts");
+var __decorate = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (undefined && undefined.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+
+
+var CategoryAliasesDatabaseComponent = /** @class */ (function () {
+    function CategoryAliasesDatabaseComponent(dbAliasService) {
+        this.dbAliasService = dbAliasService;
+        this.showConnectForm = true;
+        this.databaseString = 'mongodb://user:testtest1@ds119660.mlab.com:19660/snippets-sandbox';
+        this.editingAlias = false;
+        this.categoryEdited = false;
+    }
+    CategoryAliasesDatabaseComponent.prototype.ngOnInit = function () {
+    };
+    CategoryAliasesDatabaseComponent.prototype.connectJson = function (jsonString) {
+        this.dbAliasService.startAliasConnection(true, jsonString);
+    };
+    CategoryAliasesDatabaseComponent.prototype.connect = function (connectString) {
+        // console.log("connecting to mongoose db: response is:");
+        this.dbAliasService.startAliasConnection(false, connectString);
+    };
+    CategoryAliasesDatabaseComponent.prototype.toggleEditCategory = function (category) {
+        console.log("id and category: " + category._id);
+        console.log(category);
+        if (!this.editCategoryObject || category._id !== this.editCategoryObject._id || this.editingAlias) {
+            this.editingAlias = false;
+            if (this.editCategoryObject) {
+                console.log("about to save edit category obj");
+                console.log(this.editCategoryObject);
+                this.saveEdit(this.editCategoryObject);
+            }
+            this.editCategoryObject = category;
+            console.log("editing category obj");
+            console.log(this.editCategoryObject);
+            var categoryLabel = document.querySelector('#category-' + category._id + ' .category');
+            var categoryEdit = document.querySelector('#category-' + category._id + ' .category-edit');
+            console.log("cat label: ");
+            console.log(categoryLabel);
+            console.log("cat edited: ");
+            console.log(categoryEdit);
+            categoryLabel.style.display = 'none';
+            categoryEdit.style.display = 'block';
+        }
+    };
+    CategoryAliasesDatabaseComponent.prototype.toggleEditAliases = function (category) {
+        if (!this.editCategoryObject || category._id !== this.editCategoryObject._id || !this.editingAlias) {
+            this.editingAlias = true;
+            if (this.editCategoryObject) {
+                this.saveEdit(this.editCategoryObject);
+            }
+            this.editCategoryObject = category;
+            var aliasesLabel = document.querySelector('#category-' + category._id + ' .aliases');
+            var aliasesEdit = document.querySelector('#category-' + category._id + ' .aliases-edit');
+            aliasesLabel.style.display = 'none';
+            aliasesEdit.style.display = 'block';
+        }
+    };
+    CategoryAliasesDatabaseComponent.prototype.toggleOffEditing = function () {
+        if (this.editCategoryObject) {
+            this.editCategoryObject = undefined;
+            var noEdits = document.getElementsByClassName('no-edit');
+            var edits = document.getElementsByClassName('editable');
+            for (var i = 0; i < edits.length; i++) {
+                edits[i].style.display = 'none';
+            }
+            for (var j = 0; j < noEdits.length; j++) {
+                noEdits[j].style.display = 'block';
+            }
+        }
+    };
+    CategoryAliasesDatabaseComponent.prototype.saveEdit = function (category) {
+        console.log("saveEdit function- category: ");
+        console.log(category);
+        // setting variables for edited content so that
+        var newCat = document.querySelector('#category-' + category._id + ' .category-edit');
+        var newAlias = document.querySelector('#category-' + category._id + ' .aliases-edit');
+        category.category = newCat.value;
+        category.aliases = newAlias.value;
+        if (this.categoryEdited) {
+            if (typeof category.aliases === 'string') {
+                category.aliases.replace(' ', '');
+                category.aliases = category.aliases.split(',');
+            }
+            console.log("cat id, cat, aliases: ");
+            console.log(category._id);
+            console.log(category.category);
+            console.log(category.aliases);
+            this.dbAliasService.editCategoryAliases(category._id, category.category, category.aliases);
+            this.categoryEdited = false;
+        }
+        this.toggleOffEditing();
+    };
+    CategoryAliasesDatabaseComponent.prototype.deleteRecord = function (id) {
+        // console.log("delete id: "+id);
+        this.dbAliasService.deleteCategory(id);
+    };
+    CategoryAliasesDatabaseComponent = __decorate([
+        Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["Component"])({
+            selector: 'app-category-aliases-db',
+            template: __webpack_require__(/*! ./category-aliases-db.component.html */ "./src/app/category-aliases-db/category-aliases-db.component.html"),
+            styles: [__webpack_require__(/*! ./category-aliases-db.component.css */ "./src/app/category-aliases-db/category-aliases-db.component.css")]
+        }),
+        __metadata("design:paramtypes", [_services_databaseCategoryAliases_service__WEBPACK_IMPORTED_MODULE_1__["DatabaseCategoryAliasesService"]])
+    ], CategoryAliasesDatabaseComponent);
+    return CategoryAliasesDatabaseComponent;
 }());
 
 
@@ -429,7 +601,7 @@ module.exports = ".table-container {\r\n    max-height: 300px;\r\n}\r\n\r\n#data
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<div *ngIf=\"!databaseService.connected\">\r\n  <h4 id=\"json-title\">Use JSON File:</h4>\r\n  <p>\r\n    Click here to store/pull data from a local JSON file.\r\n  </p>\r\n  <button (click)=\"connectJson()\">Connect to JSON File</button>\r\n\r\n  <br>\r\n\r\n  <h4 id=\"db-title\">Connect your Database:</h4>\r\n  <p>\r\n    Paste your MongoDB url here with credentials and we will connect to your database.\r\n    For instructions on how to create a cloud-hosted database, <a href=\"https://github.com/mattcheah/cover-letter-snippets#setting-up-a-database\">visit the README</a>.\r\n  </p>\r\n  <p>The database string here is a test sandbox for anyone to use. Please play nice.</p>\r\n  <input [(ngModel)]=\"databaseString\"/><br>\r\n  <button [ngClass]=\"{inactive: databaseString == ''}\" (click)=\"connect(databaseString)\">Connect to Database</button>\r\n</div>\r\n\r\n<div *ngIf=\"databaseService.showDatabase\">\r\n  <p>\r\n    Your Snippets Database has {{databaseService.database.length}} entries.<br>\r\n    <small>Click a snippet or category to edit and press 'enter' to save</small>\r\n  </p>\r\n  <div class=\"table-container\">\r\n\r\n    <table id=\"database-table\">\r\n      <thead>\r\n        <tr>\r\n          <td>Snippet</td>\r\n          <td>Categories</td>\r\n          <td>Delete</td>\r\n        </tr>\r\n      </thead>\r\n      <tbody>\r\n        <tr [id]=\"'snippet-'+snippet._id\" *ngFor=\"let snippet of databaseService.database\">\r\n          <td (click)=\"toggleEditSnippet(snippet)\" >\r\n            <div class=\"snippet no-edit\" style=\"display:block\">\r\n              {{snippet.snippet}}\r\n            </div>\r\n            <textarea  \r\n            [(ngModel)]=\"editSnippetObject ? editSnippetObject.snippet : snippet.snippet\" \r\n            (keydown)=\"snippetEdited = true\" \r\n            (keyup.enter)=\"saveEdit(editSnippetObject)\" \r\n            (blur)=\"saveEdit(editSnippetObject)\"\r\n            class=\"snippet-edit editable\" >\r\n            </textarea>\r\n          </td>\r\n          <td (click)=\"toggleEditCategories(snippet)\" >\r\n            <div class=\"categories no-edit\" style=\"display:block\">\r\n              {{snippet.categories}}\r\n            </div>\r\n            <input \r\n            [(ngModel)]=\"editSnippetObject ? editSnippetObject.categories : snippet.categories\" \r\n            (keydown)=\"snippetEdited = true\" \r\n            (keyup.enter)=\"saveEdit(editSnippetObject)\" \r\n            (blur)=\"saveEdit(editSnippetObject)\"\r\n            class=\"categories-edit editable\" >\r\n          </td>\r\n          <td class=\"delete\"><a (click)=\"deleteRecord(snippet._id)\">Delete</a></td>\r\n        </tr>\r\n      </tbody>\r\n    </table>\r\n  </div>\r\n\r\n</div>\r\n"
+module.exports = "<div *ngIf=\"!databaseService.connected\">\r\n  <h4 id=\"json-title\">Use JSON File:</h4>\r\n  <p>\r\n    Click here to store/pull data from a local JSON file.\r\n  </p>\r\n  <button (click)=\"connectJson()\">Connect to JSON File</button>\r\n\r\n  <br>\r\n\r\n  <h4 id=\"db-title\">Connect your Database:</h4>\r\n  <p>\r\n    Paste your MongoDB url here with credentials and we will connect to your database.\r\n    For instructions on how to create a cloud-hosted database, <a href=\"https://github.com/mattcheah/cover-letter-snippets#setting-up-a-database\">visit the README</a>.\r\n  </p>\r\n  <p>The database string here is a test sandbox for anyone to use. Please play nice.</p>\r\n  <input [(ngModel)]=\"databaseString\"/><br>\r\n  <button [ngClass]=\"{inactive: databaseString == ''}\" (click)=\"connect(databaseString)\">Connect to Database</button>\r\n</div>\r\n\r\n<div *ngIf=\"databaseService.showDatabase\">\r\n  <p>\r\n    Your Snippets Database has {{databaseService.database.length}} entries.<br>\r\n    <small>Click a snippet or category to edit and press 'enter' to save</small>\r\n  </p>\r\n  <div class=\"table-container\">\r\n\r\n    <table id=\"database-table\">\r\n      <thead>\r\n        <tr>\r\n          <td>Snippet</td>\r\n          <td>Categories</td>\r\n          <td>Delete</td>\r\n        </tr>\r\n      </thead>\r\n      <tbody>\r\n        <tr [id]=\"'snippet-'+snippet._id\" *ngFor=\"let snippet of databaseService.database\">\r\n          <td (click)=\"toggleEditSnippet(snippet)\" >\r\n            <div class=\"snippet no-edit\" style=\"display:block\">\r\n              {{snippet.snippet}}\r\n            </div>\r\n            <textarea  \r\n            [(ngModel)]=\"editSnippetObject ? editSnippetObject.snippet : snippet.snippet\" \r\n            (keydown)=\"snippetEdited = true\" \r\n            (keyup.enter)=\"saveEdit(editSnippetObject)\" \r\n            (blur)=\"saveEdit(editSnippetObject)\"\r\n            class=\"snippet-edit editable\" >\r\n            </textarea>\r\n          </td>\r\n          <td (click)=\"toggleEditCategories(snippet)\" >\r\n            <div class=\"categories no-edit\" style=\"display:block\">\r\n              {{snippet.categories}}\r\n            </div>\r\n            <input \r\n            [(ngModel)]=\"editSnippetObject ? editSnippetObject.categories : snippet.categories\" \r\n            (keydown)=\"snippetEdited = true\" \r\n            (keyup.enter)=\"saveEdit(editSnippetObject)\" \r\n            (blur)=\"saveEdit(editSnippetObject)\"\r\n            class=\"categories-edit editable\" >\r\n          </td>\r\n          <td class=\"delete\"><a (click)=\"deleteRecord(snippet._id)\">Delete</a></td>\r\n        </tr>\r\n      </tbody>\r\n    </table>\r\n  </div>\r\n\r\n  <app-category-aliases-db></app-category-aliases-db>\r\n\r\n</div>\r\n"
 
 /***/ }),
 
@@ -445,6 +617,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "DatabaseComponent", function() { return DatabaseComponent; });
 /* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm5/core.js");
 /* harmony import */ var _services_database_service__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../services/database.service */ "./src/app/services/database.service.ts");
+/* harmony import */ var _services_databaseCategoryAliases_service__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../services/databaseCategoryAliases.service */ "./src/app/services/databaseCategoryAliases.service.ts");
 var __decorate = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -456,9 +629,11 @@ var __metadata = (undefined && undefined.__metadata) || function (k, v) {
 };
 
 
+
 var DatabaseComponent = /** @class */ (function () {
-    function DatabaseComponent(databaseService) {
+    function DatabaseComponent(databaseService, databaseCategoryAliasesService) {
         this.databaseService = databaseService;
+        this.databaseCategoryAliasesService = databaseCategoryAliasesService;
         this.showConnectForm = true;
         this.databaseString = 'mongodb://user:testtest1@ds119660.mlab.com:19660/snippets-sandbox';
         this.editingCategory = false;
@@ -467,7 +642,10 @@ var DatabaseComponent = /** @class */ (function () {
     DatabaseComponent.prototype.ngOnInit = function () {
     };
     DatabaseComponent.prototype.connectJson = function (jsonString) {
+        console.log("in db component connectJson");
         this.databaseService.startConnection(true, jsonString);
+        console.log("json string for db service: " + jsonString);
+        this.databaseCategoryAliasesService.startAliasConnection(true, jsonString);
     };
     DatabaseComponent.prototype.connect = function (connectString) {
         // console.log("connecting to mongoose db: response is:");
@@ -482,6 +660,10 @@ var DatabaseComponent = /** @class */ (function () {
             this.editSnippetObject = snippet;
             var snippetLabel = document.querySelector('#snippet-' + snippet._id + ' .snippet');
             var snippetEdit = document.querySelector('#snippet-' + snippet._id + ' .snippet-edit');
+            console.log("snippet label: ");
+            console.log(snippetLabel);
+            console.log("snippet edited: ");
+            console.log(snippetEdit);
             snippetLabel.style.display = 'none';
             snippetEdit.style.display = 'block';
         }
@@ -538,7 +720,8 @@ var DatabaseComponent = /** @class */ (function () {
             template: __webpack_require__(/*! ./database.component.html */ "./src/app/database/database.component.html"),
             styles: [__webpack_require__(/*! ./database.component.css */ "./src/app/database/database.component.css")]
         }),
-        __metadata("design:paramtypes", [_services_database_service__WEBPACK_IMPORTED_MODULE_1__["DatabaseService"]])
+        __metadata("design:paramtypes", [_services_database_service__WEBPACK_IMPORTED_MODULE_1__["DatabaseService"],
+            _services_databaseCategoryAliases_service__WEBPACK_IMPORTED_MODULE_2__["DatabaseCategoryAliasesService"]])
     ], DatabaseComponent);
     return DatabaseComponent;
 }());
@@ -1028,10 +1211,12 @@ var DatabaseService = /** @class */ (function () {
         this.connected = false;
         this.showDatabase = false;
         this.categories = {};
+        this.aliases = {};
     }
     DatabaseService.prototype.startConnection = function (isJson, urlString) {
         if (isJson === void 0) { isJson = true; }
         if (urlString === void 0) { urlString = 'snippets-db.json'; }
+        console.log("inside start connection. url string: " + urlString);
         var self = this;
         var dataObj = JSON.stringify({ databaseUrl: urlString });
         var options = {
@@ -1058,6 +1243,7 @@ var DatabaseService = /** @class */ (function () {
         });
     };
     DatabaseService.prototype.addSnippet = function (snippet, categories) {
+        console.log("in add snippet");
         var self = this;
         var data = { snippet: snippet, categories: categories };
         var options = {
@@ -1066,6 +1252,7 @@ var DatabaseService = /** @class */ (function () {
             })
         };
         var url = self.isJson ? 'api/add-json-snippet' : 'api/add-snippet';
+        console.log("(snippet) database service file url: " + url);
         this.http.post(url, JSON.stringify(data), options)
             .pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_3__["catchError"])(this.handleError)).subscribe(function (returnData) {
             if (returnData.connected) {
@@ -1157,6 +1344,182 @@ var DatabaseService = /** @class */ (function () {
             _status_message_service__WEBPACK_IMPORTED_MODULE_4__["StatusMessageService"]])
     ], DatabaseService);
     return DatabaseService;
+}());
+
+
+
+/***/ }),
+
+/***/ "./src/app/services/databaseCategoryAliases.service.ts":
+/*!*************************************************************!*\
+  !*** ./src/app/services/databaseCategoryAliases.service.ts ***!
+  \*************************************************************/
+/*! exports provided: DatabaseCategoryAliasesService */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "DatabaseCategoryAliasesService", function() { return DatabaseCategoryAliasesService; });
+/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm5/core.js");
+/* harmony import */ var _angular_common_http__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/common/http */ "./node_modules/@angular/common/fesm5/http.js");
+/* harmony import */ var rxjs__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! rxjs */ "./node_modules/rxjs/_esm5/index.js");
+/* harmony import */ var rxjs_operators__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! rxjs/operators */ "./node_modules/rxjs/_esm5/operators/index.js");
+/* harmony import */ var _status_message_service__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./status-message.service */ "./src/app/services/status-message.service.ts");
+var __decorate = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (undefined && undefined.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+
+
+
+
+
+var DatabaseCategoryAliasesService = /** @class */ (function () {
+    function DatabaseCategoryAliasesService(http, statusMessageService) {
+        this.http = http;
+        this.statusMessageService = statusMessageService;
+        this.connected = false;
+        this.showDatabase = false;
+        this.aliases = {};
+    }
+    DatabaseCategoryAliasesService.prototype.startAliasConnection = function (isJson, urlString) {
+        if (isJson === void 0) { isJson = true; }
+        if (urlString === void 0) { urlString = 'category-aliases-db.json'; }
+        console.log("in db category alias service startconnection");
+        var self = this;
+        var dataObj = JSON.stringify({ databaseUrl: urlString });
+        var options = {
+            headers: new _angular_common_http__WEBPACK_IMPORTED_MODULE_1__["HttpHeaders"]({
+                'Content-Type': 'application/json; charset=utf-8'
+            })
+        };
+        //const url = isJson ? 'api/get-json-category-aliases-data' : 'api/connect-to-database';
+        var url = 'api/get-json-category-aliases-data';
+        console.log("category alias url: " + url);
+        self.isJson = isJson;
+        this.http.post(url, dataObj, options)
+            .pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_3__["retry"])(2), Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_3__["catchError"])(this.handleError)).subscribe(function (response) {
+            if (response.connected && !response.error) {
+                self.database = response.data;
+                self.statusMessageService.newStatusMessage(response.responseMessage, 'success');
+                self.connected = true;
+                self.showDatabase = true;
+                if (self.database.length > 0) {
+                    console.log("calling extractAliases");
+                    self.extractAliases();
+                }
+            }
+            else if (response.error) {
+                self.statusMessageService.newStatusMessage(response.responseMessage, 'errir');
+            }
+        });
+    };
+    DatabaseCategoryAliasesService.prototype.addCategoryAliases = function (category, aliases) {
+        var self = this;
+        var data = { category: category, aliases: aliases };
+        var options = {
+            headers: new _angular_common_http__WEBPACK_IMPORTED_MODULE_1__["HttpHeaders"]({
+                'Content-Type': 'application/json; charset=utf-8'
+            })
+        };
+        var url = self.isJson ? 'api/add-json-category-aliases' : 'api/add-snippet';
+        this.http.post(url, JSON.stringify(data), options)
+            .pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_3__["catchError"])(this.handleError)).subscribe(function (returnData) {
+            if (returnData.connected) {
+                self.statusMessageService.newStatusMessage(returnData.responseMessage, 'success');
+                self.database = returnData.data;
+                self.extractAliases();
+            }
+            else if (returnData.error) {
+                self.statusMessageService.newStatusMessage(returnData.responseMessage, 'error');
+            }
+        });
+    };
+    DatabaseCategoryAliasesService.prototype.editCategoryAliases = function (id, category, aliases) {
+        var self = this;
+        var url = self.isJson ? 'api/edit-json-category-aliases' : 'api/edit-snippet';
+        var data = { id: id, category: category, aliases: aliases };
+        var options = {
+            headers: new _angular_common_http__WEBPACK_IMPORTED_MODULE_1__["HttpHeaders"]({
+                'Content-Type': 'application/json; charset=utf-8'
+            })
+        };
+        this.http.put(url, JSON.stringify(data), options)
+            .pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_3__["catchError"])(this.handleError)).subscribe(function (returnData) {
+            if (returnData.connected && !returnData.error) {
+                self.statusMessageService.newStatusMessage(returnData.responseMessage, 'success');
+                self.database = returnData.data;
+                self.extractAliases();
+            }
+            else if (returnData.error) {
+                self.statusMessageService.newStatusMessage(returnData.responseMessage, 'errir');
+            }
+        });
+    };
+    DatabaseCategoryAliasesService.prototype.deleteCategory = function (id) {
+        var self = this;
+        var data = { id: id };
+        var url = self.isJson ? 'api/delete-json-category-aliases' : 'api/delete-snippet';
+        var options = {
+            headers: new _angular_common_http__WEBPACK_IMPORTED_MODULE_1__["HttpHeaders"]({
+                'Content-Type': 'application/json; charset=utf-8'
+            }),
+            body: JSON.stringify(data)
+        };
+        this.http.delete(url, options)
+            .pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_3__["catchError"])(this.handleError)).subscribe(function (returnData) {
+            if (returnData.connected && !returnData.error) {
+                self.statusMessageService.newStatusMessage(returnData.responseMessage, 'success');
+                self.database = returnData.data;
+                self.extractAliases();
+            }
+            else if (returnData.error) {
+                self.statusMessageService.newStatusMessage(returnData.responseMessage, 'errir');
+            }
+        });
+    };
+    DatabaseCategoryAliasesService.prototype.extractAliases = function () {
+        this.aliases = {};
+        for (var i = 0; i < this.database.length; i++) {
+            var record = this.database[i];
+            for (var j = 0; j < record.aliases.length; j++) {
+                var alias = record.aliases[j];
+                if (!(alias in this.aliases)) {
+                    this.aliases[alias] = {
+                        ids: [],
+                        jobKeywords: 0
+                    };
+                }
+                this.aliases[alias].ids.push(record);
+            }
+        }
+        console.log("aliases: " + this.aliases);
+    };
+    DatabaseCategoryAliasesService.prototype.handleError = function (error) {
+        console.log('error obj: ');
+        console.log(error);
+        if (error.error instanceof ErrorEvent) {
+            console.error('Error: ', error.error.message);
+            this.statusMessageService.newStatusMessage('There was a network error with your request: ' + error.error.message, 'error');
+        }
+        else {
+            console.error("Backend returned code " + error.status);
+            console.error("Error Body: " + error.error);
+            this.statusMessageService.newStatusMessage('There was a server error with your request: ' + error.error, 'error');
+        }
+        return Object(rxjs__WEBPACK_IMPORTED_MODULE_2__["throwError"])('error from throwerror');
+    };
+    DatabaseCategoryAliasesService = __decorate([
+        Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["Injectable"])(),
+        __metadata("design:paramtypes", [_angular_common_http__WEBPACK_IMPORTED_MODULE_1__["HttpClient"],
+            _status_message_service__WEBPACK_IMPORTED_MODULE_4__["StatusMessageService"]])
+    ], DatabaseCategoryAliasesService);
+    return DatabaseCategoryAliasesService;
 }());
 
 

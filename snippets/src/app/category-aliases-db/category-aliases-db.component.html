@@ -1,0 +1,64 @@
+<div *ngIf="!dbAliasService.connected">
+  <h4 id="json-title">Use JSON File:</h4>
+  <p>
+    Click here to store/pull data from a local JSON file.
+  </p>
+  <button (click)="connectAliasJson()">Connect to JSON File</button>
+
+  <br>
+
+  <h4 id="db-title">Connect your Database:</h4>
+  <p>
+    Paste your MongoDB url here with credentials and we will connect to your database.
+    For instructions on how to create a cloud-hosted database, <a href="https://github.com/mattcheah/cover-letter-snippets#setting-up-a-database">visit the README</a>.
+  </p>
+  <p>The database string here is a test sandbox for anyone to use. Please play nice.</p>
+  <input [(ngModel)]="databaseString"/><br>
+  <button [ngClass]="{inactive: databaseString == ''}" (click)="connect(databaseString)">Connect to Database</button>
+</div>
+
+<div *ngIf="dbAliasService.showDatabase">
+  <p>
+    Your Snippets Database has {{dbAliasService.database.length}} categories.<br>
+    <small>Click a category or aliases to edit and press 'enter' to save</small>
+  </p>
+  <div class="table-container">
+
+    <table id="database-table">
+      <thead>
+        <tr>
+          <td>Category</td>
+          <td>Aliases</td>
+          <td>Delete</td>
+        </tr>
+      </thead>
+      <tbody>
+        <tr [id]="'category-'+category._id" *ngFor="let category of dbAliasService.database">
+          <td (click)="toggleEditCategory(category)" >
+            <div class="category no-edit" style="display:block">
+              {{category.category}}
+            </div>
+            <textarea  
+            [(ngModel)]="editCategoryObject ? editCategoryObject.category : category.category" 
+            (keydown)="categoryEdited = true" 
+            (keyup.enter)="saveEdit(editCategoryObject)" 
+            class="category-edit editable" >
+            </textarea>
+          </td>
+          <td (click)="toggleEditAliases(category)" >
+            <div class="aliases no-edit" style="display:block">
+              {{category.aliases}}
+            </div>
+            <input 
+            [(ngModel)]="editCategoryObject ? editCategoryObject.aliases : category.aliases" 
+            (keydown)="categoryEdited = true" 
+            (keyup.enter)="saveEdit(editCategoryObject)" 
+            class="aliases-edit editable" >
+          </td>
+          <td class="delete"><a (click)="deleteRecord(category._id)">Delete</a></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+</div>
