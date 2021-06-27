@@ -34,27 +34,27 @@ export class CategoryAliasesDatabaseComponent implements OnInit {
   }
 
   toggleEditCategory(category): void {
-    console.log("id and category: " + category._id);
-    console.log(category);
+    // console.log("id and category: " + category._id);
+    // console.log(category);
     if (!this.editCategoryObject || category._id !== this.editCategoryObject._id || this.editingAlias) {
       this.editingAlias = false;
 
       if (this.editCategoryObject) {
-        console.log("about to save edit category obj");
-        console.log(this.editCategoryObject);
+        // console.log("about to save edit category obj");
+        // console.log(this.editCategoryObject);
         this.saveEdit(this.editCategoryObject);
       }
 
       this.editCategoryObject = category;
-      console.log("editing category obj");
-      console.log(this.editCategoryObject);
+      // console.log("editing category obj");
+      // console.log(this.editCategoryObject);
       const categoryLabel: HTMLElement = document.querySelector('#category-' + category._id + ' .category');
       const categoryEdit: HTMLElement = document.querySelector('#category-' + category._id + ' .category-edit');
 
-      console.log("cat label: ");
-      console.log(categoryLabel);
-      console.log("cat edited: ");
-      console.log(categoryEdit);
+      // console.log("cat label: ");
+      // console.log(categoryLabel);
+      // console.log("cat edited: ");
+      // console.log(categoryEdit);
 
       categoryLabel.style.display = 'none';
       categoryEdit.style.display = 'block';
@@ -96,8 +96,8 @@ export class CategoryAliasesDatabaseComponent implements OnInit {
   }
 
   saveEdit(category): void {
-    console.log("saveEdit function- category: ");
-    console.log(category);
+    // console.log("saveEdit function- category: ");
+    // console.log(category);
 
     // setting variables for edited content so that
     const newCat: HTMLInputElement = document.querySelector('#category-' + category._id + ' .category-edit');
@@ -110,10 +110,10 @@ export class CategoryAliasesDatabaseComponent implements OnInit {
         category.aliases.replace(' ', '');
         category.aliases = category.aliases.split(',');
       }
-      console.log("cat id, cat, aliases: ");
-      console.log(category._id);
-      console.log(category.category);
-      console.log(category.aliases);
+      // console.log("cat id, cat, aliases: ");
+      // console.log(category._id);
+      // console.log(category.category);
+      // console.log(category.aliases);
       this.dbAliasService.editCategoryAliases(category._id, category.category, category.aliases);
       this.categoryEdited = false;
     }

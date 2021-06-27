@@ -370,7 +370,7 @@ module.exports = ".table-container {\r\n    max-height: 300px;\r\n}\r\n\r\n#data
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<div *ngIf=\"!dbAliasService.connected\">\r\n  <h4 id=\"json-title\">Use JSON File:</h4>\r\n  <p>\r\n    Click here to store/pull data from a local JSON file.\r\n  </p>\r\n  <button (click)=\"connectAliasJson()\">Connect to JSON File</button>\r\n\r\n  <br>\r\n\r\n  <h4 id=\"db-title\">Connect your Database:</h4>\r\n  <p>\r\n    Paste your MongoDB url here with credentials and we will connect to your database.\r\n    For instructions on how to create a cloud-hosted database, <a href=\"https://github.com/mattcheah/cover-letter-snippets#setting-up-a-database\">visit the README</a>.\r\n  </p>\r\n  <p>The database string here is a test sandbox for anyone to use. Please play nice.</p>\r\n  <input [(ngModel)]=\"databaseString\"/><br>\r\n  <button [ngClass]=\"{inactive: databaseString == ''}\" (click)=\"connect(databaseString)\">Connect to Database</button>\r\n</div>\r\n\r\n<div *ngIf=\"dbAliasService.showDatabase\">\r\n  <p>\r\n    Your Snippets Database has {{dbAliasService.database.length}} categories.<br>\r\n    <small>Click a category or aliases to edit and press 'enter' to save</small>\r\n  </p>\r\n  <div class=\"table-container\">\r\n\r\n    <table id=\"database-table\">\r\n      <thead>\r\n        <tr>\r\n          <td>Category</td>\r\n          <td>Aliases</td>\r\n          <td>Delete</td>\r\n        </tr>\r\n      </thead>\r\n      <tbody>\r\n        <tr [id]=\"'category-'+category._id\" *ngFor=\"let category of dbAliasService.database\">\r\n          <td (click)=\"toggleEditCategory(category)\" >\r\n            <div class=\"category no-edit\" style=\"display:block\">\r\n              {{category.category}}\r\n            </div>\r\n            <textarea  \r\n            [(ngModel)]=\"editCategoryObject ? editCategoryObject.category : category.category\" \r\n            (keydown)=\"categoryEdited = true\" \r\n            (keyup.enter)=\"saveEdit(editCategoryObject)\" \r\n            class=\"category-edit editable\" >\r\n            </textarea>\r\n          </td>\r\n          <td (click)=\"toggleEditAliases(category)\" >\r\n            <div class=\"aliases no-edit\" style=\"display:block\">\r\n              {{category.aliases}}\r\n            </div>\r\n            <input \r\n            [(ngModel)]=\"editCategoryObject ? editCategoryObject.aliases : category.aliases\" \r\n            (keydown)=\"categoryEdited = true\" \r\n            (keyup.enter)=\"saveEdit(editCategoryObject)\" \r\n            class=\"aliases-edit editable\" >\r\n          </td>\r\n          <td class=\"delete\"><a (click)=\"deleteRecord(category._id)\">Delete</a></td>\r\n        </tr>\r\n      </tbody>\r\n    </table>\r\n  </div>\r\n\r\n</div>\r\n"
+module.exports = "<div *ngIf=\"!dbAliasService.connected\">\r\n  <h4 id=\"json-title\">Use JSON File:</h4>\r\n  <p>\r\n    Click here to store/pull data from a local JSON file.\r\n  </p>\r\n  <button (click)=\"connectAliasJson()\">Connect to JSON File</button>\r\n\r\n  <br>\r\n\r\n  <h4 id=\"db-title\">Connect your Database:</h4>\r\n  <p>\r\n    Paste your MongoDB url here with credentials and we will connect to your database.\r\n    For instructions on how to create a cloud-hosted database, <a href=\"https://github.com/mattcheah/cover-letter-snippets#setting-up-a-database\">visit the README</a>.\r\n  </p>\r\n  <p>The database string here is a test sandbox for anyone to use. Please play nice.</p>\r\n  <input [(ngModel)]=\"databaseString\"/><br>\r\n  <button [ngClass]=\"{inactive: databaseString == ''}\" (click)=\"connect(databaseString)\">Connect to Database</button>\r\n</div>\r\n\r\n<div *ngIf=\"dbAliasService.showDatabase\">\r\n  <p>\r\n    Your Database has {{dbAliasService.database.length}} categories with their aliases.<br>\r\n    <small>Click a category or aliases to edit and press 'enter' to save</small>\r\n  </p>\r\n  <div class=\"table-container\">\r\n\r\n    <table id=\"database-table\">\r\n      <thead>\r\n        <tr>\r\n          <td>Category</td>\r\n          <td>Aliases</td>\r\n          <td>Delete</td>\r\n        </tr>\r\n      </thead>\r\n      <tbody>\r\n        <tr [id]=\"'category-'+category._id\" *ngFor=\"let category of dbAliasService.database\">\r\n          <td (click)=\"toggleEditCategory(category)\" >\r\n            <div class=\"category no-edit\" style=\"display:block\">\r\n              {{category.category}}\r\n            </div>\r\n            <textarea  \r\n            [(ngModel)]=\"editCategoryObject ? editCategoryObject.category : category.category\" \r\n            (keydown)=\"categoryEdited = true\" \r\n            (keyup.enter)=\"saveEdit(editCategoryObject)\" \r\n            class=\"category-edit editable\" >\r\n            </textarea>\r\n          </td>\r\n          <td (click)=\"toggleEditAliases(category)\" >\r\n            <div class=\"aliases no-edit\" style=\"display:block\">\r\n              {{category.aliases}}\r\n            </div>\r\n            <input \r\n            [(ngModel)]=\"editCategoryObject ? editCategoryObject.aliases : category.aliases\" \r\n            (keydown)=\"categoryEdited = true\" \r\n            (keyup.enter)=\"saveEdit(editCategoryObject)\" \r\n            class=\"aliases-edit editable\" >\r\n          </td>\r\n          <td class=\"delete\"><a (click)=\"deleteRecord(category._id)\">Delete</a></td>\r\n        </tr>\r\n      </tbody>\r\n    </table>\r\n  </div>\r\n\r\n</div>\r\n"
 
 /***/ }),
 
@@ -415,24 +415,24 @@ var CategoryAliasesDatabaseComponent = /** @class */ (function () {
         this.dbAliasService.startAliasConnection(false, connectString);
     };
     CategoryAliasesDatabaseComponent.prototype.toggleEditCategory = function (category) {
-        console.log("id and category: " + category._id);
-        console.log(category);
+        // console.log("id and category: " + category._id);
+        // console.log(category);
         if (!this.editCategoryObject || category._id !== this.editCategoryObject._id || this.editingAlias) {
             this.editingAlias = false;
             if (this.editCategoryObject) {
-                console.log("about to save edit category obj");
-                console.log(this.editCategoryObject);
+                // console.log("about to save edit category obj");
+                // console.log(this.editCategoryObject);
                 this.saveEdit(this.editCategoryObject);
             }
             this.editCategoryObject = category;
-            console.log("editing category obj");
-            console.log(this.editCategoryObject);
+            // console.log("editing category obj");
+            // console.log(this.editCategoryObject);
             var categoryLabel = document.querySelector('#category-' + category._id + ' .category');
             var categoryEdit = document.querySelector('#category-' + category._id + ' .category-edit');
-            console.log("cat label: ");
-            console.log(categoryLabel);
-            console.log("cat edited: ");
-            console.log(categoryEdit);
+            // console.log("cat label: ");
+            // console.log(categoryLabel);
+            // console.log("cat edited: ");
+            // console.log(categoryEdit);
             categoryLabel.style.display = 'none';
             categoryEdit.style.display = 'block';
         }
@@ -464,8 +464,8 @@ var CategoryAliasesDatabaseComponent = /** @class */ (function () {
         }
     };
     CategoryAliasesDatabaseComponent.prototype.saveEdit = function (category) {
-        console.log("saveEdit function- category: ");
-        console.log(category);
+        // console.log("saveEdit function- category: ");
+        // console.log(category);
         // setting variables for edited content so that
         var newCat = document.querySelector('#category-' + category._id + ' .category-edit');
         var newAlias = document.querySelector('#category-' + category._id + ' .aliases-edit');
@@ -476,10 +476,10 @@ var CategoryAliasesDatabaseComponent = /** @class */ (function () {
                 category.aliases.replace(' ', '');
                 category.aliases = category.aliases.split(',');
             }
-            console.log("cat id, cat, aliases: ");
-            console.log(category._id);
-            console.log(category.category);
-            console.log(category.aliases);
+            // console.log("cat id, cat, aliases: ");
+            // console.log(category._id);
+            // console.log(category.category);
+            // console.log(category.aliases);
             this.dbAliasService.editCategoryAliases(category._id, category.category, category.aliases);
             this.categoryEdited = false;
         }
@@ -642,9 +642,9 @@ var DatabaseComponent = /** @class */ (function () {
     DatabaseComponent.prototype.ngOnInit = function () {
     };
     DatabaseComponent.prototype.connectJson = function (jsonString) {
-        console.log("in db component connectJson");
+        // console.log("in db component connectJson");
         this.databaseService.startConnection(true, jsonString);
-        console.log("json string for db service: " + jsonString);
+        // console.log("json string for db service: " + jsonString);
         this.databaseCategoryAliasesService.startAliasConnection(true, jsonString);
     };
     DatabaseComponent.prototype.connect = function (connectString) {
@@ -660,10 +660,10 @@ var DatabaseComponent = /** @class */ (function () {
             this.editSnippetObject = snippet;
             var snippetLabel = document.querySelector('#snippet-' + snippet._id + ' .snippet');
             var snippetEdit = document.querySelector('#snippet-' + snippet._id + ' .snippet-edit');
-            console.log("snippet label: ");
-            console.log(snippetLabel);
-            console.log("snippet edited: ");
-            console.log(snippetEdit);
+            // console.log("snippet label: ");
+            // console.log(snippetLabel);
+            // console.log("snippet edited: ");
+            // console.log(snippetEdit);
             snippetLabel.style.display = 'none';
             snippetEdit.style.display = 'block';
         }
@@ -1214,9 +1214,9 @@ var DatabaseService = /** @class */ (function () {
         this.aliases = {};
     }
     DatabaseService.prototype.startConnection = function (isJson, urlString) {
+        // console.log("inside start connection. url string: " + urlString);
         if (isJson === void 0) { isJson = true; }
         if (urlString === void 0) { urlString = 'snippets-db.json'; }
-        console.log("inside start connection. url string: " + urlString);
         var self = this;
         var dataObj = JSON.stringify({ databaseUrl: urlString });
         var options = {
@@ -1243,7 +1243,7 @@ var DatabaseService = /** @class */ (function () {
         });
     };
     DatabaseService.prototype.addSnippet = function (snippet, categories) {
-        console.log("in add snippet");
+        // console.log("in add snippet");
         var self = this;
         var data = { snippet: snippet, categories: categories };
         var options = {
@@ -1252,7 +1252,7 @@ var DatabaseService = /** @class */ (function () {
             })
         };
         var url = self.isJson ? 'api/add-json-snippet' : 'api/add-snippet';
-        console.log("(snippet) database service file url: " + url);
+        // console.log("(snippet) database service file url: " + url);
         this.http.post(url, JSON.stringify(data), options)
             .pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_3__["catchError"])(this.handleError)).subscribe(function (returnData) {
             if (returnData.connected) {
@@ -1386,11 +1386,12 @@ var DatabaseCategoryAliasesService = /** @class */ (function () {
         this.connected = false;
         this.showDatabase = false;
         this.aliases = {};
+        this.categories = {};
     }
     DatabaseCategoryAliasesService.prototype.startAliasConnection = function (isJson, urlString) {
         if (isJson === void 0) { isJson = true; }
         if (urlString === void 0) { urlString = 'category-aliases-db.json'; }
-        console.log("in db category alias service startconnection");
+        // console.log("in db category alias service startconnection");
         var self = this;
         var dataObj = JSON.stringify({ databaseUrl: urlString });
         var options = {
@@ -1400,7 +1401,7 @@ var DatabaseCategoryAliasesService = /** @class */ (function () {
         };
         //const url = isJson ? 'api/get-json-category-aliases-data' : 'api/connect-to-database';
         var url = 'api/get-json-category-aliases-data';
-        console.log("category alias url: " + url);
+        // console.log("category alias url: " + url);
         self.isJson = isJson;
         this.http.post(url, dataObj, options)
             .pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_3__["retry"])(2), Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_3__["catchError"])(this.handleError)).subscribe(function (response) {
@@ -1410,8 +1411,9 @@ var DatabaseCategoryAliasesService = /** @class */ (function () {
                 self.connected = true;
                 self.showDatabase = true;
                 if (self.database.length > 0) {
-                    console.log("calling extractAliases");
+                    // console.log("calling extractAliases")
                     self.extractAliases();
+                    self.extractCategories();
                 }
             }
             else if (response.error) {
@@ -1498,7 +1500,22 @@ var DatabaseCategoryAliasesService = /** @class */ (function () {
                 this.aliases[alias].ids.push(record);
             }
         }
-        console.log("aliases: " + this.aliases);
+        // console.log("aliases: " + this.aliases)
+    };
+    DatabaseCategoryAliasesService.prototype.extractCategories = function () {
+        this.categories = {};
+        for (var i = 0; i < this.database.length; i++) {
+            var record = this.database[i];
+            var category = record.category;
+            if (!(category in this.categories)) {
+                this.categories[category] = {
+                    ids: [],
+                    jobKeywords: 0
+                };
+            }
+            this.categories[category].ids.push(record);
+        }
+        // console.log("aliases: " + this.aliases)
     };
     DatabaseCategoryAliasesService.prototype.handleError = function (error) {
         console.log('error obj: ');
@@ -1538,7 +1555,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ParseDescriptionService", function() { return ParseDescriptionService; });
 /* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm5/core.js");
 /* harmony import */ var _database_service__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./database.service */ "./src/app/services/database.service.ts");
-/* harmony import */ var _status_message_service__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./status-message.service */ "./src/app/services/status-message.service.ts");
+/* harmony import */ var _databaseCategoryAliases_service__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./databaseCategoryAliases.service */ "./src/app/services/databaseCategoryAliases.service.ts");
+/* harmony import */ var _status_message_service__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./status-message.service */ "./src/app/services/status-message.service.ts");
 var __decorate = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -1551,9 +1569,11 @@ var __metadata = (undefined && undefined.__metadata) || function (k, v) {
 
 
 
+
 var ParseDescriptionService = /** @class */ (function () {
-    function ParseDescriptionService(databaseService, statusMessageService) {
+    function ParseDescriptionService(databaseService, databaseCategoryAliasesService, statusMessageService) {
         this.databaseService = databaseService;
+        this.databaseCategoryAliasesService = databaseCategoryAliasesService;
         this.statusMessageService = statusMessageService;
         this.jobDescription = '';
         this.showParsingResults = false;
@@ -1567,8 +1587,16 @@ var ParseDescriptionService = /** @class */ (function () {
             if (word in this.databaseService.categories) {
                 this.databaseService.categories[word].jobKeywords++;
             }
+            else if (word in this.databaseCategoryAliasesService.aliases) {
+                var category = this.getCategoryForAlias(word).trim();
+                // console.log("adding alias based category: ");
+                // console.log(category);
+                this.databaseService.categories[category].jobKeywords++;
+            }
         }
         this.keywordArray = this.createOrderedArray();
+        // console.log("parse description service keyword array: ");
+        // console.log(this.keywordArray);
         this.showParsingResults = true;
     };
     ParseDescriptionService.prototype.resetJobKeywords = function () {
@@ -1614,9 +1642,21 @@ var ParseDescriptionService = /** @class */ (function () {
         this.statusMessageService.newStatusMessage(statusMessage, 'success');
         return keywordsArray;
     };
+    ParseDescriptionService.prototype.getCategoryForAlias = function (alias) {
+        for (var i = 0; i < this.databaseCategoryAliasesService.database.length; i++) {
+            var record = this.databaseCategoryAliasesService.database[i];
+            for (var j = 0; j < record.aliases.length; j++) {
+                if (alias === record.aliases[j]) {
+                    return record.category;
+                }
+            }
+        }
+    };
     ParseDescriptionService = __decorate([
         Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["Injectable"])(),
-        __metadata("design:paramtypes", [_database_service__WEBPACK_IMPORTED_MODULE_1__["DatabaseService"], _status_message_service__WEBPACK_IMPORTED_MODULE_2__["StatusMessageService"]])
+        __metadata("design:paramtypes", [_database_service__WEBPACK_IMPORTED_MODULE_1__["DatabaseService"],
+            _databaseCategoryAliases_service__WEBPACK_IMPORTED_MODULE_2__["DatabaseCategoryAliasesService"],
+            _status_message_service__WEBPACK_IMPORTED_MODULE_3__["StatusMessageService"]])
     ], ParseDescriptionService);
     return ParseDescriptionService;
 }());

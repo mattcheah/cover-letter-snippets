@@ -28,9 +28,9 @@ export class DatabaseComponent implements OnInit {
   }
 
   connectJson(jsonString: string): void {
-    console.log("in db component connectJson");
+    // console.log("in db component connectJson");
     this.databaseService.startConnection(true, jsonString);
-    console.log("json string for db service: " + jsonString);
+    // console.log("json string for db service: " + jsonString);
     
     this.databaseCategoryAliasesService.startAliasConnection(true, jsonString);
   }
@@ -52,10 +52,10 @@ export class DatabaseComponent implements OnInit {
       const snippetLabel: HTMLElement = document.querySelector('#snippet-' + snippet._id + ' .snippet');
       const snippetEdit: HTMLElement = document.querySelector('#snippet-' + snippet._id + ' .snippet-edit');
 
-      console.log("snippet label: ");
-      console.log(snippetLabel);
-      console.log("snippet edited: ");
-      console.log(snippetEdit);
+      // console.log("snippet label: ");
+      // console.log(snippetLabel);
+      // console.log("snippet edited: ");
+      // console.log(snippetEdit);
 
       snippetLabel.style.display = 'none';
       snippetEdit.style.display = 'block';

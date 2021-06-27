@@ -19,6 +19,7 @@ export class DatabaseCategoryAliasesService {
   connected = false;
   showDatabase = false;
   aliases: any = {};
+  categories: any = {};
 
   constructor(
     private http: HttpClient,
@@ -26,7 +27,7 @@ export class DatabaseCategoryAliasesService {
   ) { }
 
   startAliasConnection(isJson = true, urlString = 'category-aliases-db.json'): void {
-    console.log("in db category alias service startconnection");
+    // console.log("in db category alias service startconnection");
     const self = this;
     const dataObj = JSON.stringify({ databaseUrl: urlString });
     const options = {
@@ -37,7 +38,7 @@ export class DatabaseCategoryAliasesService {
     //const url = isJson ? 'api/get-json-category-aliases-data' : 'api/connect-to-database';
     const url = 'api/get-json-category-aliases-data';
 
-    console.log("category alias url: " + url);
+    // console.log("category alias url: " + url);
     self.isJson = isJson;
 
     this.http.post<DatabaseResponse>(url, dataObj, options)
@@ -50,8 +51,9 @@ export class DatabaseCategoryAliasesService {
         self.showDatabase = true;
 
         if (self.database.length > 0) {
-          console.log("calling extractAliases")
+          // console.log("calling extractAliases")
           self.extractAliases();
+          self.extractCategories();
         }
       } else if (response.error) {
         self.statusMessageService.newStatusMessage(response.responseMessage, 'errir');
@@ -145,7 +147,23 @@ export class DatabaseCategoryAliasesService {
         this.aliases[alias].ids.push(record);
       }
     }
-    console.log("aliases: " + this.aliases)
+    // console.log("aliases: " + this.aliases)
+  }
+
+  private extractCategories(): void {
+    this.categories = {};
+    for (let i = 0; i < this.database.length; i++) {
+      const record = this.database[i];
+        const category = record.category;
+        if (!(category in this.categories)) {
+          this.categories[category] = {
+            ids: [],
+            jobKeywords: 0
+          };
+        }
+        this.categories[category].ids.push(record);
+    }
+    // console.log("aliases: " + this.aliases)
   }
 
   private handleError(error: HttpErrorResponse) {

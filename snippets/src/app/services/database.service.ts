@@ -27,7 +27,7 @@ export class DatabaseService {
   ) { }
 
   startConnection(isJson = true, urlString = 'snippets-db.json'): void {
-    console.log("inside start connection. url string: " + urlString);
+    // console.log("inside start connection. url string: " + urlString);
 
     const self = this;
     const dataObj = JSON.stringify({ databaseUrl: urlString });
@@ -58,7 +58,7 @@ export class DatabaseService {
   }
 
   addSnippet(snippet, categories): void {
-    console.log("in add snippet");
+    // console.log("in add snippet");
     const self = this;
     const data = {snippet: snippet, categories: categories};
     const options = {
@@ -68,7 +68,7 @@ export class DatabaseService {
     };
 
     const url = self.isJson ? 'api/add-json-snippet' : 'api/add-snippet';
-    console.log("(snippet) database service file url: " + url);
+    // console.log("(snippet) database service file url: " + url);
 
     this.http.post<DatabaseResponse>(url, JSON.stringify(data), options)
       .pipe(catchError(this.handleError)
