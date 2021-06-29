@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
 
 import { DatabaseService } from './database.service';
+import { DatabaseCategoryAliasesService } from './databaseCategoryAliases.service';
 import { StatusMessageService } from './status-message.service';
 
 @Injectable()
@@ -11,7 +12,11 @@ export class ParseDescriptionService {
   showParsingResults = false;
   keywordArray: Array<{}>;
 
-  constructor(private databaseService: DatabaseService, private statusMessageService: StatusMessageService) { }
+  constructor(
+    private databaseService: DatabaseService, 
+    private databaseCategoryAliasesService: DatabaseCategoryAliasesService, 
+    private statusMessageService: StatusMessageService
+    ) { }
 
   parseDescription(description): any {
     this.resetJobKeywords();
@@ -24,9 +29,17 @@ export class ParseDescriptionService {
       if (word in this.databaseService.categories) {
         this.databaseService.categories[word].jobKeywords++;
       }
+      else if (word in this.databaseCategoryAliasesService.aliases) {
+        var category = this.getCategoryForAlias(word).trim();
+        // console.log("adding alias based category: ");
+        // console.log(category);
+        this.databaseService.categories[category].jobKeywords++;
+      }
     }
 
     this.keywordArray = this.createOrderedArray();
+    // console.log("parse description service keyword array: ");
+    // console.log(this.keywordArray);
     this.showParsingResults = true;
 
   }
@@ -44,7 +57,7 @@ export class ParseDescriptionService {
     for (let i = 0; i < keywords.length; i++) {
       this.databaseService.categories[keywords[i]].keyword = keywords[i];
       keywordsArray.push(this.databaseService.categories[keywords[i]]);
-    }
+    } 
 
     function quicksortByJobKeywords(arr, left, right) {
       if (left < right) {
@@ -79,6 +92,17 @@ export class ParseDescriptionService {
     const statusMessage = 'Finished parsing the description. The category with the most keywords in this job description is: ' + keywordsArray[0].keyword + ' with ' + keywordsArray[0].jobKeywords + ' keywords.';
     this.statusMessageService.newStatusMessage(statusMessage, 'success');
     return keywordsArray;
+  }
+
+  getCategoryForAlias(alias): any{
+    for(let i = 0; i < this.databaseCategoryAliasesService.database.length; i++){
+      const record = this.databaseCategoryAliasesService.database[i];
+      for (let j = 0; j < record.aliases.length; j++){
+        if(alias === record.aliases[j]){
+          return record.category;
+        }
+      }
+    }
   }
 
 }

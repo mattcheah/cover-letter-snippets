@@ -1,0 +1,32 @@
+.table-container {
+    max-height: 300px;
+}
+
+#database-table thead td:first-child {
+    width:60%;
+}
+
+#database-table thead td:nth-child(2) {
+    width:25%;
+}
+
+#database-table thead td:nth-child(3) {
+    width:15%;
+}
+
+.category-edit, .aliases-edit {
+  background-color: #00000000;
+  color:#c9c9c9;
+  border:none;
+  font-size: 11px;
+  font-family: sans-serif;
+}
+
+.category-edit {
+  display:none;
+  min-height: 75px;
+}
+
+.aliases-edit {
+  display:none;
+}
